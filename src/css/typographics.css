@@ -1,0 +1,47 @@
+h1 {
+  font-family: "Forum";
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 59px;
+  line-height: 65px;
+  leading-trim: both;
+  text-edge: cap;
+  text-align: center;
+  text-transform: uppercase;
+  color: #f5f1e7;
+
+  margin: 0px;
+  padding: 0px;
+}
+
+h2 {
+  font-family: "Forum";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 44px;
+  leading-trim: both;
+  text-edge: cap;
+  text-align: center;
+  text-transform: uppercase;
+  color: #f5f1e7;
+  margin: 0px;
+  padding: 0px;
+}
+
+p,
+li {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 130%;
+  text-align: center;
+  color: #f5f1e7;
+  margin: 0px;
+  padding: 0px;
+}
+
+@media (max-width: 720px) {
+}

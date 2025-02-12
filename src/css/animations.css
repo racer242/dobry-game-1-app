@@ -1,0 +1,63 @@
+.spin {
+  -webkit-animation: spin 8s linear infinite;
+  -moz-animation: spin 8s linear infinite;
+  animation: spin 8s linear infinite;
+}
+@-moz-keyframes spin {
+  100% {
+    -moz-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+.spin-pl {
+  -webkit-animation: spin 18s linear infinite normal;
+  -moz-animation: spin 18s linear infinite normal;
+  animation: spin 18s linear infinite normal;
+}
+.spin-cw {
+  -webkit-animation: spin 18s linear infinite reverse;
+  -moz-animation: spin 18s linear infinite reverse;
+  animation: spin 18s linear infinite reverse;
+}
+
+.zoom {
+  -webkit-animation: zoom 2s ease-in-out;
+  -moz-animation: zoom 2s ease-in-out;
+  animation: zoom 2s ease-in-out;
+}
+@-moz-keyframes zoom {
+  0% {
+    -moz-transform: scale(0);
+  }
+  100% {
+    -moz-transform: scale(1);
+  }
+}
+@-webkit-keyframes zoom {
+  0% {
+    -webkit-transform: scale(0);
+  }
+  100% {
+    -webkit-transform: scale(1);
+  }
+}
+@keyframes zoom {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}

@@ -1,0 +1,78 @@
+import React, { Component } from "react";
+
+import mainReducer from "./reducers/mainReducer";
+import Container from "./core/Container";
+
+import DataManager from "./core/DataManager";
+import Control from "./core/Control";
+
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+
+import { appInit, setStoreData } from "./actions/appActions";
+
+import settings from "./configuration/Settings";
+
+import "./css/app.css";
+import "./css/buttons.css";
+import "./css/typographics.css";
+import "./css/animations.css";
+import "./css/components.css";
+
+const Store = createStore(
+  mainReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {};
+  }
+
+  resize(width, height) {
+    this.setState({
+      ...this.state,
+      windowWidth: width,
+      windowHeight: height,
+    });
+  }
+
+  setData(data) {
+    Store.dispatch(setStoreData(data));
+  }
+
+  getData(data) {
+    return Store.getState();
+  }
+
+  showError() {
+    Store.dispatch(setStoreData({ error: true }));
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {}
+
+  componentDidMount() {
+    Store.dispatch(appInit(settings));
+    this.props.onInit(this);
+  }
+
+  render() {
+    return (
+      <Provider store={Store}>
+        <Container
+          id="Container"
+          windowWidth={this.state.windowWidth}
+          windowHeight={this.state.windowHeight}
+          store={Store}
+        >
+          <DataManager store={Store} />
+          <Control app={this} store={Store} />
+        </Container>
+      </Provider>
+    );
+  }
+}
+
+export default App;
