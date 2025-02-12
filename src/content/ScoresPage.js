@@ -6,8 +6,6 @@ class ScoresPage extends Component {
     super(props);
     this.store = this.props.store;
 
-    this.ref = React.createRef();
-
     this.state = {};
 
     this.closeButton_clickHandler = this.closeButton_clickHandler.bind(this);
@@ -52,7 +50,7 @@ class ScoresPage extends Component {
     children.push(this.props.children);
 
     return (
-      <div className="gamePage" ref={this.ref}>
+      <div className="scoresPage">
         <h1>У тебя 100500 очков и 123 место</h1>
         <h2>А вот топ-10</h2>
         <p>Таблица результатов</p>

@@ -6,8 +6,6 @@ class FinishPage extends Component {
     super(props);
     this.store = this.props.store;
 
-    this.ref = React.createRef();
-
     this.state = {};
 
     this.closeButton_clickHandler = this.closeButton_clickHandler.bind(this);
@@ -56,7 +54,7 @@ class FinishPage extends Component {
     children.push(this.props.children);
 
     return (
-      <div className="gamePage" ref={this.ref}>
+      <div className="finishPage">
         <h1>Игра закончена</h1>
         <p>У тебя 100500 ошибок!</p>
         <div className="dark-button" onClick={this.closeButton_clickHandler}>
