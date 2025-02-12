@@ -18,6 +18,7 @@ import "./css/buttons.css";
 import "./css/typographics.css";
 import "./css/animations.css";
 import "./css/components.css";
+import "./css/content.css";
 
 const Store = createStore(
   mainReducer,

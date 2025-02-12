@@ -1,28 +1,31 @@
-function onEditorAppReadyHandler(app) {
+// Функция инициализации приложения
+function onAppReadyHandler(app) {
+  // Функция обработки ресайза страницы.
+  // Берется элемент-контейнер и передается его размер в приложение.
   function updateLayout() {
-    app.resize(
-      document.documentElement.clientWidth ||
-        document.body.clientWidth ||
-        window.innerWidth,
-      document.documentElement.clientHeight ||
-        document.body.clientHeight ||
-        window.innerHeight
-    );
+    var container = document.getElementById("container");
+    app.resize(container.clientWidth, container.clientHeight);
   }
 
-  var data = {};
-
+  // Инициализация веб-страницы
   function initHandler() {
     updateLayout();
   }
 
+  // Ресайз веб-страницы
   function resizeHandler() {
     updateLayout();
   }
 
+  // Подписываемся на события изменения, чтобы вызывать updateLayout
+  // Обновление размеров приложения можно делать и иначе -
+  // здесь просто пример использования
+
   window.addEventListener("load", initHandler);
   window.addEventListener("resize", resizeHandler);
 
-  console.log("onEditorAppReadyHandler");
+  // Настройки приложения
+  var data = {};
+
   app.setData(data);
 }

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
-import MainPage from "../components/MainPage.js";
+import MainPage from "../components/PageStack.js";
 import Preloader from "../components/Preloader.js";
-import AboutPopup from "../components/AboutPopup.js";
+import AboutPopup from "../content/AboutPopup.js";
 import { setStoreData } from "../actions/appActions.js";
 import settings from "../configuration/Settings.js";
 
@@ -113,7 +113,6 @@ class Container extends Component {
           width: b.pageBounds.width,
           height: b.pageBounds.height,
           transform: `scale(${b.pageScale}) translateX(${b.pageX}px) translateY(${b.pageY}px)`,
-          background: "rgba(0,0,255,0.8)",
         }}
       >
         <MainPage store={this.store} />

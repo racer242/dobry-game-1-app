@@ -1,17 +1,14 @@
 import React, { Component } from "react";
-import AboutPopup from "./AboutPopup";
-import { nextMatchSelected, setStoreData } from "../actions/appActions";
+import MainPage from "../content/MainPage";
+import GamePage from "../content/GamePage";
+import FinishPage from "../content/FinishPage";
+import ScoresPage from "../content/ScoresPage";
 
-class MainPage extends Component {
+class PageStack extends Component {
   constructor(props) {
     super(props);
     this.store = this.props.store;
-
-    this.ref = React.createRef();
-
     this.state = {};
-
-    this.aboutButton_clickHandler = this.aboutButton_clickHandler.bind(this);
   }
 
   componentDidMount() {
@@ -40,30 +37,23 @@ class MainPage extends Component {
     }
   }
 
-  aboutButton_clickHandler(event) {
-    this.store.dispatch(setStoreData({ aboutPopup: true }));
-  }
-
   render() {
     let children = [];
     children.push(this.props.children);
 
     return (
-      <div
-        id="PageContainer"
-        key="PageContainer"
-        style={{
-          background: "rgba(255,0,0,0.5)",
-        }}
-        ref={this.ref}
-      >
-        <h1>Test text</h1>
-        <div className="dark-button" onClick={this.aboutButton_clickHandler}>
-          Что это?
-        </div>
+      <div className="pageContainer">
+        {this.state.currentPage === "main" && <MainPage store={this.store} />}
+        {this.state.currentPage === "game" && <GamePage store={this.store} />}
+        {this.state.currentPage === "finish" && (
+          <FinishPage store={this.store} />
+        )}
+        {this.state.currentPage === "scores" && (
+          <ScoresPage store={this.store} />
+        )}
       </div>
     );
   }
 }
 
-export default MainPage;
+export default PageStack;

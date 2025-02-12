@@ -1,0 +1,22 @@
+.gamePage,
+.mainPage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #03001b;
+  border-radius: 30px;
+  width: calc(80vw - 40px);
+  min-width: 500px;
+  padding-top: 55px;
+  padding-left: 45px;
+  padding-bottom: 45px;
+  padding-right: 28px;
+  color: #fff;
+  box-sizing: border-box;
+}

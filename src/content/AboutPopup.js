@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Popup from "./Popup";
+import Popup from "../components/Popup";
 
 class AboutPopup extends Component {
   constructor(props) {

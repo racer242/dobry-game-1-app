@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Preload from "react-preload";
 import { preloadComplete } from "../actions/appActions";
-import { ReactComponent as X } from "../images/x.svg";
 import { ReactComponent as Logo } from "../images/logo.svg";
 
 class Preloader extends Component {
