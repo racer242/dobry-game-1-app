@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Preload from "react-preload";
 import { preloadComplete } from "../actions/appActions";
-import { ReactComponent as Logo } from "../images/logo.svg";
 
 class Preloader extends Component {
   constructor(props) {
@@ -13,45 +12,7 @@ class Preloader extends Component {
 
     this.state = {};
     this.images = [
-      require("../images/bg.png"),
-      require("../images/bg_mob.png"),
-      require("../images/bottom.png"),
-      require("../images/copyright.png"),
-      require("../images/logo.png"),
-      require("../images/screen1.png"),
-      require("../images/screen2.png"),
-      require("../images/screen3.png"),
-      require("../images/sol.png"),
-      require("../images/wowow.png"),
-
-      "comps/runway.png",
-      "comps/sixnews.png",
-      "comps/zimaletto.png",
-      "comps/budapest.svg",
-      "comps/choam.svg",
-      "comps/ghost.svg",
-      "comps/kahuna.svg",
-      "comps/krusty.svg",
-      "comps/laguna.svg",
-      "comps/ollivanders.svg",
-      "comps/redapple.svg",
-      "comps/stark.svg",
-
-      "agency/cats.png",
-      "agency/creativepeople.png",
-      "agency/directors.png",
-      "agency/hate.png",
-      "agency/rassvet.png",
-      "agency/rodnya.png",
-      "agency/sol.png",
-      "agency/wowow.png",
-      "agency/aprel.svg",
-      "agency/depot.svg",
-      "agency/diglab.svg",
-      "agency/grape.svg",
-      "agency/makelove.svg",
-      "agency/mart.svg",
-      "agency/sense.svg",
+      // require("../images/bg.png"),
     ];
   }
 
@@ -87,12 +48,12 @@ class Preloader extends Component {
     setTimeout(() => {
       setTimeout(() => {
         this.store.dispatch(preloadComplete());
-      }, 2000);
+      }, 500);
       this.setState({
         ...this.state,
         isComplete: true,
       });
-    }, 2000);
+    }, 500);
   }
 
   preloader_errorHandler(event) {
@@ -130,7 +91,6 @@ class Preloader extends Component {
               ></img>
             </div>
           </div>
-          <Logo className="preloader-logo-image" />
         </div>
       </div>
     );

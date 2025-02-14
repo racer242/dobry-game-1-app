@@ -1,6 +1,5 @@
 .scoresPage,
 .finishPage,
-.gamePage,
 .mainPage {
   position: relative;
   display: flex;
@@ -13,7 +12,7 @@
   transform: translate(-50%, -50%);
   background-color: #03001b;
   border-radius: 30px;
-  width: calc(80vw - 40px);
+  width: calc(100% - 140px);
   min-width: 500px;
   padding-top: 55px;
   padding-left: 45px;

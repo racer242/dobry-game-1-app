@@ -8,7 +8,11 @@ class PageStack extends Component {
   constructor(props) {
     super(props);
     this.store = this.props.store;
-    this.state = {};
+    if (this.store) {
+      this.state = {
+        ...this.store.getState(),
+      };
+    } else this.state = { currentPage: "main" };
   }
 
   componentDidMount() {
@@ -38,9 +42,6 @@ class PageStack extends Component {
   }
 
   render() {
-    let children = [];
-    children.push(this.props.children);
-
     return (
       <div className="pageContainer">
         {this.state.currentPage === "main" && <MainPage store={this.store} />}

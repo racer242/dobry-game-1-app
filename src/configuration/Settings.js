@@ -8,12 +8,12 @@ const settings = {
   isLocal: isLocal(),
 
   desktopBounds: {
-    width: 1920,
-    height: 1080,
+    width: 960,
+    height: 540,
   },
   mobileBounds: {
-    width: 1080,
-    height: 1920,
+    width: 960,
+    height: 540,
   },
   switchToMobileWidth: 720,
 
