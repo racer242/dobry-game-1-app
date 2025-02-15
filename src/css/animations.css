@@ -1,7 +1,7 @@
 .spin {
-  -webkit-animation: spin 8s linear infinite;
-  -moz-animation: spin 8s linear infinite;
-  animation: spin 8s linear infinite;
+  -webkit-animation: spin 4s linear infinite;
+  -moz-animation: spin 4s linear infinite;
+  animation: spin 4s linear infinite;
 }
 @-moz-keyframes spin {
   100% {
@@ -20,14 +20,14 @@
   }
 }
 .spin-pl {
-  -webkit-animation: spin 18s linear infinite normal;
-  -moz-animation: spin 18s linear infinite normal;
-  animation: spin 18s linear infinite normal;
+  -webkit-animation: spin 4s linear infinite normal;
+  -moz-animation: spin 4s linear infinite normal;
+  animation: spin 4s linear infinite normal;
 }
 .spin-cw {
-  -webkit-animation: spin 18s linear infinite reverse;
-  -moz-animation: spin 18s linear infinite reverse;
-  animation: spin 18s linear infinite reverse;
+  -webkit-animation: spin 4s linear infinite reverse;
+  -moz-animation: spin 4s linear infinite reverse;
+  animation: spin 4s linear infinite reverse;
 }
 
 .zoom {

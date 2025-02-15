@@ -12,10 +12,16 @@ const settings = {
     height: 540,
   },
   mobileBounds: {
-    width: 960,
-    height: 540,
+    width: 540,
+    height: 960,
+  },
+  objectBounds: {
+    width: 100,
+    height: 100,
   },
   switchToMobileWidth: 720,
+
+  gameStepDuration: 1000,
 
   currentPage: "main",
 };
