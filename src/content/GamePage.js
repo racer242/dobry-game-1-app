@@ -25,10 +25,13 @@ class GamePage extends Component {
         { src: require("../images/objects/o6.png"), bonus: 1 },
       ],
       objects: [],
+      countdown: 0,
+      score: 0,
     };
 
     this.closeButton_clickHandler = this.closeButton_clickHandler.bind(this);
     this.finishButton_clickHandler = this.finishButton_clickHandler.bind(this);
+    this.initCount = 0;
     this.counter = 0;
   }
 
@@ -63,69 +66,109 @@ class GamePage extends Component {
     if (!this.started) {
       this.started = true;
       this.stepGame();
+      this.controlGame();
+    }
+  }
+
+  controlGame() {
+    if (this.doControl()) {
+      if (this.countdownTimer != null) clearTimeout(this.countdownTimer);
+      this.countdownTimer = setTimeout(this.controlGame.bind(this), 1000);
     }
   }
 
   stepGame() {
     this.doGame();
-    if (this.timer != null) clearTimeout(this.timer);
-    this.timer = setTimeout(
-      this.stepGame.bind(this),
-      this.state.gameStepDuration
-    );
+    if (this.gameTimer != null) clearTimeout(this.gameTimer);
+    if (this.initCount > 1) {
+      this.gameTimer = setTimeout(
+        this.stepGame.bind(this),
+        this.state.stepDuration
+      );
+    } else {
+      this.initCount++;
+      this.gameTimer = setTimeout(
+        this.stepGame.bind(this),
+        this.state.stepDuration / 100
+      );
+    }
   }
 
   stopGame() {
-    if (this.timer != null) clearTimeout(this.timer);
-    this.timer = null;
+    if (this.gameTimer != null) clearTimeout(this.gameTimer);
+    this.gameTimer = null;
+    if (this.countdownTimer != null) clearTimeout(this.countdownTimer);
+    this.countdownTimer = null;
     this.started = false;
+    console.log("STOP!!!!");
+  }
+
+  doControl() {
+    if (this.state.countdown == this.state.gameDuration) {
+      this.stopGame();
+      return false;
+    }
+    this.setState({
+      ...this.state,
+      countdown: this.state.countdown + 1,
+    });
+    return true;
   }
 
   doGame() {
-    let oldObjects = this.state.objects;
+    let objects = this.state.objects;
     let objSources = this.state.objSources;
 
-    oldObjects = oldObjects.filter((v) => v.status != "obj-off");
-    for (const obj of oldObjects) {
-      if (obj.status == "obj-show" && Math.random() > 0.7) {
+    objects = objects.filter((v) => v.status != "obj-off");
+    for (const obj of objects) {
+      if (
+        obj.status == "obj-show" &&
+        Math.random() > this.state.objectLifeProb
+      ) {
         obj.status = "obj-off";
       }
       if (obj.status == "obj-on") {
         obj.status = "obj-show";
       }
     }
+    for (let i = 0; i < this.state.newCount; i++) {
+      let x =
+        "calc(" +
+        Math.floor(Math.random() * this.state.gridSize) *
+          (100 / this.state.gridSize) +
+        "% + " +
+        50 / this.state.gridSize +
+        "% - " +
+        this.state.objectBounds.width / 2 +
+        "px)";
+      let y =
+        "calc(" +
+        Math.floor(Math.random() * this.state.gridSize) *
+          (100 / this.state.gridSize) +
+        "% + " +
+        50 / this.state.gridSize +
+        "% - " +
+        this.state.objectBounds.height / 2 +
+        "px)";
 
-    let x =
-      "calc(" +
-      Math.floor(Math.random() * 5) * 20 +
-      "% + 10% - " +
-      this.state.objectBounds.width / 2 +
-      "px)";
-    let y =
-      "calc(" +
-      Math.floor(Math.random() * 5) * 20 +
-      "% + 10% - " +
-      this.state.objectBounds.height / 2 +
-      "px)";
+      let found = objects.filter((v) => v.x == x && v.y == y);
 
-    let found = oldObjects.filter((v) => v.x == x && v.y == y);
-
-    let newObjects = [];
-    if (found.length == 0) {
-      newObjects = [
-        {
+      if (found.length == 0) {
+        objects.push({
           id: "obj" + this.counter++,
           x,
           y,
           type: objSources[Math.floor(Math.random() * objSources.length)],
           status: "obj-on",
           spin: Math.random() > 0.5 ? "spin-pl" : "spin-cw",
-        },
-      ];
+        });
+      }
     }
 
-    let objects = [...oldObjects, ...newObjects];
-    this.setState({ ...this.state, objects });
+    this.setState({
+      ...this.state,
+      objects,
+    });
   }
 
   closeButton_clickHandler(event) {
@@ -155,6 +198,9 @@ class GamePage extends Component {
             top: obj.y,
             width: this.state.objectBounds.width,
             height: this.state.objectBounds.height,
+            transitionDuration: this.state.transitionDuration + "ms",
+            transitionDelay:
+              Math.random() * this.state.transitionDuration + "ms",
           }}
         >
           <div
@@ -168,13 +214,16 @@ class GamePage extends Component {
     return (
       <div className="gamePage" ref={this.ref}>
         <div className="gameScene">{objs}</div>
-        <h1>Игра</h1>
-        <div className="dark-button" onClick={this.closeButton_clickHandler}>
+        <div className="countdown">
+          {this.state.gameDuration - this.state.countdown}
+        </div>
+
+        {/* <div className="dark-button" onClick={this.closeButton_clickHandler}>
           Назад
         </div>
         <div className="light-button" onClick={this.finishButton_clickHandler}>
           Финиш
-        </div>
+        </div> */}
       </div>
     );
   }
