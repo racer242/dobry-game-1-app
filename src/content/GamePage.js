@@ -17,12 +17,36 @@ class GamePage extends Component {
     this.state = {
       ...this.state,
       objSources: [
-        { src: require("../images/objects/o1.png"), bonus: 1 },
-        { src: require("../images/objects/o2.png"), bonus: 1 },
-        { src: require("../images/objects/o3.png"), bonus: -1 },
-        { src: require("../images/objects/o4.png"), bonus: 1 },
-        { src: require("../images/objects/o5.png"), bonus: 2 },
-        { src: require("../images/objects/o6.png"), bonus: 1 },
+        {
+          src: require("../images/objects/o1.png"),
+          bonus: 1,
+          objectLifeProb: 0.5,
+        },
+        {
+          src: require("../images/objects/o2.png"),
+          bonus: 1,
+          objectLifeProb: 0.5,
+        },
+        {
+          src: require("../images/objects/o3.png"),
+          bonus: -1,
+          objectLifeProb: 0.8,
+        },
+        {
+          src: require("../images/objects/o4.png"),
+          bonus: 1,
+          objectLifeProb: 0.5,
+        },
+        {
+          src: require("../images/objects/o5.png"),
+          bonus: 2,
+          objectLifeProb: 0.3,
+        },
+        {
+          src: require("../images/objects/o6.png"),
+          bonus: 1,
+          objectLifeProb: 0.5,
+        },
       ],
       objects: [],
       countdown: 0,
@@ -30,7 +54,7 @@ class GamePage extends Component {
     };
 
     this.closeButton_clickHandler = this.closeButton_clickHandler.bind(this);
-    this.finishButton_clickHandler = this.finishButton_clickHandler.bind(this);
+    this.objButton_clickHandler = this.objButton_clickHandler.bind(this);
     this.initCount = 0;
     this.counter = 0;
   }
@@ -106,6 +130,7 @@ class GamePage extends Component {
   doControl() {
     if (this.state.countdown == this.state.gameDuration) {
       this.stopGame();
+      this.store.dispatch(setStoreData({ currentPage: "finish" }));
       return false;
     }
     this.setState({
@@ -119,12 +144,17 @@ class GamePage extends Component {
     let objects = this.state.objects;
     let objSources = this.state.objSources;
 
-    objects = objects.filter((v) => v.status != "obj-off");
+    objects = objects.filter((v) => v.status != "obj-destroy");
     for (const obj of objects) {
-      if (
-        obj.status == "obj-show" &&
-        Math.random() > this.state.objectLifeProb
-      ) {
+      if (obj.status == "obj-off") {
+        obj.status = "obj-destroy";
+      }
+
+      if (obj.status == "obj-kill") {
+        obj.status = "obj-destroy";
+      }
+
+      if (obj.status == "obj-show" && Math.random() > obj.type.objectLifeProb) {
         obj.status = "obj-off";
       }
       if (obj.status == "obj-on") {
@@ -175,9 +205,23 @@ class GamePage extends Component {
     this.store.dispatch(setStoreData({ currentPage: "main" }));
   }
 
-  finishButton_clickHandler(event) {
-    this.stopGame();
-    this.store.dispatch(setStoreData({ currentPage: "finish" }));
+  objButton_clickHandler(event) {
+    let objects = this.state.objects;
+    let bonus = 0;
+    let objs = objects.filter((v) => v.id == event.target.id);
+    if (objs.length >= 0) {
+      let obj = objs[0];
+      obj.status = "obj-kill";
+      event.target.className = "gameObjectBox obj-kill";
+      bonus = obj.type.bonus;
+    }
+    let score = Math.max(this.state.score + bonus, 0);
+
+    this.setState({
+      ...this.state,
+      objects,
+      score,
+    });
   }
 
   render() {
@@ -198,14 +242,23 @@ class GamePage extends Component {
             top: obj.y,
             width: this.state.objectBounds.width,
             height: this.state.objectBounds.height,
-            transitionDuration: this.state.transitionDuration + "ms",
+            transitionDuration:
+              obj.status === "obj-show"
+                ? this.state.transitionDuration + "ms"
+                : "",
             transitionDelay:
-              Math.random() * this.state.transitionDuration + "ms",
+              obj.status === "obj-show"
+                ? Math.random() * this.state.transitionDuration + "ms"
+                : "0ms",
           }}
+          onClick={this.objButton_clickHandler}
         >
           <div
-            className={"gameObject " + obj.spin}
-            style={{ backgroundImage: `url(${obj.type.src})` }}
+            className={"gameObject swing"}
+            style={{
+              backgroundImage: `url(${obj.type.src})`,
+              pointerEvents: "none",
+            }}
           ></div>
         </div>
       );
@@ -217,13 +270,12 @@ class GamePage extends Component {
         <div className="countdown">
           {this.state.gameDuration - this.state.countdown}
         </div>
+        <div className="score">{this.state.score}</div>
 
         {/* <div className="dark-button" onClick={this.closeButton_clickHandler}>
           Назад
         </div>
-        <div className="light-button" onClick={this.finishButton_clickHandler}>
-          Финиш
-        </div> */}
+        */}
       </div>
     );
   }

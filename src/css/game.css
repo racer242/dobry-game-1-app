@@ -23,9 +23,26 @@
   left: 0%;
   top: 0%;
   pointer-events: none;
-
   font-family: "Forum";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 110%;
+  leading-trim: both;
+  text-edge: cap;
+  text-align: center;
+  text-transform: uppercase;
+  color: rgba(0, 0, 255, 0.8);
+  padding: 30px;
+}
 
+.score {
+  position: absolute;
+  display: block;
+  right: 0%;
+  top: 0%;
+  pointer-events: none;
+  font-family: "Forum";
   font-style: normal;
   font-weight: 400;
   font-size: 32px;
@@ -43,10 +60,8 @@
   display: block;
   width: 100px;
   height: 100px;
-  /* transition: transform 1s cubic-bezier(0.57, 0.01, 0.53, 0.99); */
-  transition-property: transform;
-  /* transition-duration: 1s; */
-  transition-timing-function: cubic-bezier(0.57, 0.01, 0.53, 0.99);
+  transition-property: transform opacity;
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .gameObject {
@@ -63,12 +78,32 @@
 
 .obj-on {
   transform: scale(0);
+  cursor: pointer;
 }
 
 .obj-show {
   transform: scale(1);
+  cursor: pointer;
+  transition-timing-function: cubic-bezier(0.57, 2.19, 0.58, 0.95);
 }
 
 .obj-off {
   transform: scale(0);
+  cursor: pointer;
+  transition-duration: 500ms;
+  transition-timing-function: ease-in;
+}
+
+.obj-kill {
+  transform: scale(2);
+  opacity: 0;
+  pointer-events: none;
+  transition-duration: 400ms;
+  transition-timing-function: cubic-bezier(0.35, 0.85, 0.62, -1.16);
+}
+
+.obj-destroy {
+  transform: scale(0);
+  opacity: 0;
+  pointer-events: none;
 }

@@ -19,13 +19,13 @@ const settings = {
     width: 100,
     height: 100,
   },
-  objectLifeProb: 0.8,
+  objectLifeProb: 0.6,
   switchToMobileWidth: 720,
-  stepDuration: 1500, //ms
-  transitionDuration: 500, //ms
+  stepDuration: 1000, //ms
+  transitionDuration: 1000, //ms
   newCount: 2,
   gridSize: 10,
-  gameDuration: 10, //s
+  gameDuration: 60, //s
 
   currentPage: "main",
 };
