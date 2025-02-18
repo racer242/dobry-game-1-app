@@ -19,7 +19,53 @@ const settings = {
     width: 100,
     height: 100,
   },
-  objectLifeProb: 0.6,
+
+  objSources: [
+    {
+      src: require("../images/objects/o1.png"),
+      bonus: 1,
+      lifeProb: 2,
+      lifeCount: 3,
+      speed: 0.5,
+    },
+    {
+      src: require("../images/objects/o2.png"),
+      bonus: 1,
+      lifeProb: 2,
+      lifeCount: 3,
+      speed: 0.5,
+    },
+    {
+      src: require("../images/objects/o3.png"),
+      bonus: -5,
+      lifeProb: 5,
+      lifeCount: 6,
+      speed: 0.1,
+    },
+    {
+      src: require("../images/objects/o4.png"),
+      bonus: 1,
+      lifeProb: 2,
+      lifeCount: 3,
+      speed: 0.5,
+    },
+    {
+      src: require("../images/objects/o5.png"),
+      bonus: 2,
+      lifeProb: 1,
+      lifeCount: 2,
+      speed: 1,
+    },
+    {
+      src: require("../images/objects/o6.png"),
+      bonus: 1,
+      lifeProb: 2,
+      lifeCount: 3,
+      speed: 0.5,
+    },
+  ],
+
+  lifeProb: 0.6,
   switchToMobileWidth: 720,
   stepDuration: 1000, //ms
   transitionDuration: 1000, //ms

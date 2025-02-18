@@ -16,38 +16,6 @@ class GamePage extends Component {
 
     this.state = {
       ...this.state,
-      objSources: [
-        {
-          src: require("../images/objects/o1.png"),
-          bonus: 1,
-          objectLifeProb: 0.5,
-        },
-        {
-          src: require("../images/objects/o2.png"),
-          bonus: 1,
-          objectLifeProb: 0.5,
-        },
-        {
-          src: require("../images/objects/o3.png"),
-          bonus: -1,
-          objectLifeProb: 0.8,
-        },
-        {
-          src: require("../images/objects/o4.png"),
-          bonus: 1,
-          objectLifeProb: 0.5,
-        },
-        {
-          src: require("../images/objects/o5.png"),
-          bonus: 2,
-          objectLifeProb: 0.3,
-        },
-        {
-          src: require("../images/objects/o6.png"),
-          bonus: 1,
-          objectLifeProb: 0.5,
-        },
-      ],
       objects: [],
       countdown: 0,
       score: 0,
@@ -140,6 +108,26 @@ class GamePage extends Component {
     return true;
   }
 
+  updateObjBounds(obj) {
+    obj.cssX =
+      "calc(" +
+      obj.x * (100 / this.state.gridSize) +
+      "% + " +
+      50 / this.state.gridSize +
+      "% - " +
+      this.state.objectBounds.width / 2 +
+      "px)";
+    obj.cssY =
+      "calc(" +
+      obj.y * (100 / this.state.gridSize) +
+      "% + " +
+      50 / this.state.gridSize +
+      "% - " +
+      this.state.objectBounds.height / 2 +
+      "px)";
+    return obj;
+  }
+
   doGame() {
     let objects = this.state.objects;
     let objSources = this.state.objSources;
@@ -154,45 +142,34 @@ class GamePage extends Component {
         obj.status = "obj-destroy";
       }
 
-      if (obj.status == "obj-show" && Math.random() > obj.type.objectLifeProb) {
-        obj.status = "obj-off";
+      if (obj.status == "obj-show") {
+        obj.life++;
+        obj.y += Math.sign(Math.random() * 1 - 0.5) * obj.type.speed;
+        obj.x += Math.sign(Math.random() * 1 - 0.5) * obj.type.speed;
+        this.updateObjBounds(obj);
+        if (obj.life > obj.type.lifeCount + Math.random() * obj.type.lifeProb) {
+          obj.status = "obj-off";
+        }
       }
+
       if (obj.status == "obj-on") {
         obj.status = "obj-show";
       }
     }
     for (let i = 0; i < this.state.newCount; i++) {
-      let x =
-        "calc(" +
-        Math.floor(Math.random() * this.state.gridSize) *
-          (100 / this.state.gridSize) +
-        "% + " +
-        50 / this.state.gridSize +
-        "% - " +
-        this.state.objectBounds.width / 2 +
-        "px)";
-      let y =
-        "calc(" +
-        Math.floor(Math.random() * this.state.gridSize) *
-          (100 / this.state.gridSize) +
-        "% + " +
-        50 / this.state.gridSize +
-        "% - " +
-        this.state.objectBounds.height / 2 +
-        "px)";
+      let x = Math.floor(Math.random() * this.state.gridSize);
+      let y = Math.floor(Math.random() * this.state.gridSize);
 
-      let found = objects.filter((v) => v.x == x && v.y == y);
-
-      if (found.length == 0) {
-        objects.push({
-          id: "obj" + this.counter++,
-          x,
-          y,
-          type: objSources[Math.floor(Math.random() * objSources.length)],
-          status: "obj-on",
-          spin: Math.random() > 0.5 ? "spin-pl" : "spin-cw",
-        });
-      }
+      objects.push({
+        id: "obj" + this.counter++,
+        x,
+        y,
+        ...this.updateObjBounds({ x, y }),
+        type: objSources[Math.floor(Math.random() * objSources.length)],
+        status: "obj-on",
+        spin: Math.random() > 0.5 ? "spin-pl" : "spin-cw",
+        life: 0,
+      });
     }
 
     this.setState({
@@ -238,8 +215,8 @@ class GamePage extends Component {
           id={obj.id}
           key={obj.id}
           style={{
-            left: obj.x,
-            top: obj.y,
+            left: obj.cssX,
+            top: obj.cssY,
             width: this.state.objectBounds.width,
             height: this.state.objectBounds.height,
             transitionDuration:
