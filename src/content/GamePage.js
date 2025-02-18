@@ -57,6 +57,8 @@ class GamePage extends Component {
 
   startGame() {
     if (!this.started) {
+      this.store.dispatch(setStoreData({ loadInit: true }));
+
       this.started = true;
       this.setState({
         ...this.state,
@@ -108,7 +110,13 @@ class GamePage extends Component {
       this.stopGame();
       if (this.stopTimer != null) clearTimeout(this.stopTimer);
       this.stopTimer = setTimeout(() => {
-        this.store.dispatch(setStoreData({ currentPage: "finish" }));
+        this.store.dispatch(
+          setStoreData({
+            currentPage: "finish",
+            gameScore: this.state.score,
+            saveScore: true,
+          })
+        );
       }, this.state.stopDuration);
 
       return false;

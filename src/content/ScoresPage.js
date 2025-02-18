@@ -17,6 +17,7 @@ class ScoresPage extends Component {
       this.onStoreChange();
     });
     this.mounted = true;
+    this.store.dispatch(setStoreData({ loadStatusTable: true }));
   }
 
   componentWillUnmount() {

@@ -1,12 +1,17 @@
 import React, { Component } from "react";
 import { setStoreData } from "../actions/appActions";
+import { getScoreTitleInGenitive } from "../utils/stringTools";
 
 class FinishPage extends Component {
   constructor(props) {
     super(props);
-    this.store = this.props.store;
 
-    this.state = {};
+    this.store = this.props.store;
+    if (this.store) {
+      this.state = {
+        ...this.store.getState(),
+      };
+    } else this.state = {};
 
     this.closeButton_clickHandler = this.closeButton_clickHandler.bind(this);
     this.startButton_clickHandler = this.startButton_clickHandler.bind(this);
@@ -56,7 +61,13 @@ class FinishPage extends Component {
     return (
       <div className="finishPage">
         <h1>Игра закончена</h1>
-        <p>У тебя 100500 ошибок!</p>
+        <p>
+          {"У тебя " +
+            this.state.gameScore +
+            " " +
+            getScoreTitleInGenitive(this.state.gameScore) +
+            "!"}
+        </p>
         <div className="dark-button" onClick={this.closeButton_clickHandler}>
           Позже поиграю
         </div>

@@ -71,7 +71,7 @@ const settings = {
   transitionDuration: 1000, //ms
   newCount: 2,
   gridSize: 10,
-  gameDuration: 60, //s
+  gameDuration: 10, //s
   stopDuration: 3000, //ms
 
   currentPage: "main",

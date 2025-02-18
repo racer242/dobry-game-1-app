@@ -6,6 +6,7 @@ function onAppReadyHandler(app) {
     var container = document.getElementById("container");
     app.resize(container.clientWidth, container.clientHeight);
   }
+  updateLayout();
 
   // Инициализация веб-страницы
   function initHandler() {
@@ -25,7 +26,15 @@ function onAppReadyHandler(app) {
   window.addEventListener("resize", resizeHandler);
 
   // Настройки приложения
-  var data = {};
+  var data = {
+    user: {
+      id: "671tt291928318282810",
+      someProp: "someValue",
+    },
+    initSource: { url: "init.json", method: "GET" },
+    saveSource: { url: "game.json", method: "GET" },
+    statusTableSource: { url: "hiscores.json", method: "GET" },
+  };
 
   app.setData(data);
 }
