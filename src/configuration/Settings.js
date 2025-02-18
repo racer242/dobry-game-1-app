@@ -72,6 +72,7 @@ const settings = {
   newCount: 2,
   gridSize: 10,
   gameDuration: 60, //s
+  stopDuration: 3000, //ms
 
   currentPage: "main",
 };

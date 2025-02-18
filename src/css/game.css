@@ -94,6 +94,7 @@
   transition-timing-function: ease-in;
 }
 
+.obj-kill-1,
 .obj-kill {
   transform: scale(1.5);
   opacity: 0;
@@ -106,4 +107,9 @@
   transform: scale(0);
   opacity: 0;
   pointer-events: none;
+}
+
+.obj-stop {
+  pointer-events: none !important;
+  opacity: 0.3;
 }

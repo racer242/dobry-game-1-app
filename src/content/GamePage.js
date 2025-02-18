@@ -19,6 +19,7 @@ class GamePage extends Component {
       objects: [],
       countdown: 0,
       score: 0,
+      finished: false,
     };
 
     this.closeButton_clickHandler = this.closeButton_clickHandler.bind(this);
@@ -57,6 +58,10 @@ class GamePage extends Component {
   startGame() {
     if (!this.started) {
       this.started = true;
+      this.setState({
+        ...this.state,
+        finished: false,
+      });
       this.stepGame();
       this.controlGame();
     }
@@ -92,13 +97,20 @@ class GamePage extends Component {
     if (this.countdownTimer != null) clearTimeout(this.countdownTimer);
     this.countdownTimer = null;
     this.started = false;
-    console.log("STOP!!!!");
+    this.setState({
+      ...this.state,
+      finished: true,
+    });
   }
 
   doControl() {
     if (this.state.countdown == this.state.gameDuration) {
       this.stopGame();
-      this.store.dispatch(setStoreData({ currentPage: "finish" }));
+      if (this.stopTimer != null) clearTimeout(this.stopTimer);
+      this.stopTimer = setTimeout(() => {
+        this.store.dispatch(setStoreData({ currentPage: "finish" }));
+      }, this.state.stopDuration);
+
       return false;
     }
     this.setState({
@@ -138,8 +150,11 @@ class GamePage extends Component {
         obj.status = "obj-destroy";
       }
 
-      if (obj.status == "obj-kill") {
+      if (obj.status == "obj-kill-1") {
         obj.status = "obj-destroy";
+      }
+      if (obj.status == "obj-kill") {
+        obj.status = "obj-kill-1";
       }
 
       if (obj.status == "obj-show") {
@@ -179,6 +194,7 @@ class GamePage extends Component {
   }
 
   closeButton_clickHandler(event) {
+    this.stopGame();
     this.store.dispatch(setStoreData({ currentPage: "main" }));
   }
 
@@ -211,7 +227,11 @@ class GamePage extends Component {
       let obj = this.state.objects[i];
       objs.push(
         <div
-          className={"gameObjectBox " + obj.status}
+          className={
+            "gameObjectBox " +
+            obj.status +
+            (this.state.finished ? " obj-stop" : "")
+          }
           id={obj.id}
           key={obj.id}
           style={{
