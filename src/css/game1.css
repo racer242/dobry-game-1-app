@@ -1,12 +1,12 @@
-.countdown {
+.g1-countdown {
   color: rgba(0, 255, 0, 0.8) !important;
 }
 
-.score {
+.g1-score {
   color: rgba(0, 255, 0, 0.8) !important;
 }
 
-.gameObjectBox {
+.g1-gameObjectBox {
   position: absolute;
   display: block;
   width: 100px;
@@ -15,7 +15,7 @@
   background-color: rgba(0, 0, 0, 0);
 }
 
-.gameObject {
+.g1-gameObject {
   position: absolute;
   display: block;
   left: 0px;
@@ -27,45 +27,45 @@
   background-repeat: no-repeat;
 }
 
-.obj-on {
+.g1-obj-on {
   transform: scale(0);
   cursor: pointer;
 }
 
-.obj-show {
+.g1-obj-show {
   transform: scale(1);
   cursor: pointer;
   transition-timing-function: cubic-bezier(0.57, 2.19, 0.58, 0.95);
 }
 
-.obj-off {
+.g1-obj-off {
   transform: scale(0);
   cursor: pointer;
   transition-duration: 500ms;
   transition-timing-function: ease-in;
 }
 
-.obj-kill-1,
-.obj-kill {
+.g1-obj-kill-1,
+.g1-obj-kill {
   transform: scale(1.5);
   opacity: 0;
   pointer-events: none;
-  transition-duration: 400ms;
+  transition-duration: 300ms;
   transition-timing-function: cubic-bezier(0.35, 0.85, 0.62, -1.16);
 }
 
-.obj-destroy {
+.g1-obj-destroy {
   transform: scale(0);
   opacity: 0;
   pointer-events: none;
 }
 
-.obj-stop {
+.g1-obj-stop {
   pointer-events: none !important;
   opacity: 0.3;
 }
 
-.gameBonusBox {
+.g1-gameBonusBox {
   position: absolute;
   display: block;
   width: 100px;
@@ -74,7 +74,7 @@
   pointer-events: none;
 }
 
-.gameBonus {
+.g1-gameBonus {
   position: absolute;
 
   left: 0px;
@@ -103,6 +103,6 @@
   color: rgba(255, 255, 255, 1);
 }
 
-.negativeBonus {
+.g1-negativeBonus {
   color: rgba(255, 0, 0, 1);
 }

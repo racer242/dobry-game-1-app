@@ -1,132 +1,18 @@
-import React, { Component } from "react";
-import { setStoreData } from "../actions/appActions";
+import React from "react";
 import "../css/game1.css";
+import GamePage from "./GamePage";
 
-class Game1Page extends Component {
+class Game1Page extends GamePage {
   constructor(props) {
     super(props);
-    this.store = this.props.store;
-    if (this.store) {
-      this.state = {
-        ...this.store.getState(),
-      };
-    } else this.state = {};
-
-    this.ref = React.createRef();
 
     this.state = {
       ...this.state,
       objects: [],
       bonuses: [],
-      countdown: 0,
-      score: 0,
-      finished: false,
     };
 
-    this.closeButton_clickHandler = this.closeButton_clickHandler.bind(this);
     this.objButton_clickHandler = this.objButton_clickHandler.bind(this);
-    this.initCount = 0;
-    this.counter = 0;
-  }
-
-  componentDidMount() {
-    this.unsubscribe = this.store.subscribe(() => {
-      this.onStoreChange();
-    });
-    this.mounted = true;
-    this.startGame();
-  }
-
-  componentWillUnmount() {
-    if (this.unsubscribe) {
-      this.unsubscribe();
-    }
-    this.mounted = false;
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {}
-
-  onStoreChange() {
-    if (this.mounted) {
-      let state = this.store.getState();
-      this.setState({
-        ...this.state,
-        ...state,
-      });
-    }
-  }
-
-  startGame() {
-    if (!this.started) {
-      this.store.dispatch(setStoreData({ loadInit: true }));
-
-      this.started = true;
-      this.setState({
-        ...this.state,
-        finished: false,
-      });
-      this.stepGame();
-      this.controlGame();
-    }
-  }
-
-  controlGame() {
-    if (this.doControl()) {
-      if (this.countdownTimer != null) clearTimeout(this.countdownTimer);
-      this.countdownTimer = setTimeout(this.controlGame.bind(this), 1000);
-    }
-  }
-
-  stepGame() {
-    this.doGame();
-    if (this.gameTimer != null) clearTimeout(this.gameTimer);
-    if (this.initCount > 1) {
-      this.gameTimer = setTimeout(
-        this.stepGame.bind(this),
-        this.state.game1.stepDuration
-      );
-    } else {
-      this.initCount++;
-      this.gameTimer = setTimeout(
-        this.stepGame.bind(this),
-        this.state.game1.stepDuration / 100
-      );
-    }
-  }
-
-  stopGame() {
-    if (this.gameTimer != null) clearTimeout(this.gameTimer);
-    this.gameTimer = null;
-    if (this.countdownTimer != null) clearTimeout(this.countdownTimer);
-    this.countdownTimer = null;
-    this.started = false;
-    this.setState({
-      ...this.state,
-      finished: true,
-    });
-  }
-
-  doControl() {
-    if (this.state.countdown == this.state.game1.gameDuration) {
-      this.stopGame();
-      if (this.stopTimer != null) clearTimeout(this.stopTimer);
-      this.stopTimer = setTimeout(() => {
-        this.store.dispatch(
-          setStoreData({
-            currentPage: "finish",
-            gameScore: this.state.score,
-            saveScore: true,
-          })
-        );
-      }, this.state.game1.stopDuration);
-
-      return false;
-    }
-    this.setState({
-      ...this.state,
-      countdown: this.state.countdown + 1,
-    });
-    return true;
   }
 
   updateObjBounds(obj) {
@@ -213,11 +99,6 @@ class Game1Page extends Component {
     });
   }
 
-  closeButton_clickHandler(event) {
-    this.stopGame();
-    this.store.dispatch(setStoreData({ currentPage: "main" }));
-  }
-
   objButton_clickHandler(event) {
     let objects = this.state.objects;
     let bonuses = this.state.bonuses;
@@ -249,18 +130,16 @@ class Game1Page extends Component {
   }
 
   render() {
-    let children = [];
-    children.push(this.props.children);
-
     let objs = [];
     for (let i = 0; i < this.state.objects.length; i++) {
       let obj = this.state.objects[i];
       objs.push(
         <div
           className={
-            "gameObjectBox " +
+            "g1-gameObjectBox " +
+            "g1-" +
             obj.status +
-            (this.state.finished ? " obj-stop" : "")
+            (this.state.finished ? " g1-obj-stop" : "")
           }
           id={obj.id}
           key={obj.id}
@@ -281,7 +160,7 @@ class Game1Page extends Component {
           onClick={this.objButton_clickHandler}
         >
           <div
-            className={"gameObject swing"}
+            className={"g1-gameObject swing"}
             style={{
               backgroundImage: `url(${obj.type.src})`,
               pointerEvents: "none",
@@ -296,7 +175,7 @@ class Game1Page extends Component {
       let bonus = this.state.bonuses[i];
       bonuses.push(
         <div
-          className="gameBonusBox bonusUp"
+          className="g1-gameBonusBox bonusUp"
           id={bonus.id}
           key={bonus.id}
           style={{
@@ -307,7 +186,9 @@ class Game1Page extends Component {
           }}
         >
           <div
-            className={"gameBonus" + (bonus.value > 0 ? "" : " negativeBonus")}
+            className={
+              "g1-gameBonus" + (bonus.value > 0 ? "" : " g1-negativeBonus")
+            }
             style={{
               backgroundImage: `url(${require("../images/game1/bonus.png")})`,
               pointerEvents: "none",
@@ -325,15 +206,10 @@ class Game1Page extends Component {
           {objs}
           {bonuses}
         </div>
-        <div className="countdown">
+        <div className="countdown g1-countdown">
           {this.state.game1.gameDuration - this.state.countdown}
         </div>
-        <div className="score">{this.state.score}</div>
-
-        {/* <div className="dark-button" onClick={this.closeButton_clickHandler}>
-          Назад
-        </div>
-        */}
+        <div className="score g1-score">{this.state.score}</div>
       </div>
     );
   }

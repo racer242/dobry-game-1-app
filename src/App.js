@@ -21,6 +21,9 @@ import "./css/components.css";
 import "./css/content.css";
 import "./css/game.css";
 
+import Game2Settings from "./configuration/Game2Settings";
+import Game1Settings from "./configuration/Game1Settings";
+
 const Store = createStore(
   mainReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
@@ -56,7 +59,10 @@ class App extends Component {
   componentDidUpdate(prevProps, prevState, snapshot) {}
 
   componentDidMount() {
-    Store.dispatch(appInit(settings));
+    Store.dispatch(
+      appInit({ ...settings, game1: Game1Settings, game2: Game2Settings })
+    );
+
     this.props.onInit(this);
   }
 
