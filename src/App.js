@@ -19,6 +19,7 @@ import "./css/typographics.css";
 import "./css/animations.css";
 import "./css/components.css";
 import "./css/content.css";
+import "./css/game.css";
 
 const Store = createStore(
   mainReducer,

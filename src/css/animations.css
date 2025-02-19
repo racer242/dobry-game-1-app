@@ -3,6 +3,16 @@
   -moz-animation: spin 4s linear infinite;
   animation: spin 4s linear infinite;
 }
+.spin-pl {
+  -webkit-animation: spin 4s linear infinite normal;
+  -moz-animation: spin 4s linear infinite normal;
+  animation: spin 4s linear infinite normal;
+}
+.spin-cw {
+  -webkit-animation: spin 4s linear infinite reverse;
+  -moz-animation: spin 4s linear infinite reverse;
+  animation: spin 4s linear infinite reverse;
+}
 @-moz-keyframes spin {
   100% {
     -moz-transform: rotate(360deg);
@@ -19,52 +29,20 @@
     transform: rotate(360deg);
   }
 }
-.spin-pl {
-  -webkit-animation: spin 4s linear infinite normal;
-  -moz-animation: spin 4s linear infinite normal;
-  animation: spin 4s linear infinite normal;
-}
-.spin-cw {
-  -webkit-animation: spin 4s linear infinite reverse;
-  -moz-animation: spin 4s linear infinite reverse;
-  animation: spin 4s linear infinite reverse;
-}
 
 .zoom {
-  -webkit-animation: zoom 2s ease-in-out;
-  -moz-animation: zoom 2s ease-in-out;
   animation: zoom 2s ease-in-out;
-}
-@-moz-keyframes zoom {
-  0% {
-    -moz-transform: scale(0);
-  }
-  100% {
-    -moz-transform: scale(1);
-  }
-}
-@-webkit-keyframes zoom {
-  0% {
-    -webkit-transform: scale(0);
-  }
-  100% {
-    -webkit-transform: scale(1);
-  }
 }
 @keyframes zoom {
   0% {
-    -webkit-transform: scale(0);
     transform: scale(0);
   }
   100% {
-    -webkit-transform: scale(1);
     transform: scale(1);
   }
 }
 
 .swing {
-  -webkit-animation: swing 3s infinite ease-in-out;
-  -moz-animation: swing 3s infinite ease-in-out;
   animation: swing 3s infinite ease-in-out;
 }
 
@@ -77,5 +55,20 @@
   }
   100% {
     transform: rotate(-10deg);
+  }
+}
+
+.bonusUp {
+  animation: bonusUp 600ms ease-in;
+  animation-fill-mode: both;
+}
+@keyframes bonusUp {
+  0% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-200%);
+    opacity: 0;
   }
 }

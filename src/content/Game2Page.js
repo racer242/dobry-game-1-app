@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { setStoreData } from "../actions/appActions";
-import "../css/game.css";
+import "../css/game1.css";
 
-class GamePage extends Component {
+class Game2Page extends Component {
   constructor(props) {
     super(props);
     this.store = this.props.store;
@@ -82,13 +82,13 @@ class GamePage extends Component {
     if (this.initCount > 1) {
       this.gameTimer = setTimeout(
         this.stepGame.bind(this),
-        this.state.stepDuration
+        this.state.game1.stepDuration
       );
     } else {
       this.initCount++;
       this.gameTimer = setTimeout(
         this.stepGame.bind(this),
-        this.state.stepDuration / 100
+        this.state.game1.stepDuration / 100
       );
     }
   }
@@ -106,7 +106,7 @@ class GamePage extends Component {
   }
 
   doControl() {
-    if (this.state.countdown == this.state.gameDuration) {
+    if (this.state.countdown == this.state.game1.gameDuration) {
       this.stopGame();
       if (this.stopTimer != null) clearTimeout(this.stopTimer);
       this.stopTimer = setTimeout(() => {
@@ -117,7 +117,7 @@ class GamePage extends Component {
             saveScore: true,
           })
         );
-      }, this.state.stopDuration);
+      }, this.state.game1.stopDuration);
 
       return false;
     }
@@ -131,26 +131,26 @@ class GamePage extends Component {
   updateObjBounds(obj) {
     obj.cssX =
       "calc(" +
-      obj.x * (100 / this.state.gridSize) +
+      obj.x * (100 / this.state.game1.gridSize) +
       "% + " +
-      50 / this.state.gridSize +
+      50 / this.state.game1.gridSize +
       "% - " +
-      this.state.objectBounds.width / 2 +
+      this.state.game1.objectBounds.width / 2 +
       "px)";
     obj.cssY =
       "calc(" +
-      obj.y * (100 / this.state.gridSize) +
+      obj.y * (100 / this.state.game1.gridSize) +
       "% + " +
-      50 / this.state.gridSize +
+      50 / this.state.game1.gridSize +
       "% - " +
-      this.state.objectBounds.height / 2 +
+      this.state.game1.objectBounds.height / 2 +
       "px)";
     return obj;
   }
 
   doGame() {
     let objects = this.state.objects;
-    let objSources = this.state.objSources;
+    let objSources = this.state.game1.objSources;
 
     objects = objects.filter((v) => v.status != "obj-destroy");
     for (const obj of objects) {
@@ -179,9 +179,9 @@ class GamePage extends Component {
         obj.status = "obj-show";
       }
     }
-    for (let i = 0; i < this.state.newCount; i++) {
-      let x = Math.floor(Math.random() * this.state.gridSize);
-      let y = Math.floor(Math.random() * this.state.gridSize);
+    for (let i = 0; i < this.state.game1.newCount; i++) {
+      let x = Math.floor(Math.random() * this.state.game1.gridSize);
+      let y = Math.floor(Math.random() * this.state.game1.gridSize);
 
       objects.push({
         id: "obj" + this.counter++,
@@ -245,15 +245,15 @@ class GamePage extends Component {
           style={{
             left: obj.cssX,
             top: obj.cssY,
-            width: this.state.objectBounds.width,
-            height: this.state.objectBounds.height,
+            width: this.state.game1.objectBounds.width,
+            height: this.state.game1.objectBounds.height,
             transitionDuration:
               obj.status === "obj-show"
-                ? this.state.transitionDuration + "ms"
+                ? this.state.game1.transitionDuration + "ms"
                 : "",
             transitionDelay:
               obj.status === "obj-show"
-                ? Math.random() * this.state.transitionDuration + "ms"
+                ? Math.random() * this.state.game1.transitionDuration + "ms"
                 : "0ms",
           }}
           onClick={this.objButton_clickHandler}
@@ -273,7 +273,7 @@ class GamePage extends Component {
       <div className="gamePage" ref={this.ref}>
         <div className="gameScene">{objs}</div>
         <div className="countdown">
-          {this.state.gameDuration - this.state.countdown}
+          {this.state.game1.gameDuration - this.state.countdown}
         </div>
         <div className="score">{this.state.score}</div>
 
@@ -286,4 +286,4 @@ class GamePage extends Component {
   }
 }
 
-export default GamePage;
+export default Game2Page;

@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import MainPage from "../content/MainPage";
-import GamePage from "../content/GamePage";
 import FinishPage from "../content/FinishPage";
 import ScoresPage from "../content/ScoresPage";
+import Game1Page from "../content/Game1Page";
+import Game2Page from "../content/Game2Page";
 
 class PageStack extends Component {
   constructor(props) {
@@ -45,7 +46,9 @@ class PageStack extends Component {
     return (
       <div className="pageContainer">
         {this.state.currentPage === "main" && <MainPage store={this.store} />}
-        {this.state.currentPage === "game" && <GamePage store={this.store} />}
+        {this.state.currentPage === "game" &&
+          ((this.state.gameIndex == 1 && <Game1Page store={this.store} />) ||
+            (this.state.gameIndex == 2 && <Game2Page store={this.store} />))}
         {this.state.currentPage === "finish" && (
           <FinishPage store={this.store} />
         )}
