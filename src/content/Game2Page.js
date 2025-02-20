@@ -44,27 +44,37 @@ class Game2Page extends GamePage {
     bonuses = bonuses.filter((v) => v.status != "bonus-destroy");
     for (const bonus of bonuses) {
       if (bonus.status == "bonus-show") {
-        bonus.status = "bonus-destroy";
+        bonus.life--;
+        if (bonus.life < 0) {
+          bonus.status = "bonus-destroy";
+        }
       }
       if (bonus.status == "bonus-on") {
         bonus.status = "bonus-show";
+        bonus.life = this.state.game2.bonusLife;
       }
     }
 
     for (const obj of objects) {
       if (obj.status == "obj-show") {
-        obj.status = "obj-on";
-        obj.life =
-          Math.random() * this.state.game2.lifeCount +
-          this.state.game2.lifeCount;
+        obj.life--;
+        if (obj.life < 0) {
+          obj.status = "obj-on";
+          obj.life =
+            Math.random() * this.state.game2.lifeCount +
+            this.state.game2.lifeCount;
+        }
         break;
       }
 
       if (obj.status == "obj-hide") {
-        obj.status = "obj-off";
-        obj.life =
-          Math.random() * this.state.game2.deadCount +
-          this.state.game2.deadCount;
+        obj.life--;
+        if (obj.life < 0) {
+          obj.status = "obj-off";
+          obj.life =
+            Math.random() * this.state.game2.deadCount +
+            this.state.game2.deadCount;
+        }
         break;
       }
 
@@ -72,6 +82,7 @@ class Game2Page extends GamePage {
         obj.life--;
         if (obj.life < 0) {
           obj.status = "obj-show";
+          obj.life = this.state.game2.switchCount;
         }
       }
 
@@ -79,6 +90,7 @@ class Game2Page extends GamePage {
         obj.life--;
         if (obj.life < 0) {
           obj.status = "obj-hide";
+          obj.life = this.state.game2.switchCount;
         }
       }
 
@@ -133,16 +145,14 @@ class Game2Page extends GamePage {
     let objects = this.state.objects;
     let bonuses = this.state.bonuses;
     let score = 0;
-    for (const obj of this.state.objects) {
-      if (
-        x > obj.x &&
-        x < obj.x + obj.width &&
-        y > obj.y &&
-        y < obj.y + obj.height
-      ) {
+    if (event.target.id) {
+      let objId = event.target.id;
+      let objs = this.state.objects.filter((v) => v.id == objId);
+      let obj = objs.length > 0 ? objs[0] : null;
+      if (obj) {
         if (obj.status == "obj-on" || obj.status == "obj-hide") {
           obj.status = "obj-killing";
-          obj.life = this.state.game2.killingCount;
+          obj.life = this.state.game2.switchCount;
           changed = true;
 
           let bonusValue = obj.type.bonus;
@@ -154,16 +164,15 @@ class Game2Page extends GamePage {
             value: bonusValue,
             status: "bonus-on",
           });
+
+          this.setState({
+            ...this.state,
+            objects,
+            bonuses,
+            score,
+          });
         }
       }
-    }
-    if (changed) {
-      this.setState({
-        ...this.state,
-        objects,
-        bonuses,
-        score,
-      });
     }
   }
 

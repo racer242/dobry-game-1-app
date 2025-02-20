@@ -1,6 +1,6 @@
 import { isMobile, isLocal } from "../core/helpers";
 
-const Game2Settings = {
+const Game3Settings = {
   objectBounds: {
     width: 100,
     height: 100,
@@ -66,9 +66,8 @@ const Game2Settings = {
 
   lifeCount: 3,
   deadCount: 4,
+  killingCount: 1,
   killCount: 3,
-  switchCount: 2,
-
   lightSize: 100,
 
   bonusLife: 3,
@@ -82,4 +81,4 @@ const Game2Settings = {
   stopDuration: 3000, //ms
 };
 
-export default Game2Settings;
+export default Game3Settings;

@@ -46,10 +46,14 @@ class Game1Page extends GamePage {
     bonuses = bonuses.filter((v) => v.status != "bonus-destroy");
     for (const bonus of bonuses) {
       if (bonus.status == "bonus-show") {
-        bonus.status = "bonus-destroy";
+        bonus.life--;
+        if (bonus.life < 0) {
+          bonus.status = "bonus-destroy";
+        }
       }
       if (bonus.status == "bonus-on") {
         bonus.status = "bonus-show";
+        bonus.life = this.state.game2.bonusLife;
       }
     }
 

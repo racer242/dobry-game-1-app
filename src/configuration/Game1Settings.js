@@ -55,6 +55,8 @@ const Game1Settings = {
   gridSize: 10,
   transitionDuration: 1000, //ms
 
+  bonusLife: 3,
+
   stepDuration: 1000, //ms
   gameDuration: 100, //s
   stopDuration: 3000, //ms

@@ -23,6 +23,7 @@ import "./css/game.css";
 
 import Game2Settings from "./configuration/Game2Settings";
 import Game1Settings from "./configuration/Game1Settings";
+import Game3Settings from "./configuration/Game3Settings";
 
 const Store = createStore(
   mainReducer,
@@ -60,7 +61,12 @@ class App extends Component {
 
   componentDidMount() {
     Store.dispatch(
-      appInit({ ...settings, game1: Game1Settings, game2: Game2Settings })
+      appInit({
+        ...settings,
+        game1: Game1Settings,
+        game2: Game2Settings,
+        game3: Game3Settings,
+      })
     );
 
     this.props.onInit(this);

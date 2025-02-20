@@ -59,7 +59,7 @@
 }
 
 .bonusUp {
-  animation: bonusUp 600ms ease-in;
+  animation: bonusUp 800ms ease-in;
   animation-fill-mode: both;
 }
 @keyframes bonusUp {
@@ -68,13 +68,13 @@
     opacity: 1;
   }
   100% {
-    transform: translateY(-200%);
+    transform: translateY(-300%);
     opacity: 0;
   }
 }
 
 .blinking {
-  animation: blinking 1000ms ease-in;
+  animation: blinking 1000ms ease-out;
 }
 @keyframes blinking {
   0% {
