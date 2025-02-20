@@ -64,10 +64,10 @@ const Game2Settings = {
     },
   ],
 
-  lifeCount: 5,
-  deadCount: 8,
+  lifeCount: 3,
+  deadCount: 4,
   killingCount: 1,
-  killCount: 10,
+  killCount: 3,
   lightSize: 100,
   newCount: 2,
   transitionDuration: 300, //ms

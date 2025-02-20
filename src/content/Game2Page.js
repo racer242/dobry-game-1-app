@@ -57,6 +57,15 @@ class Game2Page extends GamePage {
         obj.life =
           Math.random() * this.state.game2.lifeCount +
           this.state.game2.lifeCount;
+        break;
+      }
+
+      if (obj.status == "obj-hide") {
+        obj.status = "obj-off";
+        obj.life =
+          Math.random() * this.state.game2.deadCount +
+          this.state.game2.deadCount;
+        break;
       }
 
       if (obj.status == "obj-off") {
@@ -69,10 +78,7 @@ class Game2Page extends GamePage {
       if (obj.status == "obj-on") {
         obj.life--;
         if (obj.life < 0) {
-          obj.status = "obj-off";
-          obj.life =
-            Math.random() * this.state.game2.deadCount +
-            this.state.game2.deadCount;
+          obj.status = "obj-hide";
         }
       }
 
@@ -105,6 +111,7 @@ class Game2Page extends GamePage {
   }
 
   scene_moveHandler(event) {
+    if (this.state.finished) return;
     let b = event.currentTarget.getBoundingClientRect();
     let x = (event.clientX - b.x) / this.props.bounds.pageScale;
     let y = (event.clientY - b.y) / this.props.bounds.pageScale;
@@ -133,7 +140,7 @@ class Game2Page extends GamePage {
         y > obj.y &&
         y < obj.y + obj.height
       ) {
-        if (obj.status == "obj-on") {
+        if (obj.status == "obj-on" || obj.status == "obj-hide") {
           obj.status = "obj-killing";
           obj.life = this.state.game2.killingCount;
           changed = true;
@@ -179,6 +186,7 @@ class Game2Page extends GamePage {
             top: obj.y,
             width: obj.width,
             height: obj.height,
+            transitionDuration: this.state.game2.transitionDuration + "ms",
             transitionDelay:
               Math.random() * this.state.game2.transitionDuration + "ms",
           }}
