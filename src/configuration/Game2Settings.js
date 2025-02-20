@@ -15,8 +15,6 @@ const Game2Settings = {
       type: {
         src: require("../images/game2/objects/o1.png"),
         bonus: 1,
-        lifeProb: 2,
-        lifeCount: 3,
         speed: 0.5,
       },
     },
@@ -28,8 +26,6 @@ const Game2Settings = {
       type: {
         src: require("../images/game2/objects/o2.png"),
         bonus: 1,
-        lifeProb: 2,
-        lifeCount: 3,
         speed: 0.5,
       },
     },
@@ -41,8 +37,6 @@ const Game2Settings = {
       type: {
         src: require("../images/game2/objects/o3.png"),
         bonus: 1,
-        lifeProb: 2,
-        lifeCount: 3,
         speed: 0.5,
       },
     },
@@ -54,8 +48,6 @@ const Game2Settings = {
       type: {
         src: require("../images/game2/objects/o4.png"),
         bonus: 1,
-        lifeProb: 2,
-        lifeCount: 3,
         speed: 0.5,
       },
     },
@@ -67,18 +59,21 @@ const Game2Settings = {
       type: {
         src: require("../images/game2/objects/o5.png"),
         bonus: 1,
-        lifeProb: 2,
-        lifeCount: 3,
         speed: 0.5,
       },
     },
   ],
 
-  lifeProb: 0.6,
-  stepDuration: 1000, //ms
-  transitionDuration: 1000, //ms
+  lifeCount: 5,
+  deadCount: 8,
+  killingCount: 1,
+  killCount: 10,
+  lightSize: 100,
   newCount: 2,
-  gridSize: 10,
+  transitionDuration: 300, //ms
+  detectionSize: 50,
+
+  stepDuration: 200, //ms
   gameDuration: 100, //s
   stopDuration: 3000, //ms
 };

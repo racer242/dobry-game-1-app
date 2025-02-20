@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import MainPage from "../components/PageStack.js";
+import PageStack from "../components/PageStack.js";
 import Preloader from "../components/Preloader.js";
 import AboutPopup from "../content/AboutPopup.js";
 import { setStoreData } from "../actions/appActions.js";
@@ -24,6 +24,8 @@ class Container extends Component {
       pageY: 0,
       mobileSize: false,
     };
+
+    this.ref = React.createRef();
 
     this.closeAboutPopup_clickHandler =
       this.closeAboutPopup_clickHandler.bind(this);
@@ -95,6 +97,7 @@ class Container extends Component {
       blockHeight: height,
       blockInnerHeight: height / pageScale,
       mobileSize,
+      position: this.ref?.current?.getBoundingClientRect(),
     };
     // }
 
@@ -109,13 +112,14 @@ class Container extends Component {
       <div
         className="page"
         key="Page"
+        ref={this.ref}
         style={{
           width: b.pageBounds.width,
           height: b.pageBounds.height,
           transform: `scale(${b.pageScale}) translateX(${b.pageX}px) translateY(${b.pageY}px)`,
         }}
       >
-        <MainPage store={this.store} />
+        <PageStack bounds={b} store={this.store} />
       </div>
     );
 

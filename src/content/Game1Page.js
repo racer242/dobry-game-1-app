@@ -10,6 +10,9 @@ class Game1Page extends GamePage {
       ...this.state,
       objects: [],
       bonuses: [],
+      gameDuration: this.state.game1.gameDuration,
+      stopDuration: this.state.game1.stopDuration,
+      stepDuration: this.state.game1.stepDuration,
     };
 
     this.objButton_clickHandler = this.objButton_clickHandler.bind(this);
@@ -201,7 +204,7 @@ class Game1Page extends GamePage {
     }
 
     return (
-      <div className="gamePage" ref={this.ref}>
+      <div className="gamePage">
         <div className="gameScene">
           {objs}
           {bonuses}

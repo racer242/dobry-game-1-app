@@ -45,15 +45,21 @@ class PageStack extends Component {
   render() {
     return (
       <div className="pageContainer">
-        {this.state.currentPage === "main" && <MainPage store={this.store} />}
+        {this.state.currentPage === "main" && (
+          <MainPage bounds={this.props.bounds} store={this.store} />
+        )}
         {this.state.currentPage === "game" &&
-          ((this.state.gameIndex == 1 && <Game1Page store={this.store} />) ||
-            (this.state.gameIndex == 2 && <Game2Page store={this.store} />))}
+          ((this.state.gameIndex == 1 && (
+            <Game1Page bounds={this.props.bounds} store={this.store} />
+          )) ||
+            (this.state.gameIndex == 2 && (
+              <Game2Page bounds={this.props.bounds} store={this.store} />
+            )))}
         {this.state.currentPage === "finish" && (
-          <FinishPage store={this.store} />
+          <FinishPage bounds={this.props.bounds} store={this.store} />
         )}
         {this.state.currentPage === "scores" && (
-          <ScoresPage store={this.store} />
+          <ScoresPage bounds={this.props.bounds} store={this.store} />
         )}
       </div>
     );

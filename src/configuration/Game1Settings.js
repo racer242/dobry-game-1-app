@@ -51,10 +51,11 @@ const Game1Settings = {
     },
   ],
 
-  stepDuration: 1000, //ms
-  transitionDuration: 1000, //ms
   newCount: 2,
   gridSize: 10,
+  transitionDuration: 1000, //ms
+
+  stepDuration: 1000, //ms
   gameDuration: 100, //s
   stopDuration: 3000, //ms
 };

@@ -63,6 +63,7 @@ class GamePage extends Component {
       });
       this.stepGame();
       this.controlGame();
+      this.doStart();
     }
   }
 
@@ -79,13 +80,13 @@ class GamePage extends Component {
     if (this.initCount > 1) {
       this.gameTimer = setTimeout(
         this.stepGame.bind(this),
-        this.state.game1.stepDuration
+        this.state.stepDuration
       );
     } else {
       this.initCount++;
       this.gameTimer = setTimeout(
         this.stepGame.bind(this),
-        this.state.game1.stepDuration / 100
+        this.state.stepDuration / 100
       );
     }
   }
@@ -103,7 +104,7 @@ class GamePage extends Component {
   }
 
   doControl() {
-    if (this.state.countdown == this.state.game1.gameDuration) {
+    if (this.state.countdown == this.state.gameDuration) {
       this.stopGame();
       if (this.stopTimer != null) clearTimeout(this.stopTimer);
       this.stopTimer = setTimeout(() => {
@@ -114,7 +115,7 @@ class GamePage extends Component {
             saveScore: true,
           })
         );
-      }, this.state.game1.stopDuration);
+      }, this.state.stopDuration);
 
       return false;
     }
@@ -125,6 +126,7 @@ class GamePage extends Component {
     return true;
   }
 
+  doStart() {}
   doGame() {}
 
   closeButton_clickHandler(event) {
