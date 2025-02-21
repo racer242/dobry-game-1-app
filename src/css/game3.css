@@ -6,6 +6,51 @@
   color: rgba(255, 0, 255, 0.8) !important;
 }
 
+.g3-gameScene {
+  position: absolute;
+  display: block;
+}
+.g3-gameSceneBg {
+  position: absolute;
+  display: block;
+  background-image: url(../images/game3/bg.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.g3-gameCellsBlock {
+  position: absolute;
+  display: block;
+  transform: translate(-50%, -50%);
+}
+
+.g3-cellBox {
+  position: absolute;
+  display: block;
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  border-width: 0;
+  border-style: solid;
+  background-color: #000;
+}
+
+.g3-cellPlate {
+  position: absolute;
+  display: block;
+  width: calc(100% - 4px);
+  height: calc(100% - 12px);
+  margin: 2px;
+  border-radius: 8px;
+  border-width: 0;
+  border-style: solid;
+}
+
+.g3-cell-stop {
+  opacity: 0.2;
+}
+
 .g3-gameObjectBox {
   position: absolute;
   display: block;
@@ -31,18 +76,9 @@
   pointer-events: none;
 }
 
-.g3-gameScene {
-  position: absolute;
-  display: block;
-}
-.g3-gameSceneBg {
-  position: absolute;
-  display: block;
-  background-image: url(../images/game3/bg.png);
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
+/* 
+cellHover:"#fff",
+cellUsed:"#D0D5E0", */
 
 .g3-obj-hide,
 .g3-obj-off {

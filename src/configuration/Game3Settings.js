@@ -1,68 +1,66 @@
 import { isMobile, isLocal } from "../core/helpers";
 
 const Game3Settings = {
-  objectBounds: {
-    width: 100,
+  cellBounds: {
+    width: 88,
     height: 100,
+    gapX: 10,
+    gapY: 10,
   },
 
   objSources: [
     {
-      x: 341,
-      y: 359,
-      width: 75,
-      height: 63,
       type: {
-        src: require("../images/game2/objects/o1.png"),
+        src: require("../images/game3/objects/o1.png"),
         bonus: 1,
-        speed: 0.5,
       },
     },
     {
-      x: 556,
-      y: 361,
-      width: 54,
-      height: 64,
       type: {
-        src: require("../images/game2/objects/o2.png"),
+        src: require("../images/game3/objects/o2.png"),
         bonus: 1,
-        speed: 0.5,
       },
     },
     {
-      x: 453,
-      y: 357,
-      width: 93,
-      height: 80,
       type: {
-        src: require("../images/game2/objects/o3.png"),
+        src: require("../images/game3/objects/o3.png"),
         bonus: 1,
-        speed: 0.5,
       },
     },
     {
-      x: 355,
-      y: 51,
-      width: 37,
-      height: 66,
       type: {
-        src: require("../images/game2/objects/o4.png"),
+        src: require("../images/game3/objects/o4.png"),
         bonus: 1,
-        speed: 0.5,
       },
     },
     {
-      x: 524,
-      y: 90,
-      width: 52,
-      height: 90,
       type: {
-        src: require("../images/game2/objects/o5.png"),
+        src: require("../images/game3/objects/o5.png"),
         bonus: 1,
-        speed: 0.5,
+      },
+    },
+    {
+      type: {
+        src: require("../images/game3/objects/o6.png"),
+        bonus: 1,
+      },
+    },
+    {
+      type: {
+        src: require("../images/game3/objects/o7.png"),
+        bonus: 1,
+      },
+    },
+    {
+      type: {
+        src: require("../images/game3/objects/o8.png"),
+        bonus: 1,
       },
     },
   ],
+
+  cellColors: ["#5D279E", "#A71FE1", "#FF49B8", "#E11F26"],
+  matrixSize: [4, 4],
 
   lifeCount: 3,
   deadCount: 4,

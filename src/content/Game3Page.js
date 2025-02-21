@@ -7,13 +7,35 @@ class Game3Page extends GamePage {
     super(props);
 
     let objects = [];
-    for (let i = 0; i < this.state.game3.objSources.length; i++) {
-      objects.push({
-        ...this.state.game3.objSources[i],
-        id: "obj" + this.counter++,
-        status: "obj-off",
-      });
+    // for (let i = 0; i < this.state.game3.objSources.length; i++) {
+    //   objects.push({
+    //     ...this.state.game3.objSources[i],
+    //     id: "obj" + this.counter++,
+    //     status: "obj-off",
+    //   });
+    // }
+
+    let cells = [];
+    for (let i = 0; i < this.state.game3.matrixSize[0]; i++) {
+      for (let j = 0; j < this.state.game3.matrixSize[1]; j++) {
+        let cell = {
+          id: i + " " + j,
+          x:
+            j *
+            (this.state.game3.cellBounds.width +
+              this.state.game3.cellBounds.gapX),
+          y:
+            i *
+            (this.state.game3.cellBounds.height +
+              this.state.game3.cellBounds.gapY),
+          width: this.state.game3.cellBounds.width,
+          height: this.state.game3.cellBounds.height,
+          color: this.state.game3.cellColors[i],
+        };
+        cells.push(cell);
+      }
     }
+    console.log(cells);
 
     this.state = {
       ...this.state,
@@ -21,6 +43,17 @@ class Game3Page extends GamePage {
       stopDuration: this.state.game3.stopDuration,
       stepDuration: this.state.game3.stepDuration,
       objects,
+      cells,
+      cellsWidth:
+        this.state.game3.matrixSize[1] *
+          (this.state.game3.cellBounds.width +
+            this.state.game3.cellBounds.gapX) -
+        this.state.game3.cellBounds.gapX,
+      cellsHeight:
+        this.state.game3.matrixSize[1] *
+          (this.state.game3.cellBounds.height +
+            this.state.game3.cellBounds.gapY) -
+        this.state.game3.cellBounds.gapY,
       bonuses: [],
     };
 
@@ -106,38 +139,64 @@ class Game3Page extends GamePage {
 
   render() {
     let objs = [];
-    for (let i = 0; i < this.state.objects.length; i++) {
-      let obj = this.state.objects[i];
-      objs.push(
+    let cells = [];
+    for (let i = 0; i < this.state.cells.length; i++) {
+      let cell = this.state.cells[i];
+      cells.push(
         <div
           className={
-            "g3-gameObjectBox " +
-            "g3-" +
-            obj.status +
-            (this.state.finished ? " g3-obj-stop" : "")
+            "g3-cellBox" + (this.state.finished ? " g3-cell-stop" : "")
           }
-          id={obj.id}
-          key={obj.id}
+          id={cell.id}
+          key={cell.id}
           style={{
-            left: obj.x,
-            top: obj.y,
-            width: obj.width,
-            height: obj.height,
+            left: cell.x + "px",
+            top: cell.y + "px",
+            width: cell.width + "px",
+            height: cell.height + "px",
+
             transitionDuration: this.state.game3.transitionDuration + "ms",
-            transitionDelay:
-              Math.random() * this.state.game3.transitionDuration + "ms",
           }}
           onClick={this.objButton_clickHandler}
         >
           <div
-            className={"g3-gameObject"}
-            style={{
-              backgroundImage: `url(${obj.type.src})`,
-              pointerEvents: "none",
-            }}
+            className="g3-cellPlate"
+            style={{ backgroundColor: cell.color }}
           ></div>
         </div>
       );
+
+      // let obj = this.state.objects[i];
+      // objs.push(
+      //   <div
+      //     className={
+      //       "g3-gameObjectBox " +
+      //       "g3-" +
+      //       obj.status +
+      //       (this.state.finished ? " g3-obj-stop" : "")
+      //     }
+      //     id={obj.id}
+      //     key={obj.id}
+      //     style={{
+      //       left: obj.x,
+      //       top: obj.y,
+      //       width: obj.width,
+      //       height: obj.height,
+      //       transitionDuration: this.state.game3.transitionDuration + "ms",
+      //       transitionDelay:
+      //         Math.random() * this.state.game3.transitionDuration + "ms",
+      //     }}
+      //     onClick={this.objButton_clickHandler}
+      //   >
+      //     <div
+      //       className={"g3-gameObject"}
+      //       style={{
+      //         backgroundImage: `url(${obj.type.src})`,
+      //         pointerEvents: "none",
+      //       }}
+      //     ></div>
+      //   </div>
+      // );
     }
 
     let bonuses = [];
@@ -205,7 +264,18 @@ class Game3Page extends GamePage {
                   (this.props.bounds.mobileSize ? "rotate(270deg)" : ""),
               }}
             ></div>
-            {objs}
+
+            <div
+              className="g3-gameCellsBlock"
+              style={{
+                width: this.state.cellsWidth,
+                height: this.state.cellsHeight,
+                left: this.props.bounds.mobileSize ? "45%" : "50%",
+                top: this.props.bounds.mobileSize ? "50%" : "45%",
+              }}
+            >
+              {cells}
+            </div>
             {bonuses}
           </div>
         </div>
