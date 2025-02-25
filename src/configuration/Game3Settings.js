@@ -7,6 +7,10 @@ const Game3Settings = {
     gapX: 10,
     gapY: 10,
   },
+  bonusBounds: {
+    width: 100,
+    height: 100,
+  },
 
   objSources: [
     {
@@ -74,7 +78,7 @@ const Game3Settings = {
   transitionDuration: 300, //ms
   detectionSize: 50,
 
-  stepDuration: 200, //ms
+  stepDuration: 500, //ms
   gameDuration: 100, //s
   stopDuration: 3000, //ms
 };

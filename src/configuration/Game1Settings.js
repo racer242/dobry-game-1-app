@@ -5,6 +5,10 @@ const Game1Settings = {
     width: 100,
     height: 100,
   },
+  bonusBounds: {
+    width: 100,
+    height: 100,
+  },
 
   objSources: [
     {

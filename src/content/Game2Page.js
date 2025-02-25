@@ -223,8 +223,8 @@ class Game2Page extends GamePage {
           style={{
             left: bonus.cssX,
             top: bonus.cssY,
-            width: this.state.game2.objectBounds.width,
-            height: this.state.game2.objectBounds.height,
+            width: this.state.game2.bonusBounds.width,
+            height: this.state.game2.bonusBounds.height,
           }}
         >
           <div

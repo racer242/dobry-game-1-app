@@ -6,20 +6,12 @@ class Game3Page extends GamePage {
   constructor(props) {
     super(props);
 
-    let objects = [];
-    // for (let i = 0; i < this.state.game3.objSources.length; i++) {
-    //   objects.push({
-    //     ...this.state.game3.objSources[i],
-    //     id: "obj" + this.counter++,
-    //     status: "obj-off",
-    //   });
-    // }
-
     let cells = [];
+    let randomCell = [];
     for (let i = 0; i < this.state.game3.matrixSize[0]; i++) {
       for (let j = 0; j < this.state.game3.matrixSize[1]; j++) {
         let cell = {
-          id: i + " " + j,
+          id: "cell_" + i + "_" + j,
           x:
             j *
             (this.state.game3.cellBounds.width +
@@ -33,9 +25,43 @@ class Game3Page extends GamePage {
           color: this.state.game3.cellColors[i],
         };
         cells.push(cell);
+        randomCell.push(cell);
       }
     }
-    console.log(cells);
+
+    randomCell.sort((a, b) => 0.5 - Math.random());
+
+    let objects = [];
+    for (let i = 0; i < this.state.game3.objSources.length; i++) {
+      let cell = randomCell.pop();
+      let obj = {
+        ...this.state.game3.objSources[i],
+        id: "obj" + this.counter++,
+        status: "obj-off",
+        isOpen: false,
+        isFound: false,
+      };
+      cell.obj = obj;
+      objects.push(obj);
+
+      let firstObj = obj;
+
+      cell = randomCell.pop();
+      obj = {
+        ...this.state.game3.objSources[i],
+        id: "obj" + this.counter++,
+        status: "obj-off",
+        isOpen: false,
+        isFound: false,
+      };
+      cell.obj = obj;
+      objects.push(obj);
+
+      let secondObj = obj;
+
+      firstObj.pair = secondObj;
+      secondObj.pair = firstObj;
+    }
 
     this.state = {
       ...this.state,
@@ -57,7 +83,7 @@ class Game3Page extends GamePage {
       bonuses: [],
     };
 
-    this.scene_moveHandler = this.scene_moveHandler.bind(this);
+    this.cell_clickHandler = this.cell_clickHandler.bind(this);
   }
 
   doStart() {
@@ -75,28 +101,54 @@ class Game3Page extends GamePage {
         if (bonus.life < 0) {
           bonus.status = "bonus-destroy";
         }
+        continue;
       }
       if (bonus.status == "bonus-on") {
         bonus.status = "bonus-show";
         bonus.life = this.state.game2.bonusLife;
+        continue;
       }
     }
 
     for (const obj of objects) {
       if (obj.status == "obj-show") {
         obj.status = "obj-on";
-        break;
+        continue;
       }
 
       if (obj.status == "obj-hide") {
+        obj.isOpen = false;
         obj.status = "obj-off";
-        break;
+        continue;
+      }
+
+      if (obj.status == "obj-hidding") {
+        obj.status = "obj-hide";
+        continue;
+      }
+
+      if (obj.status == "obj-wait-and-found") {
+        continue;
+      }
+      if (obj.status == "obj-show-and-found") {
+        obj.status = "obj-show";
+        continue;
+      }
+      if (obj.status == "obj-wait-and-hide") {
+        obj.status = "obj-hidding";
+        continue;
+      }
+      if (obj.status == "obj-show-and-hide") {
+        obj.status = "obj-hidding";
+        continue;
       }
 
       if (obj.status == "obj-off") {
+        continue;
       }
 
       if (obj.status == "obj-on") {
+        continue;
       }
     }
 
@@ -107,34 +159,53 @@ class Game3Page extends GamePage {
     });
   }
 
-  scene_moveHandler(event) {
-    if (this.state.finished) return;
-
+  cell_clickHandler(event) {
+    let cells = this.state.cells;
     let objects = this.state.objects;
     let bonuses = this.state.bonuses;
-    let score = 0;
-    for (const obj of this.state.objects) {
-      if (true) {
-        if (true) {
-          obj.status = "obj-off";
-          let bonusValue = obj.type.bonus;
-          score = Math.max(this.state.score + bonusValue, 0);
-          bonuses.push({
-            id: "bonus" + this.counter++,
-            cssX: 0 + "px",
-            cssY: 0 + "px",
-            value: bonusValue,
-            status: "bonus-on",
-          });
-          this.setState({
-            ...this.state,
-            objects,
-            bonuses,
-            score,
-          });
+    let bonusValue = 0;
+    let cellsFound = cells.filter((v) => v.id == event.target.id);
+    if (cellsFound.length > 0) {
+      let obj = cellsFound[0].obj;
+      if (!obj.isOpen) {
+        let findOpened = objects.filter((v) => v.isOpen && !v.isFound);
+        if (findOpened.length <= 1) {
+          if (findOpened.length > 0) {
+            let foundObj = findOpened[0];
+            if (foundObj.pair === obj) {
+              foundObj.isFound = true;
+              foundObj.status = "obj-wait-and-found";
+              obj.isFound = true;
+              obj.status = "obj-show-and-found";
+              obj.isOpen = true;
+              bonusValue = obj.type.bonus;
+              bonuses.push({
+                id: "bonus" + this.counter++,
+                cssX: event.target.offsetLeft,
+                cssY: event.target.offsetTop,
+                value: bonusValue,
+                status: "bonus-on",
+              });
+            } else {
+              foundObj.status = "obj-wait-and-hide";
+              obj.status = "obj-show-and-hide";
+              obj.isOpen = true;
+            }
+          } else {
+            obj.status = "obj-show";
+            obj.isOpen = true;
+          }
         }
       }
     }
+    let score = Math.max(this.state.score + bonusValue, 0);
+
+    this.setState({
+      ...this.state,
+      objects,
+      bonuses,
+      score,
+    });
   }
 
   render() {
@@ -142,6 +213,7 @@ class Game3Page extends GamePage {
     let cells = [];
     for (let i = 0; i < this.state.cells.length; i++) {
       let cell = this.state.cells[i];
+      let obj = cell.obj;
       cells.push(
         <div
           className={
@@ -157,46 +229,33 @@ class Game3Page extends GamePage {
 
             transitionDuration: this.state.game3.transitionDuration + "ms",
           }}
-          onClick={this.objButton_clickHandler}
+          onClick={this.cell_clickHandler}
         >
-          <div
-            className="g3-cellPlate"
-            style={{ backgroundColor: cell.color }}
-          ></div>
+          <div className="g3-cellPlate" style={{ backgroundColor: cell.color }}>
+            <div
+              className={
+                "g3-gameObjectBox " +
+                "g3-" +
+                obj.status +
+                (this.state.finished ? " g3-obj-stop" : "")
+              }
+              id={obj.id}
+              key={obj.id}
+              style={{
+                transitionDuration: this.state.game3.transitionDuration + "ms",
+              }}
+            >
+              <div
+                className={"g3-gameObject"}
+                style={{
+                  backgroundImage: `url(${obj.type.src})`,
+                  pointerEvents: "none",
+                }}
+              ></div>
+            </div>
+          </div>
         </div>
       );
-
-      // let obj = this.state.objects[i];
-      // objs.push(
-      //   <div
-      //     className={
-      //       "g3-gameObjectBox " +
-      //       "g3-" +
-      //       obj.status +
-      //       (this.state.finished ? " g3-obj-stop" : "")
-      //     }
-      //     id={obj.id}
-      //     key={obj.id}
-      //     style={{
-      //       left: obj.x,
-      //       top: obj.y,
-      //       width: obj.width,
-      //       height: obj.height,
-      //       transitionDuration: this.state.game3.transitionDuration + "ms",
-      //       transitionDelay:
-      //         Math.random() * this.state.game3.transitionDuration + "ms",
-      //     }}
-      //     onClick={this.objButton_clickHandler}
-      //   >
-      //     <div
-      //       className={"g3-gameObject"}
-      //       style={{
-      //         backgroundImage: `url(${obj.type.src})`,
-      //         pointerEvents: "none",
-      //       }}
-      //     ></div>
-      //   </div>
-      // );
     }
 
     let bonuses = [];
@@ -210,8 +269,8 @@ class Game3Page extends GamePage {
           style={{
             left: bonus.cssX,
             top: bonus.cssY,
-            width: this.state.game3.objectBounds.width,
-            height: this.state.game3.objectBounds.height,
+            width: this.state.game3.bonusBounds.width,
+            height: this.state.game3.bonusBounds.height,
           }}
         >
           <div
@@ -245,8 +304,6 @@ class Game3Page extends GamePage {
                 ? this.state.mobileBounds.height
                 : this.state.desktopBounds.height,
             }}
-            onPointerDown={this.scene_moveHandler}
-            onPointerMove={this.scene_moveHandler}
           >
             <div
               className="g3-gameSceneBg"
@@ -275,8 +332,8 @@ class Game3Page extends GamePage {
               }}
             >
               {cells}
+              {bonuses}
             </div>
-            {bonuses}
           </div>
         </div>
         <div className="countdown g3-countdown">

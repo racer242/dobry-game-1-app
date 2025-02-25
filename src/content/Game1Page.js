@@ -111,7 +111,7 @@ class Game1Page extends GamePage {
     let bonuses = this.state.bonuses;
     let bonusValue = 0;
     let objs = objects.filter((v) => v.id == event.target.id);
-    if (objs.length >= 0) {
+    if (objs.length > 0) {
       let obj = objs[0];
 
       bonusValue = obj.type.bonus;
@@ -124,7 +124,7 @@ class Game1Page extends GamePage {
       });
 
       obj.status = "obj-kill";
-      event.target.classList.add("obj-kill");
+      event.target.classList.add("g1-obj-kill");
     }
     let score = Math.max(this.state.score + bonusValue, 0);
 
@@ -188,8 +188,8 @@ class Game1Page extends GamePage {
           style={{
             left: bonus.cssX,
             top: bonus.cssY,
-            width: this.state.game1.objectBounds.width,
-            height: this.state.game1.objectBounds.height,
+            width: this.state.game1.bonusBounds.width,
+            height: this.state.game1.bonusBounds.height,
           }}
         >
           <div
