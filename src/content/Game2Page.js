@@ -146,33 +146,34 @@ class Game2Page extends GamePage {
     let objects = this.state.objects;
     let bonuses = this.state.bonuses;
     let score = 0;
-    if (event.target.id) {
-      let objId = event.target.id;
-      let objs = this.state.objects.filter((v) => v.id == objId);
-      let obj = objs.length > 0 ? objs[0] : null;
-      if (obj) {
-        if (obj.status == "obj-on" || obj.status == "obj-hide") {
-          obj.status = "obj-killing";
-          obj.life = this.state.game2.switchCount;
-          changed = true;
 
-          let bonusValue = obj.type.bonus;
-          score = Math.max(this.state.score + bonusValue, 0);
-          bonuses.push({
-            id: "bonus" + this.counter++,
-            cssX: lx + "px",
-            cssY: ly + "px",
-            value: bonusValue,
-            status: "bonus-on",
-          });
+    let objs = this.state.objects.filter(
+      (v) => v.x < x && v.x + v.width > x && v.y < y && v.y + v.height > y
+    );
 
-          this.setState({
-            ...this.state,
-            objects,
-            bonuses,
-            score,
-          });
-        }
+    let obj = objs.length > 0 ? objs[0] : null;
+    if (obj) {
+      if (obj.status == "obj-on" || obj.status == "obj-hide") {
+        obj.status = "obj-killing";
+        obj.life = this.state.game2.switchCount;
+        changed = true;
+
+        let bonusValue = obj.type.bonus;
+        score = Math.max(this.state.score + bonusValue, 0);
+        bonuses.push({
+          id: "bonus" + this.counter++,
+          cssX: lx + "px",
+          cssY: ly + "px",
+          value: bonusValue,
+          status: "bonus-on",
+        });
+
+        this.setState({
+          ...this.state,
+          objects,
+          bonuses,
+          score,
+        });
       }
     }
   }
