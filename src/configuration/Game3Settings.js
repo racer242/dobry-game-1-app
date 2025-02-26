@@ -64,6 +64,10 @@ const Game3Settings = {
   ],
 
   cellColors: ["#5D279E", "#A71FE1", "#FF49B8", "#E11F26"],
+
+  modeSequense: ["rows", "columns", "diagonal"],
+  modeCount: 40,
+
   matrixSize: [4, 4],
 
   lifeCount: 3,
@@ -75,12 +79,13 @@ const Game3Settings = {
   bonusLife: 3,
 
   newCount: 2,
-  transitionDuration: 300, //ms
+  transitionDuration: 200, //ms
   detectionSize: 50,
 
   stepDuration: 500, //ms
   gameDuration: 100, //s
   stopDuration: 3000, //ms
+  animationDuration: 4000, //ms
 };
 
 export default Game3Settings;

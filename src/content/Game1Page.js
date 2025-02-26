@@ -104,6 +104,8 @@ class Game1Page extends GamePage {
       objects,
       bonuses,
     });
+
+    return true;
   }
 
   objButton_clickHandler(event) {

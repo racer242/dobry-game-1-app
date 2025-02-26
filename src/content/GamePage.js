@@ -75,19 +75,20 @@ class GamePage extends Component {
   }
 
   stepGame() {
-    this.doGame();
-    if (this.gameTimer != null) clearTimeout(this.gameTimer);
-    if (this.initCount > 1) {
-      this.gameTimer = setTimeout(
-        this.stepGame.bind(this),
-        this.state.stepDuration
-      );
-    } else {
-      this.initCount++;
-      this.gameTimer = setTimeout(
-        this.stepGame.bind(this),
-        this.state.stepDuration / 100
-      );
+    if (this.doGame()) {
+      if (this.gameTimer != null) clearTimeout(this.gameTimer);
+      if (this.initCount > 1) {
+        this.gameTimer = setTimeout(
+          this.stepGame.bind(this),
+          this.state.stepDuration
+        );
+      } else {
+        this.initCount++;
+        this.gameTimer = setTimeout(
+          this.stepGame.bind(this),
+          this.state.stepDuration / 100
+        );
+      }
     }
   }
 
@@ -103,20 +104,23 @@ class GamePage extends Component {
     });
   }
 
+  finishGame() {
+    if (this.stopTimer != null) clearTimeout(this.stopTimer);
+    this.stopTimer = setTimeout(() => {
+      this.store.dispatch(
+        setStoreData({
+          currentPage: "finish",
+          gameScore: this.state.score,
+          saveScore: true,
+        })
+      );
+    }, this.state.stopDuration);
+  }
+
   doControl() {
     if (this.state.countdown == this.state.gameDuration) {
       this.stopGame();
-      if (this.stopTimer != null) clearTimeout(this.stopTimer);
-      this.stopTimer = setTimeout(() => {
-        this.store.dispatch(
-          setStoreData({
-            currentPage: "finish",
-            gameScore: this.state.score,
-            saveScore: true,
-          })
-        );
-      }, this.state.stopDuration);
-
+      this.finishGame();
       return false;
     }
     this.setState({
@@ -127,7 +131,9 @@ class GamePage extends Component {
   }
 
   doStart() {}
-  doGame() {}
+  doGame() {
+    return true;
+  }
 
   closeButton_clickHandler(event) {
     this.stopGame();

@@ -99,3 +99,48 @@
     opacity: 0;
   }
 }
+
+.found {
+  animation: blinking 1000ms ease-out;
+}
+@keyframes found {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.color-switch {
+  animation: color-switch 1000ms ease-out infinite;
+}
+@keyframes color-switch {
+  0% {
+    background-color: #5d279e;
+  }
+  24% {
+    background-color: #5d279e;
+  }
+  25% {
+    background-color: #a71fe1;
+  }
+  49% {
+    background-color: #a71fe1;
+  }
+  50% {
+    background-color: #e11f26;
+  }
+  74% {
+    background-color: #e11f26;
+  }
+  75% {
+    background-color: #ff49b8;
+  }
+  100% {
+    background-color: #ff49b8;
+  }
+}

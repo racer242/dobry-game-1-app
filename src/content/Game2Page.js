@@ -64,7 +64,7 @@ class Game2Page extends GamePage {
             Math.random() * this.state.game2.lifeCount +
             this.state.game2.lifeCount;
         }
-        break;
+        continue;
       }
 
       if (obj.status == "obj-hide") {
@@ -75,7 +75,7 @@ class Game2Page extends GamePage {
             Math.random() * this.state.game2.deadCount +
             this.state.game2.deadCount;
         }
-        break;
+        continue;
       }
 
       if (obj.status == "obj-off") {
@@ -120,6 +120,7 @@ class Game2Page extends GamePage {
       objects,
       bonuses,
     });
+    return true;
   }
 
   scene_moveHandler(event) {

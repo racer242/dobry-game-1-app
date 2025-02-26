@@ -12,6 +12,8 @@ class Game3Page extends GamePage {
       for (let j = 0; j < this.state.game3.matrixSize[1]; j++) {
         let cell = {
           id: "cell_" + i + "_" + j,
+          row: i,
+          column: j,
           x:
             j *
             (this.state.game3.cellBounds.width +
@@ -81,6 +83,10 @@ class Game3Page extends GamePage {
             this.state.game3.cellBounds.gapY) -
         this.state.game3.cellBounds.gapY,
       bonuses: [],
+      activityEnabled: true,
+      aniMode: "rows",
+      modeLife: 0,
+      currentMode: 0,
     };
 
     this.cell_clickHandler = this.cell_clickHandler.bind(this);
@@ -93,6 +99,16 @@ class Game3Page extends GamePage {
   doGame() {
     let objects = this.state.objects;
     let bonuses = this.state.bonuses;
+
+    let count = objects.filter((v) => v.isFound);
+    if (count.length === objects.length) {
+      this.stopGame();
+      this.finishGame();
+      return false;
+    }
+
+    let findOpened = objects.filter((v) => v.isOpen && !v.isFound);
+    let activityEnabled = findOpened.length <= 1;
 
     bonuses = bonuses.filter((v) => v.status != "bonus-destroy");
     for (const bonus of bonuses) {
@@ -117,7 +133,6 @@ class Game3Page extends GamePage {
       }
 
       if (obj.status == "obj-hide") {
-        obj.isOpen = false;
         obj.status = "obj-off";
         continue;
       }
@@ -136,10 +151,12 @@ class Game3Page extends GamePage {
       }
       if (obj.status == "obj-wait-and-hide") {
         obj.status = "obj-hidding";
+        obj.isOpen = false;
         continue;
       }
       if (obj.status == "obj-show-and-hide") {
         obj.status = "obj-hidding";
+        obj.isOpen = false;
         continue;
       }
 
@@ -152,11 +169,29 @@ class Game3Page extends GamePage {
       }
     }
 
+    let aniMode = this.state.aniMode;
+    let currentMode = this.state.currentMode;
+    let modeLife = this.state.modeLife;
+    if (modeLife > this.state.game3.modeCount) {
+      modeLife = 0;
+      currentMode++;
+      if (currentMode >= this.state.game3.modeSequense.length) {
+        currentMode = 0;
+      }
+      aniMode = this.state.game3.modeSequense[currentMode];
+    }
+    modeLife++;
+
     this.setState({
       ...this.state,
       objects,
       bonuses,
+      activityEnabled,
+      aniMode,
+      currentMode,
+      modeLife,
     });
+    return true;
   }
 
   cell_clickHandler(event) {
@@ -224,14 +259,29 @@ class Game3Page extends GamePage {
           style={{
             left: cell.x + "px",
             top: cell.y + "px",
-            width: cell.width + "px",
-            height: cell.height + "px",
-
             transitionDuration: this.state.game3.transitionDuration + "ms",
           }}
-          onClick={this.cell_clickHandler}
+          onPointerDown={this.cell_clickHandler}
         >
-          <div className="g3-cellPlate" style={{ backgroundColor: cell.color }}>
+          <div
+            className="g3-cellPlate"
+            style={{
+              backgroundColor: cell.color,
+              transitionDuration: this.state.game3.transitionDuration + "ms",
+              animationDelay:
+                this.state.aniMode == "rows"
+                  ? (this.state.game3.animationDuration / 4) * cell.row + "ms"
+                  : this.state.aniMode == "columns"
+                  ? (this.state.game3.animationDuration / 4) * cell.column +
+                    "ms"
+                  : (this.state.game3.animationDuration / 4) *
+                      (cell.column + cell.row) +
+                    "ms",
+              animationName: "color-switch",
+              animationDuration: this.state.game3.animationDuration + "ms",
+              animationIterationCount: "infinite",
+            }}
+          >
             <div
               className={
                 "g3-gameObjectBox " +
@@ -303,6 +353,7 @@ class Game3Page extends GamePage {
               height: this.props.bounds.mobileSize
                 ? this.state.mobileBounds.height
                 : this.state.desktopBounds.height,
+              pointerEvents: this.state.activityEnabled ? "all" : "none",
             }}
           >
             <div
