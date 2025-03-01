@@ -1,30 +1,70 @@
 .g4-countdown {
-  color: rgba(255, 255, 0, 0.8) !important;
+  color: rgba(0, 255, 255, 0.8) !important;
 }
 
 .g4-score {
-  color: rgba(255, 255, 0, 0.8) !important;
+  color: rgba(0, 255, 255, 0.8) !important;
 }
 
 .g4-gameScene {
   position: absolute;
   display: block;
 }
-.g4-gameSceneBg {
+
+.g4-parallax1,
+.g4-parallax2,
+.g4-parallax3 {
   position: absolute;
   display: block;
-  background-position: center center;
-  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+  background-repeat: repeat-x;
   background-size: cover;
+  background-position-x: 0;
+  background-position-y: center;
+  transition-property: background-position-x;
+  /* transition-timing-function: linear; */
+  transition-timing-function: steps(100);
 }
 
-.g4-gameBonusBox {
+.g4-parallax3 {
+  background-image: url(../images/game4/plan1.png);
+}
+
+.g4-parallax2 {
+  background-image: url(../images/game4/plan2.png);
+}
+
+.g4-parallax1 {
+  background-image: url(../images/game4/plan3.png);
+}
+
+.g4-columns {
   position: absolute;
   display: block;
-  width: 100px;
-  height: 100px;
-  transition-property: transform opacity left top;
-  pointer-events: none;
+  top: 0px;
+  transition-property: transform;
+  transition-timing-function: steps(100);
+}
+
+.g4-column {
+  position: absolute;
+  display: block;
+}
+
+.g4-columnTop {
+  flex: auto;
+  position: absolute;
+  display: block;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.g4-columnBottom {
+  flex: auto;
+  position: absolute;
+  display: block;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .g4-gameBonus {

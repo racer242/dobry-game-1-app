@@ -83,8 +83,17 @@ const Game4Settings = {
     },
   ],
 
+  parallaxSpeed1: 2,
+  parallaxSpeed2: 4,
+  parallaxSpeed3: 10,
+
+  columnDistance: 300,
+  columnGap: 120,
+  columnOffset: 180,
+  startColumnCount: 5,
+
   bonusLife: 3,
-  stepDuration: 500, //ms
+  stepDuration: 100, //ms
   gameDuration: 100, //s
   stopDuration: 3000, //ms
   animationDuration: 4000, //ms

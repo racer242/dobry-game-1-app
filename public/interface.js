@@ -34,7 +34,7 @@ function onAppReadyHandler(app) {
     initSource: { url: "init.json", method: "GET" },
     saveSource: { url: "game.json", method: "GET" },
     statusTableSource: { url: "hiscores.json", method: "GET" },
-    gameIndex: 3,
+    gameIndex: 4,
   };
 
   app.setData(data);
