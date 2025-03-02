@@ -6,6 +6,18 @@ const Game4Settings = {
     height: 50,
   },
 
+  heroBounds: {
+    width: 86,
+    height: 45,
+  },
+
+  bonusBounds: {
+    width: 28,
+    height: 47,
+    gap: 10,
+    glow: 72,
+  },
+
   topSources: [
     {
       src: require("../images/game4/top1.png"),
@@ -92,11 +104,19 @@ const Game4Settings = {
   columnOffset: 180,
   startColumnCount: 5,
 
+  heroStartPosition: 0,
+  heroXPosition: 100,
+  pushPower: 10,
+  heroWeight: 3,
+
+  bonusProp: 0.5,
+
   bonusLife: 3,
   stepDuration: 100, //ms
   gameDuration: 100, //s
   stopDuration: 3000, //ms
   animationDuration: 4000, //ms
+  goHorizontalDuration: 1000, //m s
 };
 
 export default Game4Settings;

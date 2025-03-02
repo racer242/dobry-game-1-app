@@ -19,18 +19,31 @@ class Game4Page extends GamePage {
       stopDuration: this.state.game4.stopDuration,
       stepDuration: this.state.game4.stepDuration,
       bonuses: [],
+      power: false,
       parallax1: 0,
       parallax2: 0,
       parallax3: 0,
       position,
       columns,
+      heroX: this.state.game4.heroStartPosition,
+      heroY: this.state.desktopBounds.height / 2,
+      heroPower: 0,
     };
 
-    this.game_clickHandler = this.game_clickHandler.bind(this);
+    this.game_downHandler = this.game_downHandler.bind(this);
+    this.game_upHandler = this.game_upHandler.bind(this);
   }
 
   doStart() {
     super.doStart();
+    if (this.startTimer != null) clearTimeout(this.startTimer);
+    this.startTimer = setTimeout(() => {
+      this.setState({
+        ...this.state,
+        heroX: this.state.game4.heroXPosition,
+      });
+      this.startTimer = null;
+    }, this.state.game4.stepDuration);
   }
 
   doGame() {
@@ -65,6 +78,28 @@ class Game4Page extends GamePage {
       this.addColumn(columns);
     }
 
+    let heroY = this.state.heroY;
+    let heroPower = this.state.heroPower;
+
+    if (this.state.power) {
+      heroPower += this.state.game4.pushPower;
+    }
+    heroPower -= this.state.game4.heroWeight;
+
+    heroY -= heroPower;
+
+    if (heroY < 0) {
+      heroY = 0;
+      heroPower = 0;
+    }
+    if (heroY > this.state.desktopBounds.height) {
+      heroY =
+        this.state.desktopBounds.height - this.state.game4.heroBounds.height;
+      heroPower = 0;
+    }
+
+    // let found = columns.filter((v) => v.x);
+
     this.setState({
       ...this.state,
       objects,
@@ -74,22 +109,22 @@ class Game4Page extends GamePage {
       parallax3,
       position,
       columns,
+      heroY,
+      heroPower,
     });
     return true;
   }
 
-  game_clickHandler(event) {
-    let objects = this.state.objects;
-    let bonuses = this.state.bonuses;
-    let bonusValue = 0;
-
-    let score = Math.max(this.state.score + bonusValue, 0);
-
+  game_downHandler() {
     this.setState({
       ...this.state,
-      objects,
-      bonuses,
-      score,
+      power: true,
+    });
+  }
+  game_upHandler() {
+    this.setState({
+      ...this.state,
+      power: false,
     });
   }
 
@@ -116,6 +151,17 @@ class Game4Page extends GamePage {
     column.y =
       (this.state.desktopBounds.height - column.height) / 2 +
       (0.5 - Math.random()) * this.state.game4.columnOffset;
+
+    if (Math.random() > this.state.game4.bonusProp)
+      column.bonus = {
+        status: "bonus-on",
+        ...this.state.game4.bonusBounds,
+        x: (column.width - this.state.game4.bonusBounds.width) / 2,
+        y: this.state.game4.bonusBounds.gap,
+        glow: this.state.game4.bonusBounds.glow,
+        glowX: (column.width - this.state.game4.bonusBounds.glow) / 2,
+      };
+
     columns.push(column);
   }
 
@@ -156,6 +202,28 @@ class Game4Page extends GamePage {
                 bottom: 0,
               }}
             ></div>
+            {column.bonus && (
+              <>
+                <div
+                  className="g4-bonus-glow"
+                  style={{
+                    left: column.bonus.glowX,
+                    width: column.bonus.glow,
+                    height: column.bonus.glow,
+                    bottom: column.bottom.height,
+                  }}
+                ></div>
+                <div
+                  className="g4-bonus"
+                  style={{
+                    left: column.bonus.x,
+                    width: column.bonus.width,
+                    height: column.bonus.height,
+                    bottom: column.bottom.height + column.bonus.y,
+                  }}
+                ></div>
+              </>
+            )}
           </div>
         );
     }
@@ -190,26 +258,33 @@ class Game4Page extends GamePage {
       );
     }
 
+    let mobileScale =
+      this.state.mobileBounds.height / this.state.desktopBounds.height;
+
     return (
       <div className="gamePage">
-        <div className="gameScene">
+        <div
+          className="gameScene"
+          onPointerDown={this.game_downHandler}
+          onPointerUp={this.game_upHandler}
+        >
           <div
             className="g4-gameScene"
             style={{
-              left: "50%",
+              left: this.props.bounds.mobileSize
+                ? (this.state.desktopBounds.width * mobileScale -
+                    this.state.desktopBounds.width) /
+                    2 -
+                  this.state.game4.heroXPosition * mobileScale +
+                  "px"
+                : "50%",
               top: "50%",
-              transform:
-                "translate(-50%, -50%)" +
-                (this.props.bounds.mobileSize
-                  ? " scale(" +
-                    this.state.mobileBounds.height /
-                      this.state.desktopBounds.height +
-                    ")"
-                  : ""),
+              transform: this.props.bounds.mobileSize
+                ? "translate(0, -50%)" + " scale(" + mobileScale + ")"
+                : "translate(-50%, -50%)" + "",
               width: this.state.desktopBounds.width,
               height: this.state.desktopBounds.height,
             }}
-            onPointerDown={this.game_clickHandler}
           >
             <div
               className="g4-parallax1"
@@ -240,6 +315,58 @@ class Game4Page extends GamePage {
               }}
             >
               {columns}
+            </div>
+            <div
+              className="g4-hero"
+              style={{
+                left: this.state.heroX,
+                transform: "translateY(" + this.state.heroY + "px)",
+                width: this.state.game4.heroBounds.width,
+                height: this.state.game4.heroBounds.height,
+                transition:
+                  "transform " +
+                  this.state.game4.stepDuration +
+                  "ms steps(100), " +
+                  "left " +
+                  this.state.game4.goHorizontalDuration +
+                  "ms ease-out",
+              }}
+            >
+              <div
+                className="g4-hero-flame-container"
+                style={
+                  this.state.power
+                    ? { transform: "rotate(-20deg) translateY(10px)" }
+                    : {}
+                }
+              >
+                <div className="g4-hero-flame"></div>
+              </div>
+              <div
+                className="g4-hero-guitar"
+                style={this.state.power ? { transform: "rotate(-20deg)" } : {}}
+              ></div>
+              <div
+                className="g4-hero-cap"
+                style={
+                  this.state.heroPower < 0
+                    ? {
+                        transform: "translateY(" + this.state.heroPower + "px)",
+                      }
+                    : {}
+                }
+              ></div>
+              <div
+                className="g4-hero-glasses"
+                style={
+                  this.state.heroPower < 0
+                    ? {
+                        transform:
+                          "translateY(" + this.state.heroPower / 2 + "px)",
+                      }
+                    : {}
+                }
+              ></div>
             </div>
             {bonuses}
           </div>
