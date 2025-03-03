@@ -192,3 +192,17 @@
     opacity: 0;
   }
 }
+
+.disappear {
+  animation: disappear 1000ms ease-out;
+}
+@keyframes disappear {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}

@@ -24,7 +24,6 @@
   background-position-x: 0;
   background-position-y: center;
   transition-property: background-position-x;
-  /* transition-timing-function: linear; */
   transition-timing-function: steps(100);
 }
 
@@ -59,12 +58,14 @@
   display: block;
   background-repeat: no-repeat;
   background-size: contain;
+  background-color: rgba(0, 0, 255, 0.3);
 }
 .g4-columnBottom {
   position: absolute;
   display: block;
   background-repeat: no-repeat;
   background-size: contain;
+  background-color: rgba(0, 0, 255, 0.3);
 }
 
 .g4-hero,
@@ -78,6 +79,10 @@
   background-repeat: no-repeat;
   background-size: contain;
   transition: all 200ms ease-out;
+}
+
+.g4-hero {
+  background-color: rgba(255, 0, 0, 0.3);
 }
 
 .g4-hero-flame-container {
@@ -116,24 +121,26 @@
   background-image: url(../images/game4/glasses.png);
 }
 
-.g4-bonus {
+.g4-prize {
   position: absolute;
   display: block;
   background-repeat: no-repeat;
   background-size: contain;
   background-image: url(../images/game4/can.png);
   animation: floating 1000ms ease-in-out infinite;
+  transition: all 500ms linear;
 }
 
-.g4-bonus-on {
+.g4-prize-on {
   opacity: 1;
 }
 
-.g4-bonus-off {
+.g4-prize-off {
   opacity: 0;
+  animation: disappear 300ms ease-out !important;
 }
 
-.g4-bonus-glow {
+.g4-prize-glow {
   position: absolute;
   display: block;
   background-repeat: no-repeat;

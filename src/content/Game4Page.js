@@ -27,7 +27,7 @@ class Game4Page extends GamePage {
       columns,
       heroX: this.state.game4.heroStartPosition,
       heroY: this.state.desktopBounds.height / 2,
-      heroPower: 0,
+      heroPower: this.state.game4.pushPower,
     };
 
     this.game_downHandler = this.game_downHandler.bind(this);
@@ -43,11 +43,10 @@ class Game4Page extends GamePage {
         heroX: this.state.game4.heroXPosition,
       });
       this.startTimer = null;
-    }, this.state.game4.stepDuration);
+    }, this.state.game4.startDuration);
   }
 
   doGame() {
-    let objects = this.state.objects;
     let bonuses = this.state.bonuses;
 
     bonuses = bonuses.filter((v) => v.status != "bonus-destroy");
@@ -98,11 +97,58 @@ class Game4Page extends GamePage {
       heroPower = 0;
     }
 
-    // let found = columns.filter((v) => v.x);
+    let hX = -this.state.position + this.state.heroX;
+    let hY = heroY;
+    let prizeColumns = columns.filter(
+      (v) =>
+        v.prize &&
+        v.prize.isOn &&
+        Math.max(v.prize.l, hX) <
+          Math.min(v.prize.r, hX + this.state.game4.heroBounds.width) &&
+        Math.max(v.prize.t, hY) <
+          Math.min(v.prize.b, hY + this.state.game4.heroBounds.height)
+    );
+
+    let score = this.state.score;
+    if (prizeColumns.length > 0) {
+      let prize = prizeColumns[0].prize;
+      prize.isOn = false;
+      prize.status = "prize-off";
+
+      bonuses.push({
+        id: "bonus" + this.counter++,
+        cssX: prize.l + position,
+        cssY: prize.t,
+        value: this.state.game4.prizeValue,
+        status: "bonus-on",
+      });
+      score += this.state.game4.prizeValue;
+    }
+
+    let hitColumns = columns.filter(
+      (v) =>
+        v.x + position > -v.width &&
+        ((Math.max(v.top.l, hX) <
+          Math.min(v.top.r, hX + this.state.game4.heroBounds.width) &&
+          Math.max(v.top.t, hY) <
+            Math.min(v.top.b, hY + this.state.game4.heroBounds.height)) ||
+          (Math.max(v.bottom.l, hX) <
+            Math.min(v.bottom.r, hX + this.state.game4.heroBounds.width) &&
+            Math.max(v.bottom.t, hY) <
+              Math.min(v.bottom.b, hY + this.state.game4.heroBounds.height)))
+    );
+
+    if (hitColumns.length > 0) {
+      let hitColumn = hitColumns[0];
+      console.log(hitColumn.id);
+      this.stopGame();
+      this.finishGame();
+      return false;
+    }
 
     this.setState({
       ...this.state,
-      objects,
+
       bonuses,
       parallax1,
       parallax2,
@@ -111,6 +157,7 @@ class Game4Page extends GamePage {
       columns,
       heroY,
       heroPower,
+      score,
     });
     return true;
   }
@@ -152,16 +199,40 @@ class Game4Page extends GamePage {
       (this.state.desktopBounds.height - column.height) / 2 +
       (0.5 - Math.random()) * this.state.game4.columnOffset;
 
-    if (Math.random() > this.state.game4.bonusProp)
-      column.bonus = {
-        status: "bonus-on",
-        ...this.state.game4.bonusBounds,
-        x: (column.width - this.state.game4.bonusBounds.width) / 2,
-        y: this.state.game4.bonusBounds.gap,
-        glow: this.state.game4.bonusBounds.glow,
-        glowX: (column.width - this.state.game4.bonusBounds.glow) / 2,
+    if (Math.random() > this.state.game4.prizeProb) {
+      column.prize = {
+        isOn: true,
+        status: "prize-on",
+        ...this.state.game4.prizeBounds,
+        x: (column.width - this.state.game4.prizeBounds.width) / 2,
+        y:
+          column.height -
+          column.bottom.height -
+          this.state.game4.prizeBounds.gap -
+          this.state.game4.prizeBounds.height,
+        glow: this.state.game4.prizeBounds.glow,
+        glowX: (column.width - this.state.game4.prizeBounds.glow) / 2,
+        glowY:
+          column.height -
+          column.bottom.height -
+          this.state.game4.prizeBounds.glow,
       };
+      column.prize.l = column.x + column.prize.x;
+      column.prize.r = column.x + column.prize.x + column.prize.width;
+      column.prize.t = column.y + column.prize.y;
+      column.prize.b = column.y + column.prize.y + column.prize.height;
 
+      column.top.l = column.x + column.top.ml;
+      column.top.r = column.x + column.top.width - column.top.mr;
+      column.top.t = column.y + column.top.mt;
+      column.top.b = column.y + column.top.height - column.top.mb;
+
+      column.bottom.l = column.x + column.bottom.ml;
+      column.bottom.r = column.x + column.bottom.width - column.bottom.mr;
+      column.bottom.t =
+        column.y + column.height - column.bottom.height + column.bottom.mt;
+      column.bottom.b = column.y + column.height - column.bottom.mb;
+    }
     columns.push(column);
   }
 
@@ -202,24 +273,24 @@ class Game4Page extends GamePage {
                 bottom: 0,
               }}
             ></div>
-            {column.bonus && (
+            {column.prize && (
               <>
                 <div
-                  className="g4-bonus-glow"
+                  className={"g4-prize-glow g4-" + column.prize.status}
                   style={{
-                    left: column.bonus.glowX,
-                    width: column.bonus.glow,
-                    height: column.bonus.glow,
-                    bottom: column.bottom.height,
+                    left: column.prize.glowX,
+                    top: column.prize.glowY,
+                    width: column.prize.glow,
+                    height: column.prize.glow,
                   }}
                 ></div>
                 <div
-                  className="g4-bonus"
+                  className={"g4-prize g4-" + column.prize.status}
                   style={{
-                    left: column.bonus.x,
-                    width: column.bonus.width,
-                    height: column.bonus.height,
-                    bottom: column.bottom.height + column.bonus.y,
+                    left: column.prize.x,
+                    top: column.prize.y,
+                    width: column.prize.width,
+                    height: column.prize.height,
                   }}
                 ></div>
               </>

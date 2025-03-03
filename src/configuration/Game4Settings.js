@@ -1,9 +1,9 @@
 import { isMobile, isLocal } from "../core/helpers";
 
 const Game4Settings = {
-  targetBounds: {
-    width: 50,
-    height: 50,
+  bonusBounds: {
+    width: 100,
+    height: 100,
   },
 
   heroBounds: {
@@ -11,7 +11,7 @@ const Game4Settings = {
     height: 45,
   },
 
-  bonusBounds: {
+  prizeBounds: {
     width: 28,
     height: 47,
     gap: 10,
@@ -23,37 +23,37 @@ const Game4Settings = {
       src: require("../images/game4/top1.png"),
       width: 55,
       height: 300,
-      l: 11,
-      b: 11,
-      r: 11,
-      t: 0,
+      ml: 11,
+      mb: 11,
+      mr: 11,
+      mt: 0,
     },
     {
       src: require("../images/game4/top2.png"),
       width: 50,
       height: 300,
-      l: 7,
-      b: 0,
-      r: 3,
-      t: 0,
+      ml: 7,
+      mb: 0,
+      mr: 3,
+      mt: 0,
     },
     {
       src: require("../images/game4/top3.png"),
       width: 49,
       height: 300,
-      l: 2,
-      b: 0,
-      r: 0,
-      t: 0,
+      ml: 2,
+      mb: 0,
+      mr: 0,
+      mt: 0,
     },
     {
       src: require("../images/game4/top4.png"),
       width: 58,
       height: 300,
-      l: 10,
-      b: 2,
-      r: 3,
-      t: 0,
+      ml: 10,
+      mb: 2,
+      mr: 3,
+      mt: 0,
     },
   ],
   bottomSources: [
@@ -61,37 +61,37 @@ const Game4Settings = {
       src: require("../images/game4/bottom1.png"),
       width: 81,
       height: 300,
-      l: 5,
-      b: 0,
-      r: 25,
-      t: 0,
+      ml: 5,
+      mb: 0,
+      mr: 25,
+      mt: 0,
     },
     {
       src: require("../images/game4/bottom2.png"),
       width: 80,
       height: 300,
-      l: 10,
-      b: 0,
-      r: 10,
-      t: 3,
+      ml: 10,
+      mb: 0,
+      mr: 10,
+      mt: 3,
     },
     {
       src: require("../images/game4/bottom3.png"),
       width: 54,
       height: 300,
-      l: 0,
-      b: 0,
-      r: 0,
-      t: 0,
+      ml: 0,
+      mb: 0,
+      mr: 0,
+      mt: 0,
     },
     {
       src: require("../images/game4/bottom4.png"),
       width: 56,
       height: 300,
-      l: 0,
-      b: 0,
-      r: 5,
-      t: 0,
+      ml: 0,
+      mb: 0,
+      mr: 5,
+      mt: 0,
     },
   ],
 
@@ -100,20 +100,22 @@ const Game4Settings = {
   parallaxSpeed3: 10,
 
   columnDistance: 300,
-  columnGap: 120,
+  columnGap: 200,
   columnOffset: 180,
   startColumnCount: 5,
 
-  heroStartPosition: 0,
+  heroStartPosition: -100,
   heroXPosition: 100,
   pushPower: 10,
   heroWeight: 3,
 
-  bonusProp: 0.5,
+  prizeProb: 0,
+  prizeValue: 1,
 
   bonusLife: 3,
   stepDuration: 100, //ms
   gameDuration: 100, //s
+  startDuration: 500, //ms
   stopDuration: 3000, //ms
   animationDuration: 4000, //ms
   goHorizontalDuration: 1000, //m s
