@@ -99,21 +99,26 @@ const Game4Settings = {
   parallaxSpeed2: 4,
   parallaxSpeed3: 10,
 
+  collisionDistance: 200,
+  collisionStart: 100,
+
   columnDistance: 300,
   columnGap: 200,
   columnOffset: 180,
   startColumnCount: 5,
+
+  startPosition: 300 * 3,
 
   heroStartPosition: -100,
   heroXPosition: 100,
   pushPower: 10,
   heroWeight: 3,
 
-  prizeProb: 0,
+  prizeProb: 0.5,
   prizeValue: 1,
 
   bonusLife: 3,
-  stepDuration: 100, //ms
+  stepDuration: 80, //ms
   gameDuration: 100, //s
   startDuration: 500, //ms
   stopDuration: 3000, //ms

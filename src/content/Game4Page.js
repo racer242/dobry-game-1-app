@@ -11,7 +11,7 @@ class Game4Page extends GamePage {
       this.addColumn(columns);
     }
 
-    let position = this.state.desktopBounds.width;
+    let position = this.state.game4.startPosition;
 
     this.state = {
       ...this.state,
@@ -36,14 +36,10 @@ class Game4Page extends GamePage {
 
   doStart() {
     super.doStart();
-    if (this.startTimer != null) clearTimeout(this.startTimer);
-    this.startTimer = setTimeout(() => {
-      this.setState({
-        ...this.state,
-        heroX: this.state.game4.heroXPosition,
-      });
-      this.startTimer = null;
-    }, this.state.game4.startDuration);
+    this.setState({
+      ...this.state,
+      heroX: this.state.game4.heroXPosition,
+    });
   }
 
   doGame() {
@@ -127,23 +123,35 @@ class Game4Page extends GamePage {
 
     let hitColumns = columns.filter(
       (v) =>
-        v.x + position > -v.width &&
-        ((Math.max(v.top.l, hX) <
-          Math.min(v.top.r, hX + this.state.game4.heroBounds.width) &&
+        (v.x + position > -v.width &&
+          Math.max(v.top.l, hX) <
+            Math.min(v.top.r, hX + this.state.game4.heroBounds.width) &&
           Math.max(v.top.t, hY) <
             Math.min(v.top.b, hY + this.state.game4.heroBounds.height)) ||
-          (Math.max(v.bottom.l, hX) <
-            Math.min(v.bottom.r, hX + this.state.game4.heroBounds.width) &&
-            Math.max(v.bottom.t, hY) <
-              Math.min(v.bottom.b, hY + this.state.game4.heroBounds.height)))
+        (Math.max(v.bottom.l, hX) <
+          Math.min(v.bottom.r, hX + this.state.game4.heroBounds.width) &&
+          Math.max(v.bottom.t, hY) <
+            Math.min(v.bottom.b, hY + this.state.game4.heroBounds.height))
     );
 
+    let collision = null;
     if (hitColumns.length > 0) {
       let hitColumn = hitColumns[0];
       console.log(hitColumn.id);
       this.stopGame();
       this.finishGame();
-      return false;
+      collision = [];
+      for (let i = 0; i < 3; i++) {
+        let direction =
+          Math.PI / 8 + (Math.PI * i) / 10 + (Math.random() * Math.PI) / 20;
+        let distance =
+          this.state.game4.collisionStart +
+          Math.random() * this.state.game4.collisionDistance;
+        collision.push({
+          x: Math.cos(direction) * distance,
+          y: Math.sin(direction) * distance,
+        });
+      }
     }
 
     this.setState({
@@ -158,8 +166,9 @@ class Game4Page extends GamePage {
       heroY,
       heroPower,
       score,
+      collision,
     });
-    return true;
+    return !collision;
   }
 
   game_downHandler() {
@@ -221,18 +230,17 @@ class Game4Page extends GamePage {
       column.prize.r = column.x + column.prize.x + column.prize.width;
       column.prize.t = column.y + column.prize.y;
       column.prize.b = column.y + column.prize.y + column.prize.height;
-
-      column.top.l = column.x + column.top.ml;
-      column.top.r = column.x + column.top.width - column.top.mr;
-      column.top.t = column.y + column.top.mt;
-      column.top.b = column.y + column.top.height - column.top.mb;
-
-      column.bottom.l = column.x + column.bottom.ml;
-      column.bottom.r = column.x + column.bottom.width - column.bottom.mr;
-      column.bottom.t =
-        column.y + column.height - column.bottom.height + column.bottom.mt;
-      column.bottom.b = column.y + column.height - column.bottom.mb;
     }
+    column.top.l = column.x + column.top.ml;
+    column.top.r = column.x + column.top.width - column.top.mr;
+    column.top.t = column.y + column.top.mt;
+    column.top.b = column.y + column.top.height - column.top.mb;
+
+    column.bottom.l = column.x + column.bottom.ml;
+    column.bottom.r = column.x + column.bottom.width - column.bottom.mr;
+    column.bottom.t =
+      column.y + column.height - column.bottom.height + column.bottom.mt;
+    column.bottom.b = column.y + column.height - column.bottom.mb;
     columns.push(column);
   }
 
@@ -404,9 +412,13 @@ class Game4Page extends GamePage {
               }}
             >
               <div
-                className="g4-hero-flame-container"
+                className={"g4-hero-flame-container"}
                 style={
-                  this.state.power
+                  this.state.collision
+                    ? {
+                        opacity: 0,
+                      }
+                    : this.state.power
                     ? { transform: "rotate(-20deg) translateY(10px)" }
                     : {}
                 }
@@ -414,13 +426,32 @@ class Game4Page extends GamePage {
                 <div className="g4-hero-flame"></div>
               </div>
               <div
-                className="g4-hero-guitar"
-                style={this.state.power ? { transform: "rotate(-20deg)" } : {}}
+                className={
+                  "g4-hero-guitar" +
+                  (this.state.collision ? " g4-collision" : "")
+                }
+                style={
+                  this.state.collision
+                    ? {
+                        left: this.state.collision[2].x,
+                        top: this.state.collision[2].y,
+                      }
+                    : this.state.power
+                    ? { transform: "rotate(-20deg)" }
+                    : {}
+                }
               ></div>
               <div
-                className="g4-hero-cap"
+                className={
+                  "g4-hero-cap" + (this.state.collision ? " g4-collision" : "")
+                }
                 style={
-                  this.state.heroPower < 0
+                  this.state.collision
+                    ? {
+                        left: this.state.collision[1].x,
+                        top: this.state.collision[1].y,
+                      }
+                    : this.state.heroPower < 0
                     ? {
                         transform: "translateY(" + this.state.heroPower + "px)",
                       }
@@ -428,9 +459,17 @@ class Game4Page extends GamePage {
                 }
               ></div>
               <div
-                className="g4-hero-glasses"
+                className={
+                  "g4-hero-glasses" +
+                  (this.state.collision ? " g4-collision" : "")
+                }
                 style={
-                  this.state.heroPower < 0
+                  this.state.collision
+                    ? {
+                        left: this.state.collision[0].x,
+                        top: this.state.collision[0].y,
+                      }
+                    : this.state.heroPower < 0
                     ? {
                         transform:
                           "translateY(" + this.state.heroPower / 2 + "px)",

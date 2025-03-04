@@ -58,14 +58,12 @@
   display: block;
   background-repeat: no-repeat;
   background-size: contain;
-  background-color: rgba(0, 0, 255, 0.3);
 }
 .g4-columnBottom {
   position: absolute;
   display: block;
   background-repeat: no-repeat;
   background-size: contain;
-  background-color: rgba(0, 0, 255, 0.3);
 }
 
 .g4-hero,
@@ -79,10 +77,6 @@
   background-repeat: no-repeat;
   background-size: contain;
   transition: all 200ms ease-out;
-}
-
-.g4-hero {
-  background-color: rgba(255, 0, 0, 0.3);
 }
 
 .g4-hero-flame-container {
@@ -119,6 +113,12 @@
   width: 25px;
   height: 12px;
   background-image: url(../images/game4/glasses.png);
+}
+
+.g4-collision {
+  transition: all 3000ms ease-out, opacity 500ms linear 2500ms;
+  opacity: 0;
+  transform: rotate(180deg);
 }
 
 .g4-prize {
