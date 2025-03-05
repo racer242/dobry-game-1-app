@@ -309,31 +309,47 @@ class Game4Page extends GamePage {
 
     let bonuses = [];
     for (let i = 0; i < this.state.bonuses.length; i++) {
+      let particles = [];
+      for (let i = 0; i < 50; i++) {
+        particles.push(<div key={"p" + i} className="particle"></div>);
+      }
+
       let bonus = this.state.bonuses[i];
       bonuses.push(
-        <div
-          className="g3-gameBonusBox bonusUp"
-          id={bonus.id}
-          key={bonus.id}
-          style={{
-            left: bonus.cssX,
-            top: bonus.cssY,
-            width: this.state.game4.bonusBounds.width,
-            height: this.state.game4.bonusBounds.height,
-          }}
-        >
+        <>
           <div
-            className={
-              "g3-gameBonus" + (bonus.value > 0 ? "" : " g3-negativeBonus")
-            }
+            className="g3-gameBonusBox bonusUp"
+            id={bonus.id}
+            key={bonus.id}
             style={{
-              backgroundImage: `url(${require("../images/game2/bonus.png")})`,
-              pointerEvents: "none",
+              left: bonus.cssX,
+              top: bonus.cssY,
+              width: this.state.game4.bonusBounds.width,
+              height: this.state.game4.bonusBounds.height,
             }}
           >
-            {bonus.value > 0 ? "+" + bonus.value : bonus.value}
+            <div
+              className={
+                "g3-gameBonus" + (bonus.value > 0 ? "" : " g3-negativeBonus")
+              }
+              style={{
+                backgroundImage: `url(${require("../images/game2/bonus.png")})`,
+                pointerEvents: "none",
+              }}
+            >
+              {bonus.value > 0 ? "+" + bonus.value : bonus.value}
+            </div>
           </div>
-        </div>
+          <div
+            className="particle-container"
+            style={{
+              left: bonus.cssX,
+              top: bonus.cssY,
+            }}
+          >
+            {particles}
+          </div>
+        </>
       );
     }
 

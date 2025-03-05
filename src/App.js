@@ -20,6 +20,7 @@ import "./css/animations.css";
 import "./css/components.css";
 import "./css/content.css";
 import "./css/game.css";
+import "./css/animation.scss";
 
 import Game2Settings from "./configuration/Game2Settings";
 import Game1Settings from "./configuration/Game1Settings";

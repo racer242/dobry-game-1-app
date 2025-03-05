@@ -116,7 +116,7 @@
 }
 
 .g4-collision {
-  transition: all 3000ms ease-out, opacity 500ms linear 2500ms;
+  transition: all 2000ms ease-out, opacity 200ms linear 1800ms;
   opacity: 0;
   transform: rotate(180deg);
 }

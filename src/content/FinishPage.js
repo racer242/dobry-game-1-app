@@ -57,7 +57,6 @@ class FinishPage extends Component {
   render() {
     let children = [];
     children.push(this.props.children);
-
     return (
       <div className="finishPage">
         <h1>Игра закончена</h1>
