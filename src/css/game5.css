@@ -1,0 +1,65 @@
+.g5-countdown {
+  color: rgba(0, 255, 0, 0.8) !important;
+}
+
+.g5-gameScene {
+  position: absolute;
+  display: block;
+  background: #a20006;
+  pointer-events: none;
+}
+
+.g5-container {
+  position: absolute;
+  display: block;
+  perspective: 5000px;
+}
+
+.g5-frame {
+  position: absolute;
+  transform-style: preserve-3d;
+}
+
+.g5-cylinder {
+  position: absolute;
+  transform-style: preserve-3d;
+}
+
+.g5-section {
+  position: absolute;
+  background-image: url(../images/game5/scene.png);
+  background-color: aquamarine;
+}
+
+.g5-obj {
+  position: absolute;
+  width: 30px;
+  height: 40px;
+  background-color: chartreuse;
+  pointer-events: all;
+}
+
+.g5-fade-left {
+  position: absolute;
+  width: 40%;
+  height: 101%;
+  background: linear-gradient(
+    90deg,
+    rgba(162, 0, 6, 1) 0%,
+    rgba(162, 0, 6, 1) 62%,
+    rgba(162, 0, 6, 0) 100%
+  );
+}
+
+.g5-fade-right {
+  position: absolute;
+  left: 60%;
+  width: 40%;
+  height: 101%;
+  background: linear-gradient(
+    90deg,
+    rgba(162, 0, 6, 0) 0%,
+    rgba(162, 0, 6, 1) 38%,
+    rgba(162, 0, 6, 1) 100%
+  );
+}
