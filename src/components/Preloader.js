@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Preload from "react-preload";
 import { preloadComplete } from "../actions/appActions";
+import resources from "../configuration/Resources";
 
 class Preloader extends Component {
   constructor(props) {
@@ -9,11 +10,13 @@ class Preloader extends Component {
     this.preloader_errorHandler = this.preloader_errorHandler.bind(this);
 
     this.store = this.props.store;
+    if (this.store) {
+      this.state = {
+        ...this.store.getState(),
+      };
+    } else this.state = { gameIndex: 1 };
 
-    this.state = {};
-    this.images = [
-      // require("../images/bg.png"),
-    ];
+    this.images = window.gameIndex ? resources[this.state.gameIndex] : [];
   }
 
   componentDidMount() {
@@ -66,6 +69,7 @@ class Preloader extends Component {
       <div
         id="Preloader"
         key="Preloader"
+        className={"g" + this.state.gameIndex}
         style={{ opacity: this.state.isComplete ? 0 : 1 }}
       >
         <Preload
@@ -78,19 +82,10 @@ class Preloader extends Component {
           resolveOnError={true}
           mountChildren={true}
         />
-        <div className="preloader-logo">
-          <div className="preloader-logo-frame">
-            <div className="preloader-logo-scale zoom">
-              <img
-                src={require("../images/preload1.png")}
-                className="preloader-logo-frame-image spin-pl"
-              ></img>
-              <img
-                src={require("../images/preload2.png")}
-                className="preloader-logo-frame-image-1 spin-cw"
-              ></img>
-            </div>
-          </div>
+        <div className="preload-spin">
+          <div
+            className={"preloader-display" + " g" + this.state.gameIndex}
+          ></div>
         </div>
       </div>
     );

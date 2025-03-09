@@ -17,7 +17,7 @@ class Game5Page extends GamePage {
       objects.push(obj);
     }
 
-    let zRadius = Math.floor(this.state.game5.sceneWidth / (2 * Math.PI)) - 3;
+    let zRadius = Math.floor(this.state.game5.sceneWidth / (2 * Math.PI)) - 5;
 
     this.state = {
       ...this.state,

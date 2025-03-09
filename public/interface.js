@@ -1,3 +1,5 @@
+window.gameIndex = 1;
+
 // Функция инициализации приложения
 function onAppReadyHandler(app) {
   // Функция обработки ресайза страницы.
@@ -34,7 +36,7 @@ function onAppReadyHandler(app) {
     initSource: { url: "init.json", method: "GET" },
     saveSource: { url: "game.json", method: "GET" },
     statusTableSource: { url: "hiscores.json", method: "GET" },
-    gameIndex: 5,
+    gameIndex: window.gameIndex,
   };
 
   app.setData(data);
