@@ -147,7 +147,7 @@ class GamePage extends Component {
     return (
       <div className="gamePage" ref={this.ref}>
         {children}
-        {/* <div className="dark-button" onClick={this.closeButton_clickHandler}>
+        {/* <div className="secondary-button" onClick={this.closeButton_clickHandler}>
           Назад
         </div>
         */}

@@ -110,7 +110,7 @@ class Container extends Component {
     children.push(this.props.children);
     children.push(
       <div
-        className="page"
+        className={"page" + (b.mobileSize ? " mobile" : "")}
         key="Page"
         ref={this.ref}
         style={{
@@ -120,19 +120,18 @@ class Container extends Component {
         }}
       >
         <PageStack bounds={b} store={this.store} />
+        {!this.state.preloaded && (
+          <Preloader store={this.store} key="Preloader" />
+        )}
+
+        {this.state.aboutPopup && (
+          <AboutPopup
+            key="AboutPopup"
+            onClose={this.closeAboutPopup_clickHandler}
+          />
+        )}
       </div>
     );
-
-    if (this.state.aboutPopup)
-      children.push(
-        <AboutPopup
-          key="AboutPopup"
-          onClose={this.closeAboutPopup_clickHandler}
-        />
-      );
-
-    if (!this.state.preloaded)
-      children.push(<Preloader store={this.store} key="Preloader" />);
 
     return React.createElement("div", { id: "Container" }, children);
   }

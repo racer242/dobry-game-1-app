@@ -1,55 +1,51 @@
-.light-button,
-.dark-button {
+.primary-button,
+.secondary-button {
   position: relative;
-  display: block;
-  background: #3290ff;
-  width: 230px;
-  padding: 10px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 24px 110px;
+  gap: 10px;
+
+  color: #5d279e;
+  background: #ffffff;
+  border-radius: 12px;
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+
   cursor: pointer;
+}
+
+.primary-button:hover,
+.primary-button:active {
+  background: #ff49b8;
   color: #fff;
-  border: #fff 1px solid;
-  border-radius: 5px;
-  font-size: 20px;
-
-  font-family: "Raleway";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 100%;
-  leading-trim: both;
-  text-edge: cap;
-  text-align: center;
-
-  color: #f5f1e7;
 }
-
-.light-button:hover,
-.light-button:active {
-  color: #3290ff;
-  border: #3290ff 1px solid;
-  background: #fff;
+.primary-button:active {
+  background: #ff49b8;
+  color: #5d279e;
 }
-.light-button:active {
-  color: #03001b;
-}
-.light-button:disabled {
-  color: rgba(50, 144, 255, 0.5);
-  border: rgba(50, 144, 255, 0.5) 1px solid;
-  background: rgba(50, 144, 255, 0.2);
+.primary-button:disabled {
+  color: #ddd;
+  background: #eee;
   cursor: default;
 }
 
-.dark-button {
+.secondary-button {
   color: #03001b;
 }
 
-.dark-button:hover,
-.dark-button:active {
+.secondary-button:hover,
+.secondary-button:active {
   color: #03001b;
   border: #3290ff 1px solid;
   background: #fff;
 }
-.dark-button:active {
+.secondary-button:active {
   color: #3290ff;
 }
 
@@ -110,53 +106,4 @@
 .close-button:hover,
 .close-button:active {
   opacity: 0.7;
-}
-
-@media (max-width: 720px) {
-  .light-button:hover {
-    color: #fff;
-    border: #fff 1px solid;
-    background: #3290ff;
-  }
-  .light-button:active {
-    color: #03001b;
-    border: #3290ff 1px solid;
-    background: #fff;
-  }
-
-  .dark-button:hover {
-    color: #03001b;
-    border: #fff 1px solid;
-    background: #3290ff;
-  }
-  .dark-button:active {
-    color: #3290ff;
-    border: #3290ff 1px solid;
-    background: #fff;
-  }
-
-  .link-button:hover {
-    text-decoration: none;
-  }
-
-  .social-button:hover {
-    opacity: 1;
-  }
-  .social-button:active {
-    opacity: 0.7;
-  }
-
-  .image-button:hover {
-    opacity: 1;
-  }
-  .image-button:active {
-    opacity: 0.7;
-  }
-
-  .close-button:hover {
-    opacity: 1;
-  }
-  .close-button:active {
-    opacity: 0.7;
-  }
 }

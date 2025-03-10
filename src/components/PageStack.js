@@ -7,6 +7,7 @@ import Game2Page from "../content/Game2Page";
 import Game3Page from "../content/Game3Page";
 import Game4Page from "../content/Game4Page";
 import Game5Page from "../content/Game5Page";
+import Main1Page from "../content/Main1Page";
 
 class PageStack extends Component {
   constructor(props) {
@@ -48,9 +49,11 @@ class PageStack extends Component {
   render() {
     return (
       <div className="pageContainer">
-        {this.state.currentPage === "main" && (
-          <MainPage bounds={this.props.bounds} store={this.store} />
-        )}
+        {this.state.currentPage === "main" &&
+          ((this.state.gameIndex == 1 && (
+            <Main1Page bounds={this.props.bounds} store={this.store} />
+          )) || <MainPage bounds={this.props.bounds} store={this.store} />)}
+
         {this.state.currentPage === "game" &&
           ((this.state.gameIndex == 1 && (
             <Game1Page bounds={this.props.bounds} store={this.store} />

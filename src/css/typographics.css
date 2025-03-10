@@ -1,47 +1,73 @@
-h1 {
-  font-family: "Forum";
-
+.game h1 {
+  font-family: "Onest";
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   font-size: 32px;
-  line-height: 110%;
-  leading-trim: both;
-  text-edge: cap;
+  line-height: 41px;
+  text-align: center;
+  color: #ffffff;
+  padding: 0;
+  margin: 0;
+}
+
+.game h2 {
+  font-family: "Onest";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+  color: #ffffff;
+  padding: 0;
+  margin: 0;
+}
+
+.game p {
+  font-family: "Onest";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+  color: #f8d1b9;
+  padding: 0;
+  margin: 0;
+}
+
+.game .button {
+  font-family: "Onest";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
   text-align: center;
   text-transform: uppercase;
-  color: #f5f1e7;
-
-  margin: 0px;
-  padding: 0px;
 }
 
-h2 {
-  font-family: "Forum";
+.game .mobile h1 {
+  font-size: 32px;
+  line-height: 52px;
+}
+
+.game .mobile h2 {
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.game .mobile p {
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.game .mobile .button {
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.game .display {
+  font-family: "Onest";
   font-style: normal;
-  font-weight: 400;
-  font-size: 28px;
-  line-height: 110%;
-  leading-trim: both;
-  text-edge: cap;
-  text-align: center;
-  text-transform: uppercase;
-  color: #f5f1e7;
-  margin: 0px;
-  padding: 0px;
-}
-
-p,
-li {
-  font-family: "Raleway";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 110%;
-  text-align: center;
-  color: #f5f1e7;
-  margin: 0px;
-  padding: 0px;
-}
-
-@media (max-width: 720px) {
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 32px;
 }

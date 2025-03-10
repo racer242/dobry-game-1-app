@@ -56,7 +56,7 @@ class MainPage extends Component {
           трогай то, что его портит.
         </p>
         <p>Можно ошибиться только три раза</p>
-        <div className="light-button" onClick={this.startButton_clickHandler}>
+        <div className="primary-button" onClick={this.startButton_clickHandler}>
           Стартуем!
         </div>
       </div>

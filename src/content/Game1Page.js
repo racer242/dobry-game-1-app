@@ -72,8 +72,9 @@ class Game1Page extends GamePage {
 
       if (obj.status == "obj-show") {
         obj.life++;
-        obj.y += Math.sign(Math.random() * 1 - 0.5) * obj.type.speed;
-        obj.x += Math.sign(Math.random() * 1 - 0.5) * obj.type.speed;
+        obj.x = obj.baseX + Math.sign(Math.random() * 1 - 0.5) * obj.type.speed;
+        obj.y = obj.baseY + Math.sign(Math.random() * 1 - 0.5) * obj.type.speed;
+
         this.updateObjBounds(obj);
         if (obj.life > obj.type.lifeCount + Math.random() * obj.type.lifeProb) {
           obj.status = "obj-off";
@@ -88,10 +89,15 @@ class Game1Page extends GamePage {
       let x = Math.floor(Math.random() * this.state.game1.gridSize);
       let y = Math.floor(Math.random() * this.state.game1.gridSize);
 
+      let found = objects.filter((v) => v.baseX == x && v.baseY == y);
+      if (found.length > 0) continue;
+
       objects.push({
         id: "obj" + this.counter++,
         x,
         y,
+        baseX: x,
+        baseY: y,
         ...this.updateObjBounds({ x, y }),
         type: objSources[Math.floor(Math.random() * objSources.length)],
         status: "obj-on",
@@ -199,7 +205,7 @@ class Game1Page extends GamePage {
               "g1-gameBonus" + (bonus.value > 0 ? "" : " g1-negativeBonus")
             }
             style={{
-              backgroundImage: `url(${require("../images/game1/bonus.png")})`,
+              backgroundImage: `url(${require("../images/game1/bonus.svg")})`,
               pointerEvents: "none",
             }}
           >
@@ -212,13 +218,14 @@ class Game1Page extends GamePage {
     return (
       <div className="gamePage">
         <div className="gameScene">
+          <div className="pageBg g1 pulsing"></div>
           {objs}
           {bonuses}
         </div>
         <div className="countdown g1-countdown">
           {this.state.game1.gameDuration - this.state.countdown}
         </div>
-        <div className="score g1-score">{this.state.score}</div>
+        <div className="score display g1">{this.state.score}</div>
       </div>
     );
   }

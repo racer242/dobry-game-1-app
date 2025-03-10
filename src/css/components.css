@@ -136,19 +136,17 @@
   animation: spin 2s linear infinite;
 }
 
-@media (max-width: 720px) {
-  #PopupContainer {
-    border-radius: 0px;
-    width: calc(100vw - 0px);
-    max-height: 100vh;
-    padding-top: 35px;
-    padding-left: 25px;
-    padding-bottom: 25px;
-    padding-right: 8px;
-  }
+.mobile #PopupContainer {
+  border-radius: 0px;
+  width: calc(100vw - 0px);
+  max-height: 100vh;
+  padding-top: 35px;
+  padding-left: 25px;
+  padding-bottom: 25px;
+  padding-right: 8px;
+}
 
-  #PopupContent {
-    max-height: calc(100vh - 55px);
-    height: calc(100vh - 55px);
-  }
+.mobile #PopupContent {
+  max-height: calc(100vh - 55px);
+  height: calc(100vh - 55px);
 }

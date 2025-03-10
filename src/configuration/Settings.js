@@ -13,7 +13,7 @@ const settings = {
   },
   mobileBounds: {
     width: 540,
-    height: 960,
+    height: 860,
   },
   switchToMobileWidth: 720,
   currentPage: "main",

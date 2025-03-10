@@ -2,22 +2,100 @@
 .finishPage,
 .mainPage {
   position: relative;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20px;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #03001b;
-  border-radius: 30px;
-  width: calc(100% - 140px);
-  min-width: 500px;
-  padding-top: 55px;
-  padding-left: 45px;
-  padding-bottom: 45px;
-  padding-right: 28px;
-  color: #fff;
+  gap: 40px;
   box-sizing: border-box;
+}
+
+.mobile .scoresPage,
+.mobile .finishPage,
+.mobile .mainPage {
+  justify-content: space-evenly;
+}
+
+.pageBg {
+  position: absolute;
+  background-position: center;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.head {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  position: relative;
+  width: 155px;
+  height: 144px;
+  background-size: contain;
+}
+
+.head h1 {
+  position: absolute;
+  bottom: -20px;
+}
+
+.plate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 36px;
+  gap: 10px;
+  isolation: isolate;
+  background: #5d279e;
+  border-radius: 20px;
+  gap: 20px;
+  width: calc(100% - 350px);
+  min-width: 480px;
+  box-sizing: border-box;
+}
+
+.help {
+  background: #692eb0;
+  border-radius: 12px;
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  justify-content: space-between;
+  padding: 5px 20px;
+  isolation: isolate;
+  border-radius: 20px;
+  box-sizing: border-box;
+}
+
+.help-item {
+  height: 25px;
+  min-width: 20px;
+}
+
+.pageBg.g1 {
+  background-image: url(../images/game1/bg.jpg);
+  background-size: cover;
+}
+
+.logo.g1 {
+  background-image: url(../images/game1/logo.png);
+}
+
+.mobile .pageBg.g1 {
+  background-image: url(../images/game1/bg-mob.jpg);
 }

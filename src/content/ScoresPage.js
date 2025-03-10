@@ -55,10 +55,13 @@ class ScoresPage extends Component {
         <h1>У тебя 100500 очков и 123 место</h1>
         <h2>А вот топ-10</h2>
         <p>Таблица результатов</p>
-        <div className="dark-button" onClick={this.closeButton_clickHandler}>
+        <div
+          className="secondary-button"
+          onClick={this.closeButton_clickHandler}
+        >
           Позже поиграю
         </div>
-        <div className="light-button" onClick={this.startButton_clickHandler}>
+        <div className="primary-button" onClick={this.startButton_clickHandler}>
           Играть еще раз
         </div>
       </div>

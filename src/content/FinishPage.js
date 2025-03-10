@@ -67,13 +67,19 @@ class FinishPage extends Component {
             getScoreTitleInGenitive(this.state.gameScore) +
             "!"}
         </p>
-        <div className="dark-button" onClick={this.closeButton_clickHandler}>
+        <div
+          className="secondary-button"
+          onClick={this.closeButton_clickHandler}
+        >
           Позже поиграю
         </div>
-        <div className="light-button" onClick={this.scoresButton_clickHandler}>
+        <div
+          className="primary-button"
+          onClick={this.scoresButton_clickHandler}
+        >
           Смотреть результаты
         </div>
-        <div className="light-button" onClick={this.startButton_clickHandler}>
+        <div className="primary-button" onClick={this.startButton_clickHandler}>
           Играть еще раз
         </div>
       </div>

@@ -41,19 +41,26 @@
 
 .score {
   position: absolute;
-  display: block;
-  right: 0%;
-  top: 0%;
   pointer-events: none;
-  font-family: "Forum";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 32px;
-  line-height: 110%;
-  leading-trim: both;
-  text-edge: cap;
+
+  width: 132px;
+  height: 72px;
+  right: 24px;
+  top: 24px;
+
+  background-color: rgba(93, 40, 159, 0.9);
+  background-position: 10px center;
+  background-repeat: no-repeat;
+  border-radius: 36px;
+  display: block;
+  isolation: isolate;
+  box-sizing: border-box;
+  padding-left: 50px;
+  padding-top: 20px;
   text-align: center;
-  text-transform: uppercase;
-  color: rgba(0, 0, 255, 0.8);
-  padding: 30px;
+}
+
+.score.g1 {
+  background-image: url(../images/game1/bonus-display.svg);
+  color: #ff49b8;
 }

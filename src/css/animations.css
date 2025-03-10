@@ -161,7 +161,7 @@
 }
 
 .floating {
-  animation: floating 500ms ease-out;
+  animation: floating 2000ms ease-out infinite;
 }
 @keyframes floating {
   0% {
@@ -204,5 +204,20 @@
   100% {
     transform: scale(2);
     opacity: 0;
+  }
+}
+
+.pulsing {
+  animation: pulsing 2500ms ease-out infinite;
+}
+@keyframes pulsing {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
   }
 }
