@@ -17,6 +17,15 @@
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
+  transition: filter 500ms ease-out;
+}
+
+.g1-obj-show:hover .g1-gameObject {
+  filter: drop-shadow(10px 10px 20px #ff49b8);
+}
+
+.g1-obj-show:hover .g1-gameObject.bad {
+  filter: drop-shadow(10px 10px 20px #ff0000);
 }
 
 .g1-obj-on {
@@ -53,47 +62,4 @@
 
 .g1-obj-stop {
   pointer-events: none !important;
-  opacity: 0.3;
-}
-
-.g1-gameBonusBox {
-  position: absolute;
-  display: block;
-  width: 100px;
-  height: 100px;
-  transition-property: transform opacity left top;
-  pointer-events: none;
-}
-
-.g1-gameBonus {
-  position: absolute;
-
-  left: 0px;
-  top: 0px;
-  width: 100%;
-  height: 100%;
-  background-size: contain;
-  background-position: center center;
-  background-repeat: no-repeat;
-  pointer-events: none;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-
-  font-family: "Forum";
-  font-style: normal;
-  font-weight: bold;
-  font-size: 32px;
-  line-height: 110%;
-  leading-trim: both;
-  text-edge: cap;
-  text-align: center;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 1);
-}
-
-.g1-negativeBonus {
-  color: rgba(255, 0, 0, 1);
 }

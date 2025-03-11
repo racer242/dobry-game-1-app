@@ -5,7 +5,6 @@
   font-size: 32px;
   line-height: 41px;
   text-align: center;
-  color: #ffffff;
   padding: 0;
   margin: 0;
 }
@@ -14,10 +13,20 @@
   font-family: "Onest";
   font-style: normal;
   font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+.game h3 {
+  font-family: "Onest";
+  font-style: normal;
+  font-weight: 600;
   font-size: 16px;
   line-height: 20px;
   text-align: center;
-  color: #ffffff;
   padding: 0;
   margin: 0;
 }
@@ -29,9 +38,13 @@
   font-size: 16px;
   line-height: 20px;
   text-align: center;
-  color: #f8d1b9;
   padding: 0;
   margin: 0;
+}
+
+.game p.small {
+  font-size: 14px;
+  line-height: 18px;
 }
 
 .game .button {
@@ -50,6 +63,11 @@
 }
 
 .game .mobile h2 {
+  font-size: 24px;
+  line-height: 32px;
+}
+
+.game .mobile h3 {
   font-size: 20px;
   line-height: 28px;
 }
@@ -57,6 +75,11 @@
 .game .mobile p {
   font-size: 20px;
   line-height: 28px;
+}
+
+.game .mobile p.small {
+  font-size: 16px;
+  line-height: 20px;
 }
 
 .game .mobile .button {
@@ -70,4 +93,28 @@
   font-weight: 600;
   font-size: 32px;
   line-height: 32px;
+}
+
+.game .score-value {
+  font-family: "Onest";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 40px;
+}
+
+.game .score-title {
+  font-family: "Onest";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 24px;
+}
+
+.game .table {
+  font-family: "Onest";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
 }

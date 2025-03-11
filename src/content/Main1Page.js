@@ -16,32 +16,6 @@ class Main1Page extends Component {
     this.startButton_clickHandler = this.startButton_clickHandler.bind(this);
   }
 
-  componentDidMount() {
-    this.unsubscribe = this.store.subscribe(() => {
-      this.onStoreChange();
-    });
-    this.mounted = true;
-  }
-
-  componentWillUnmount() {
-    if (this.unsubscribe) {
-      this.unsubscribe();
-    }
-    this.mounted = false;
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {}
-
-  onStoreChange() {
-    if (this.mounted) {
-      let state = this.store.getState();
-      this.setState({
-        ...this.state,
-        ...state,
-      });
-    }
-  }
-
   startButton_clickHandler(event) {
     this.store.dispatch(setStoreData({ currentPage: "game" }));
   }
@@ -51,18 +25,18 @@ class Main1Page extends Component {
     children.push(this.props.children);
 
     return (
-      <div className="mainPage">
-        <div className="pageBg g1 pulsing"></div>
-        <div className="head">
-          <div className="logo g1 floating"></div>
+      <div className="mainPage g1">
+        <div className="pageBg pulsing"></div>
+        <div className="head appear-zoom">
+          <div className="logo floating"></div>
           <h1>Лови Вайб</h1>
         </div>
-        <div className="plate">
-          <h2>
+        <div className="plate appear-top delay500ms">
+          <h3>
             Лови вайб на Добрый Fest! Тапай на то, что даёт плюс вайб на
             фестивале, и набирай очки.
-          </h2>
-          <p>
+          </h3>
+          <p className="orange">
             Нажимай на всё, что создаёт музыкальный вайб и получай +1 за каждый
             предмет. Если нажмешь на то, что его портит, очки вычитаются.
             Время игры - 60 секунд.
@@ -103,10 +77,10 @@ class Main1Page extends Component {
           </div>
         </div>
         <div
-          className="primary-button button"
+          className="primary-button button appear-bottom delay1s"
           onClick={this.startButton_clickHandler}
         >
-          Стартуем!
+          Играть
         </div>
       </div>
     );

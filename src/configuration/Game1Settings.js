@@ -5,10 +5,6 @@ const Game1Settings = {
     width: 100,
     height: 100,
   },
-  bonusBounds: {
-    width: 100,
-    height: 100,
-  },
 
   objSources: [
     {
@@ -161,8 +157,8 @@ const Game1Settings = {
   bonusLife: 3,
 
   stepDuration: 1000, //ms
-  gameDuration: 100, //s
-  stopDuration: 3000, //ms
+  gameDuration: 10, //s
+  stopDuration: 2000, //ms
 };
 
 export default Game1Settings;

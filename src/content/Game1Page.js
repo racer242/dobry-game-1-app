@@ -1,6 +1,7 @@
 import React from "react";
 import "../css/game1.css";
 import GamePage from "./GamePage";
+import CircularProgress from "../components/CircularProgress";
 
 class Game1Page extends GamePage {
   constructor(props) {
@@ -42,6 +43,7 @@ class Game1Page extends GamePage {
     let objects = this.state.objects;
     let objSources = this.state.game1.objSources;
     let bonuses = this.state.bonuses;
+    let scoreAdded = this.state.scoreAdded;
 
     bonuses = bonuses.filter((v) => v.status != "bonus-destroy");
     for (const bonus of bonuses) {
@@ -52,6 +54,7 @@ class Game1Page extends GamePage {
         }
       }
       if (bonus.status == "bonus-on") {
+        scoreAdded = false;
         bonus.status = "bonus-show";
         bonus.life = this.state.game2.bonusLife;
       }
@@ -109,6 +112,7 @@ class Game1Page extends GamePage {
       ...this.state,
       objects,
       bonuses,
+      scoreAdded,
     });
 
     return true;
@@ -125,8 +129,8 @@ class Game1Page extends GamePage {
       bonusValue = obj.type.bonus;
       bonuses.push({
         id: "bonus" + this.counter++,
-        cssX: event.target.offsetLeft,
-        cssY: event.target.offsetTop,
+        cssX: event.target.offsetLeft + this.state.game1.objectBounds.width,
+        cssY: event.target.offsetTop + this.state.game1.objectBounds.height / 4,
         value: bonusValue,
         status: "bonus-on",
       });
@@ -141,6 +145,7 @@ class Game1Page extends GamePage {
       objects,
       bonuses,
       score,
+      scoreAdded: bonusValue > 0,
     });
   }
 
@@ -175,7 +180,9 @@ class Game1Page extends GamePage {
           onClick={this.objButton_clickHandler}
         >
           <div
-            className={"g1-gameObject swing"}
+            className={
+              "g1-gameObject swing" + (obj.type.bonus > 0 ? "" : " bad")
+            }
             style={{
               backgroundImage: `url(${obj.type.src})`,
               pointerEvents: "none",
@@ -188,44 +195,68 @@ class Game1Page extends GamePage {
     let bonuses = [];
     for (let i = 0; i < this.state.bonuses.length; i++) {
       let bonus = this.state.bonuses[i];
+      let particles = [];
+      if (bonus.value > 0) {
+        for (let i = 0; i < this.state.particlesCount; i++) {
+          particles.push(<div key={"p" + i} className="particle"></div>);
+        }
+      }
       bonuses.push(
-        <div
-          className="g1-gameBonusBox bonusUp"
-          id={bonus.id}
-          key={bonus.id}
-          style={{
-            left: bonus.cssX,
-            top: bonus.cssY,
-            width: this.state.game1.bonusBounds.width,
-            height: this.state.game1.bonusBounds.height,
-          }}
-        >
+        <div key={bonus.id}>
           <div
-            className={
-              "g1-gameBonus" + (bonus.value > 0 ? "" : " g1-negativeBonus")
-            }
+            className="particle-container"
             style={{
-              backgroundImage: `url(${require("../images/game1/bonus.svg")})`,
-              pointerEvents: "none",
+              left: bonus.cssX,
+              top: bonus.cssY,
             }}
           >
-            {bonus.value > 0 ? "+" + bonus.value : bonus.value}
+            {particles}
+          </div>
+          <div
+            className="bonus-box bonusUp display"
+            id={bonus.id}
+            style={{
+              left: bonus.cssX,
+              top: bonus.cssY,
+            }}
+          >
+            <div className={"bonus g1" + (bonus.value > 0 ? "" : " negative")}>
+              {bonus.value > 0 ? "+" + bonus.value : bonus.value}
+            </div>
           </div>
         </div>
       );
     }
 
+    let time = this.state.game1.gameDuration - this.state.countdown;
+
     return (
-      <div className="gamePage">
+      <div className="gamePage g1">
         <div className="gameScene">
-          <div className="pageBg g1 pulsing"></div>
+          <div className="pageBg pulsing"></div>
           {objs}
           {bonuses}
         </div>
-        <div className="countdown g1-countdown">
-          {this.state.game1.gameDuration - this.state.countdown}
+        <div className={"countdown display " + (time < 10 ? " warning" : "")}>
+          <CircularProgress value={1 - time / this.state.game1.gameDuration}>
+            {time}
+          </CircularProgress>
         </div>
-        <div className="score display g1">{this.state.score}</div>
+        <div
+          className={
+            "score display" + (this.state.scoreAdded > 0 ? " impulse" : "")
+          }
+        >
+          {this.state.score}
+        </div>
+        <div
+          className="pageBg pulsing"
+          style={{
+            visibility: this.state.finished ? "visible" : "hidden",
+            opacity: this.state.finished ? 1 : 0,
+            transitionDuration: this.state.game1.stopDuration + "ms",
+          }}
+        ></div>
       </div>
     );
   }

@@ -10,7 +10,7 @@ $s: 500px;
   position: absolute;
   width: $d;
   height: $d;
-  animation: shoot 3s ease-out infinite;
+  animation: shoot 3s ease-out;
   animation-name: shoot, fade;
   border-radius: $d;
 

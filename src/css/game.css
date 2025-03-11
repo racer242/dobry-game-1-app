@@ -22,21 +22,15 @@
 
 .countdown {
   position: absolute;
-  display: block;
-  left: 0%;
-  top: 0%;
   pointer-events: none;
-  font-family: "Forum";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 32px;
-  line-height: 110%;
-  leading-trim: both;
-  text-edge: cap;
-  text-align: center;
-  text-transform: uppercase;
-  color: rgba(0, 0, 255, 0.8);
-  padding: 30px;
+
+  width: 72px;
+  height: 72px;
+  left: 24px;
+  top: 24px;
+  display: block;
+  isolation: isolate;
+  box-sizing: border-box;
 }
 
 .score {
@@ -60,7 +54,54 @@
   text-align: center;
 }
 
-.score.g1 {
+.bonus-box {
+  position: absolute;
+  display: block;
+  width: 150px;
+  height: 150px;
+  transition-property: transform opacity left top;
+  pointer-events: none;
+}
+
+.bonus {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 150px;
+  height: 150px;
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  transform: translate(-50%, -25%);
+}
+
+.g1 .bonus {
+  background-image: url(../images/game1/bonus.svg);
+  color: #fff;
+}
+.g1 .bonus.negative {
+  color: #ff49b8;
+}
+
+.g1 .score {
   background-image: url(../images/game1/bonus-display.svg);
   color: #ff49b8;
+}
+
+.g1 .countdown {
+  color: #fff;
+}
+
+.g1 .countdown .progress-bar__background {
+  stroke: #ffd100;
+}
+
+.g1 .countdown .progress-bar__progress {
+  stroke: #5d279e;
 }

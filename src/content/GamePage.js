@@ -23,6 +23,9 @@ class GamePage extends Component {
     this.closeButton_clickHandler = this.closeButton_clickHandler.bind(this);
     this.initCount = 0;
     this.counter = 0;
+    if (this.countdownTimer != null) clearTimeout(this.countdownTimer);
+    if (this.gameTimer != null) clearTimeout(this.gameTimer);
+    this.countdown = 0;
   }
 
   componentDidMount() {
@@ -52,11 +55,17 @@ class GamePage extends Component {
     }
   }
 
+  setState(data) {
+    data.countdown = this.countdown;
+    super.setState(data);
+  }
+
   startGame() {
     if (!this.started) {
       this.store.dispatch(setStoreData({ loadInit: true }));
 
       this.started = true;
+      this.countdown = 0;
       this.setState({
         ...this.state,
         finished: false,
@@ -118,15 +127,17 @@ class GamePage extends Component {
   }
 
   doControl() {
-    if (this.state.countdown == this.state.gameDuration) {
+    if (this.countdown == this.state.gameDuration) {
       this.stopGame();
       this.finishGame();
       return false;
     }
+
     this.setState({
       ...this.state,
-      countdown: this.state.countdown + 1,
+      countdown: this.countdown,
     });
+    this.countdown++;
     return true;
   }
 
@@ -147,10 +158,6 @@ class GamePage extends Component {
     return (
       <div className="gamePage" ref={this.ref}>
         {children}
-        {/* <div className="secondary-button" onClick={this.closeButton_clickHandler}>
-          Назад
-        </div>
-        */}
       </div>
     );
   }

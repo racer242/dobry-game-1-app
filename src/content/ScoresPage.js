@@ -51,18 +51,110 @@ class ScoresPage extends Component {
     children.push(this.props.children);
 
     return (
-      <div className="scoresPage">
-        <h1>У тебя 100500 очков и 123 место</h1>
-        <h2>А вот топ-10</h2>
-        <p>Таблица результатов</p>
-        <div
-          className="secondary-button"
-          onClick={this.closeButton_clickHandler}
-        >
-          Позже поиграю
+      <div className="scoresPage common">
+        <div className="pageBg"></div>
+        <div className="head appear-opacity">
+          <h1>Участие в розыгрышах</h1>
         </div>
-        <div className="primary-button" onClick={this.startButton_clickHandler}>
-          Играть еще раз
+        <div className="scores-layout">
+          <div className="scores-info with-plate appear-top">
+            <div className="scores-info-plate">
+              <h3>У тебя</h3>
+              <h2 className="yellow">240 очков и</h2>
+              <h2 className="pink">1145-е место</h2>
+              <h3>в рейтинге текущей недели</h3>
+            </div>
+            <p className="scores-info-comment small">
+              Чтобы участвовать в розыгрыше, нужно войти в Топ-500 по очкам на
+              неделе, сответствующей розыгрышу.
+            </p>
+          </div>
+          <div className="scores-info with-table appear-top delay500ms">
+            <h3>Статусы по неделям</h3>
+            <div className="scores-table table">
+              <ul className="scores-head white">
+                <li>Розыгрыш</li>
+                <li>Место</li>
+                <li>Участие</li>
+              </ul>
+              <div className="scores-body black">
+                <ul className="scores-row">
+                  <li>01.04-07.04</li>
+                  <li>4234</li>
+                  <li>нет</li>
+                </ul>
+                <ul className="scores-row">
+                  <li>01.04-07.04</li>
+                  <li>4234</li>
+                  <li>нет</li>
+                </ul>
+                <ul className="scores-row">
+                  <li>01.04-07.04</li>
+                  <li>4234</li>
+                  <li>нет</li>
+                </ul>
+                <ul className="scores-row">
+                  <li>01.04-07.04</li>
+                  <li>4234</li>
+                  <li>нет</li>
+                </ul>
+                <ul className="scores-row">
+                  <li>01.04-07.04</li>
+                  <li>4234</li>
+                  <li>нет</li>
+                </ul>
+                <ul className="scores-row">
+                  <li>01.04-07.04</li>
+                  <li>4234</li>
+                  <li>нет</li>
+                </ul>
+                <ul className="scores-row">
+                  <li>01.04-07.04</li>
+                  <li>4234</li>
+                  <li>нет</li>
+                </ul>
+                <ul className="scores-row">
+                  <li>01.04-07.04</li>
+                  <li>4234</li>
+                  <li>нет</li>
+                </ul>
+                <ul className="scores-row">
+                  <li>01.04-07.04</li>
+                  <li>4234</li>
+                  <li>нет</li>
+                </ul>
+                <ul className="scores-row">
+                  <li>01.04-07.04</li>
+                  <li>4234</li>
+                  <li>нет</li>
+                </ul>
+                <ul className="scores-row">
+                  <li>01.04-07.04</li>
+                  <li>4234</li>
+                  <li>нет</li>
+                </ul>
+                <ul className="scores-row">
+                  <li>01.04-07.04</li>
+                  <li>4234</li>
+                  <li>нет</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="button-group appear-bottom">
+          <div
+            className="secondary-button"
+            onClick={this.closeButton_clickHandler}
+          >
+            Играть позже
+          </div>
+          <div
+            className="primary-button"
+            onClick={this.startButton_clickHandler}
+          >
+            Играть заново
+          </div>
         </div>
       </div>
     );

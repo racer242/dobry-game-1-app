@@ -18,6 +18,7 @@
   flex-grow: 0;
 
   cursor: pointer;
+  box-sizing: border-box;
 }
 
 .primary-button:hover,
@@ -36,17 +37,24 @@
 }
 
 .secondary-button {
-  color: #03001b;
+  color: #fff;
+  background: none;
+  border: #fff 3px solid;
 }
 
-.secondary-button:hover,
-.secondary-button:active {
-  color: #03001b;
-  border: #3290ff 1px solid;
+.secondary-button:hover {
   background: #fff;
+  color: #ff49b8;
 }
 .secondary-button:active {
-  color: #3290ff;
+  background: #fff;
+  color: #5d279e;
+}
+
+.secondary-button:disabled {
+  color: #ddd;
+  cursor: default;
+  border: #eee 3px solid;
 }
 
 .link-button {
