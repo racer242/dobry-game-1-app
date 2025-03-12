@@ -1,4 +1,4 @@
-window.gameId = "VIBE";
+window.gameId = "SPOTLIGHTS";
 
 // Функция инициализации приложения
 function onAppReadyHandler(app) {

@@ -13,6 +13,7 @@
   box-sizing: border-box;
   color: #fff;
   padding: 0px 10px;
+  gap: 10px;
 }
 
 .mobile .scoresPage,
@@ -46,6 +47,8 @@
   width: 155px;
   height: 144px;
   background-size: contain;
+  background-position: center bottom;
+  background-repeat: no-repeat;
 }
 
 .head h1 {
@@ -62,7 +65,7 @@
   background: #5d279e;
   border-radius: 20px;
   gap: 20px;
-  width: calc(100% - 350px);
+  width: calc(100% - 280px);
   min-width: 480px;
   box-sizing: border-box;
 }
@@ -335,6 +338,10 @@
   background-size: cover;
 }
 
+.g2 .pageBg {
+  background-color: #1d083f;
+}
+
 .common .pageBg {
   background: linear-gradient(180deg, #9d1fe1 0%, #5d279e 100%);
 }
@@ -343,6 +350,71 @@
   background-image: url(../images/game1/logo.png);
 }
 
+.g2 .logo {
+  background-image: url(../images/game2/logo.png);
+}
+
 .g1 .mobile .pageBg {
   background-image: url(../images/game1/bg-mob.jpg);
+}
+
+.g2.mainPage .lamps-left,
+.g2.mainPage .lamps-right {
+  position: absolute;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  top: 0;
+  pointer-events: none;
+}
+
+.g2.mainPage .lamps-left {
+  background-image: url(../images/game2/lamps-left.png);
+  left: 70px;
+  width: 242px;
+  height: 37px;
+}
+.g2.mainPage .lamps-right {
+  background-image: url(../images/game2/lamps-right.png);
+  right: 70px;
+  width: 242px;
+  height: 37px;
+}
+
+.g2.mainPage .rays-right,
+.g2.mainPage .rays-left {
+  position: absolute;
+  top: 21px;
+  pointer-events: none;
+}
+
+.g2.mainPage .rays-left {
+  left: 70px;
+  width: 242px;
+  height: 580px;
+}
+.g2.mainPage .rays-right {
+  right: 70px;
+  width: 242px;
+  height: 580px;
+}
+.g2.mainPage .ray {
+  position: absolute;
+  width: 215px;
+  height: 583px;
+  opacity: 0.5;
+}
+
+.g2.mainPage .people {
+  position: absolute;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(../images/game2/people.png);
+  left: 0;
+  bottom: 0;
+  width: 913px;
+  height: 91px;
+  pointer-events: none;
 }
