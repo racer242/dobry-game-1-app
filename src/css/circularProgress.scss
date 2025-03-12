@@ -2,7 +2,7 @@ $progress-bar-stroke-background-width: 5.5;
 $progress-bar-stroke-progress-width: 6;
 $progress-bar-size: 72px;
 
-svg {
+.circularProgress {
   height: $progress-bar-size;
   transform: rotate(-90deg);
   width: $progress-bar-size;

@@ -16,38 +16,6 @@ export const setStoreData = (data) => {
   };
 };
 
-export const loadStoreDataError = (data) => {
-  return {
-    type: "LOAD_STORE_DATA_ERROR",
-    data: {
-      ...data,
-      dataLoaded: false,
-      reloadData: false,
-      loadDataError: true,
-    },
-  };
-};
-
-export const reloadStoreData = () => {
-  return {
-    type: "RELOAD_STORE_DATA",
-    data: {
-      dataLoaded: false,
-      reloadData: true,
-      loadDataError: false,
-    },
-  };
-};
-
-export const waitingForReloadStoreData = () => {
-  return {
-    type: "WAITING_FOR_RELOAD_STORE_DATA",
-    data: {
-      dataLoaded: false,
-    },
-  };
-};
-
 export const setAppData = (data) => {
   return {
     type: "SET_APP_DATA",

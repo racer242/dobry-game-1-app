@@ -62,4 +62,5 @@
 
 .g1-obj-stop {
   pointer-events: none !important;
+  opacity: 0.5 !important;
 }

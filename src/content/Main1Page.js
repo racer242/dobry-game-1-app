@@ -10,14 +10,21 @@ class Main1Page extends Component {
   constructor(props) {
     super(props);
     this.store = this.props.store;
-
-    this.state = {};
+    if (this.store) {
+      this.state = {
+        ...this.store.getState(),
+      };
+    } else this.state = {};
 
     this.startButton_clickHandler = this.startButton_clickHandler.bind(this);
   }
 
   startButton_clickHandler(event) {
-    this.store.dispatch(setStoreData({ currentPage: "game" }));
+    this.store.dispatch(
+      setStoreData({
+        currentPage: "game",
+      })
+    );
   }
 
   render() {

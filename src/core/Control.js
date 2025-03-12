@@ -1,6 +1,6 @@
 import { Component } from "react";
 
-import { reloadStoreData, saveStorageData } from "../actions/appActions";
+import { saveStorageData } from "../actions/appActions";
 
 class Control extends Component {
   //--------------------------------------------------------------------------
@@ -13,12 +13,6 @@ class Control extends Component {
     super(props);
     this.state = {};
     this.store = this.props.store;
-
-    this.actionMap = {};
-
-    this.appStartDelay = 500;
-
-    // console.log("Control constructor");
   }
 
   //--------------------------------------------------------------------------
@@ -50,55 +44,10 @@ class Control extends Component {
   onStoreChange() {
     if (this.mounted) {
       let state = this.store.getState();
-
-      // this.setState(state);
-
-      //
-      //
-      // if (state.dataLoaded) {
-      //
-      //   // console.log("Control dataLoaded",state.windowIsVisible);
-      //   if (state.windowIsVisible) {
-      //     // console.log("Control Wait for next load");
-      //     this.store.dispatch(
-      //       waitingForReloadStoreData()
-      //     );
-      //     this.waitForReload();
-      //   } else {
-      //     // console.log("Tab is inactive. Do not load");
-      //   }
-      //
-      // } else
-      // if (state.loadDataError) {
-      //   // console.log("Control loadDataError");
-      //   this.store.dispatch(
-      //     reloadStoreData()
-      //   );
-      // } else
-      // }
-
       if (state.dataForStorageChanged) {
-        // console.log("Control dataForStorageChanged");
         this.store.dispatch(saveStorageData());
       }
     }
-  }
-
-  stopTimeout() {
-    if (this.loadTimeout) {
-      clearTimeout(this.loadTimeout);
-      this.loadTimeout = null;
-    }
-  }
-
-  waitForReload() {
-    // console.log("Control waitForReload");
-    this.stopTimeout();
-
-    this.loadTimeout = setTimeout(() => {
-      // console.log("Control Reload");
-      this.store.dispatch(reloadStoreData());
-    }, this.store.reloadTimeout);
   }
 
   render() {

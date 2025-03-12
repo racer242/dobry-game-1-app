@@ -118,3 +118,7 @@
   font-size: 14px;
   line-height: 18px;
 }
+
+.game .bold {
+  font-weight: 800;
+}

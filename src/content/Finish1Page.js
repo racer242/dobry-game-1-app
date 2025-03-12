@@ -71,7 +71,7 @@ class Finish1Page extends Component {
           <div className="score-pie appear-zoom delay500ms">
             <div className="score-value">{this.state.gameScore} </div>
             <div className="score-title">
-              {getScoreTitleInGenitive(this.state.gameScore)}{" "}
+              {getScoreTitleInGenitive(this.state.gameScore)}
             </div>
           </div>
         </div>

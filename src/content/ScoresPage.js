@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { setStoreData } from "../actions/appActions";
+import { getScoreTitleInGenitive } from "../utils/stringTools";
 
 class ScoresPage extends Component {
   constructor(props) {
@@ -50,6 +51,32 @@ class ScoresPage extends Component {
     let children = [];
     children.push(this.props.children);
 
+    let place = this.state.gameScores?.place;
+    let marks = this.state.gameScores?.marks;
+    let rating = this.state.gameScores?.rating
+      ? this.state.gameScores.rating
+      : [];
+
+    let rows = [];
+    let after = false;
+    for (let i = 0; i < rating.length; i++) {
+      let row = rating[i];
+      let keep = row.part == "keep" || row.part == "notYet";
+      rows.push(
+        <ul
+          key={"row" + i}
+          className={
+            "scores-row" + (keep ? " bold" : "") + (after ? " pink" : "")
+          }
+        >
+          <li>{row.period}</li>
+          <li>{row.place ?? "-"}</li>
+          <li>{row.partTitle ?? "-"}</li>
+        </ul>
+      );
+      if (keep) after = true;
+    }
+
     return (
       <div className="scoresPage common">
         <div className="pageBg"></div>
@@ -60,8 +87,10 @@ class ScoresPage extends Component {
           <div className="scores-info with-plate appear-top">
             <div className="scores-info-plate">
               <h3>У тебя</h3>
-              <h2 className="yellow">240 очков и</h2>
-              <h2 className="pink">1145-е место</h2>
+              <h2 className="yellow">
+                {marks} {getScoreTitleInGenitive(marks)} и
+              </h2>
+              <h2 className="pink">{place}-е место</h2>
               <h3>в рейтинге текущей недели</h3>
             </div>
             <p className="scores-info-comment small">
@@ -77,68 +106,7 @@ class ScoresPage extends Component {
                 <li>Место</li>
                 <li>Участие</li>
               </ul>
-              <div className="scores-body black">
-                <ul className="scores-row">
-                  <li>01.04-07.04</li>
-                  <li>4234</li>
-                  <li>нет</li>
-                </ul>
-                <ul className="scores-row">
-                  <li>01.04-07.04</li>
-                  <li>4234</li>
-                  <li>нет</li>
-                </ul>
-                <ul className="scores-row">
-                  <li>01.04-07.04</li>
-                  <li>4234</li>
-                  <li>нет</li>
-                </ul>
-                <ul className="scores-row">
-                  <li>01.04-07.04</li>
-                  <li>4234</li>
-                  <li>нет</li>
-                </ul>
-                <ul className="scores-row">
-                  <li>01.04-07.04</li>
-                  <li>4234</li>
-                  <li>нет</li>
-                </ul>
-                <ul className="scores-row">
-                  <li>01.04-07.04</li>
-                  <li>4234</li>
-                  <li>нет</li>
-                </ul>
-                <ul className="scores-row">
-                  <li>01.04-07.04</li>
-                  <li>4234</li>
-                  <li>нет</li>
-                </ul>
-                <ul className="scores-row">
-                  <li>01.04-07.04</li>
-                  <li>4234</li>
-                  <li>нет</li>
-                </ul>
-                <ul className="scores-row">
-                  <li>01.04-07.04</li>
-                  <li>4234</li>
-                  <li>нет</li>
-                </ul>
-                <ul className="scores-row">
-                  <li>01.04-07.04</li>
-                  <li>4234</li>
-                  <li>нет</li>
-                </ul>
-                <ul className="scores-row">
-                  <li>01.04-07.04</li>
-                  <li>4234</li>
-                  <li>нет</li>
-                </ul>
-                <ul className="scores-row">
-                  <li>01.04-07.04</li>
-                  <li>4234</li>
-                  <li>нет</li>
-                </ul>
-              </div>
+              <div className="scores-body black">{rows}</div>
             </div>
           </div>
         </div>

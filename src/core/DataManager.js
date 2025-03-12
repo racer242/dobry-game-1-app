@@ -55,15 +55,12 @@ class DataManager extends Component {
         ...state,
       });
       if (!this.isLoading) {
-        if (state.loadInit) {
-          console.log("DataManager loadInit");
-          this.loadInit();
-        } else if (state.saveScore) {
-          console.log("DataManager saveScore");
-          this.saveScore();
-        } else if (state.loadStatusTable) {
-          console.log("DataManager loadStatusTable");
-          this.loadStatusTable();
+        if (state.requestStart) {
+          console.log("DataManager requestStart");
+          this.requestStart(state.requestStart);
+        } else if (state.requestFinish) {
+          console.log("DataManager requestFinish");
+          this.requestFinish(state.requestFinish);
         }
       }
       if (state.saveStorageData) {
@@ -73,27 +70,23 @@ class DataManager extends Component {
     }
   }
 
-  async loadInit() {
-    await this.load(this.state.initSource, {}, {}, "loadInit", "initData");
-  }
-
-  async saveScore() {
+  async requestStart(action) {
     await this.load(
-      this.state.saveSource,
-      { score: this.state.gameScore },
+      action.request,
+      action.data,
       {},
-      "saveScore",
-      "saveData"
+      "requestStart",
+      "gameCredentials"
     );
   }
 
-  async loadStatusTable(data) {
+  async requestFinish(action) {
     await this.load(
-      this.state.statusTableSource,
+      action.request,
+      action.data,
       {},
-      {},
-      "loadStatusTable",
-      "tableData"
+      "requestFinish",
+      "gameScores"
     );
   }
 

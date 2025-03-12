@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.9",
     "input-format": "^0.3.11",
+    "md5": "^2.3.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-preload": "^0.6.0",

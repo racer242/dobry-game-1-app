@@ -1,4 +1,4 @@
-window.gameIndex = 1;
+window.gameId = "VIBE";
 
 // Функция инициализации приложения
 function onAppReadyHandler(app) {
@@ -29,15 +29,19 @@ function onAppReadyHandler(app) {
 
   // Настройки приложения
   var data = {
-    user: {
-      id: "671tt291928318282810",
-      someProp: "someValue",
+    games: {
+      1: { id: "VIBE", request: { url: "/api/TentGame.json", method: "GET" } },
+      2: {
+        id: "SPOTLIGHTS",
+        request: { url: "/api/SpotLights.json", method: "GET" },
+      },
+      3: { id: "MATCH", request: { url: "/api/Match.json", method: "GET" } },
+      4: { id: "STAGE", request: { url: "/api/Stage.json", method: "GET" } },
+      index: { VIBE: 1, SPOTLIGHTS: 2, MATCH: 3, STAGE: 4 },
     },
-    initSource: { url: "init.json", method: "GET" },
-    saveSource: { url: "game.json", method: "GET" },
-    statusTableSource: { url: "hiscores.json", method: "GET" },
-    gameIndex: window.gameIndex,
   };
+  data.gameIndex = data.games.index[window.gameId];
+  data.gameData = data.games[data.gameIndex];
 
   app.setData(data);
 }

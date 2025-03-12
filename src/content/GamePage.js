@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { setStoreData } from "../actions/appActions";
+import md5 from "md5";
 
 class GamePage extends Component {
   constructor(props) {
@@ -55,6 +56,37 @@ class GamePage extends Component {
     }
   }
 
+  registerStart() {
+    this.store.dispatch(
+      setStoreData({
+        requestStart: {
+          request: this.state.gameData.request,
+          data: { mode: "start", tentCode: this.state.gameData.id },
+        },
+      })
+    );
+  }
+
+  registerFinish() {
+    let guid = this.state.gameCredentials?.guid;
+    let userCode = this.state.gameCredentials?.userCode;
+    let marks = this.state.score;
+    let hash = md5(userCode + guid + guid + guid + marks);
+    this.store.dispatch(
+      setStoreData({
+        requestFinish: {
+          request: this.state.gameData.request,
+          data: {
+            mode: "finish",
+            hash,
+            guid,
+            marks,
+          },
+        },
+      })
+    );
+  }
+
   setState(data) {
     data.countdown = this.countdown;
     super.setState(data);
@@ -62,7 +94,7 @@ class GamePage extends Component {
 
   startGame() {
     if (!this.started) {
-      this.store.dispatch(setStoreData({ loadInit: true }));
+      this.registerStart();
 
       this.started = true;
       this.countdown = 0;
@@ -116,14 +148,17 @@ class GamePage extends Component {
   finishGame() {
     if (this.stopTimer != null) clearTimeout(this.stopTimer);
     this.stopTimer = setTimeout(() => {
-      this.store.dispatch(
-        setStoreData({
-          currentPage: "finish",
-          gameScore: this.state.score,
-          saveScore: true,
-        })
-      );
-    }, this.state.stopDuration);
+      this.registerFinish();
+      if (this.stopTimer != null) clearTimeout(this.stopTimer);
+      this.stopTimer = setTimeout(() => {
+        this.store.dispatch(
+          setStoreData({
+            currentPage: "finish",
+            gameScore: this.state.score,
+          })
+        );
+      }, this.state.stopDuration / 2);
+    }, this.state.stopDuration / 2);
   }
 
   doControl() {

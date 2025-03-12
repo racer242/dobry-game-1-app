@@ -14,7 +14,11 @@ class CircularProgress extends Component {
 
     return (
       <>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 38 38">
+        <svg
+          className="circularProgress"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="-5 -5 38 38"
+        >
           <circle
             cx="14"
             cy="14"
