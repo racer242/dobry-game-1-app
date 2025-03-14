@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { setStoreData } from "../actions/appActions";
 
-import { ReactComponent as RAY_RED } from "../images/game2/ray-red.svg";
 import { ReactComponent as RAY_PINK } from "../images/game2/ray-pink.svg";
 import { ReactComponent as RAY_PURPLE } from "../images/game2/ray-purple.svg";
 import { ReactComponent as RAY_YELLOW } from "../images/game2/ray-yellow.svg";
@@ -36,24 +35,24 @@ class Main2Page extends Component {
         <div className="pageBg"></div>
 
         <div className="rays-left">
-          <RAY_YELLOW className="ray" style={{ left: -98 }} />
-          <RAY_PURPLE className="ray" style={{ left: -64 }} />
-          <RAY_YELLOW className="ray" style={{ left: -18 }} />
-          <RAY_PINK className="ray" style={{ left: 30 }} />
-          <RAY_YELLOW className="ray" style={{ left: 67 }} />
-          <RAY_PURPLE className="ray" style={{ left: 128 }} />
+          <RAY_YELLOW className="ray lights-even" style={{ left: -98 }} />
+          <RAY_PURPLE className="ray lights" style={{ left: -64 }} />
+          <RAY_YELLOW className="ray lights-even" style={{ left: -18 }} />
+          <RAY_PINK className="ray lights" style={{ left: 30 }} />
+          <RAY_YELLOW className="ray lights-even" style={{ left: 67 }} />
+          <RAY_PURPLE className="ray lights" style={{ left: 128 }} />
         </div>
         <div className="rays-right">
-          <RAY_PINK className="ray" style={{ left: -93 }} />
-          <RAY_YELLOW className="ray" style={{ left: -41 }} />
-          <RAY_PURPLE className="ray" style={{ left: -6 }} />
-          <RAY_YELLOW className="ray" style={{ left: 46 }} />
-          <RAY_PINK className="ray" style={{ left: 80 }} />
-          <RAY_YELLOW className="ray" style={{ left: 127 }} />
+          <RAY_PINK className="ray lights" style={{ left: -93 }} />
+          <RAY_YELLOW className="ray lights-even" style={{ left: -41 }} />
+          <RAY_PURPLE className="ray lights" style={{ left: -6 }} />
+          <RAY_YELLOW className="ray lights-even" style={{ left: 46 }} />
+          <RAY_PINK className="ray lights" style={{ left: 80 }} />
+          <RAY_YELLOW className="ray lights-even" style={{ left: 127 }} />
         </div>
         <div className="lamps-left"></div>
         <div className="lamps-right"></div>
-        <div className="people"></div>
+        <div className="people dancing"></div>
         <div className="head appear-zoom">
           <div className="logo floating"></div>
           <h1>В свете софитов</h1>

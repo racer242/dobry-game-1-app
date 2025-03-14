@@ -17,7 +17,7 @@ const settings = {
   },
   switchToMobileWidth: 720,
   currentPage: "main",
-  particlesCount: 50,
+  particlesCount: 30,
 };
 
 export default settings;

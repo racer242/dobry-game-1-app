@@ -382,6 +382,13 @@
   height: 37px;
 }
 
+.mobile .g2.mainPage .lamps-left {
+  left: -110px;
+}
+.mobile .g2.mainPage .lamps-right {
+  right: -110px;
+}
+
 .g2.mainPage .rays-right,
 .g2.mainPage .rays-left {
   position: absolute;
@@ -393,20 +400,44 @@
   left: 70px;
   width: 242px;
   height: 580px;
+  opacity: 0.5;
 }
 .g2.mainPage .rays-right {
   right: 70px;
   width: 242px;
   height: 580px;
+  opacity: 0.5;
 }
+.g2.gamePage .rays {
+  position: absolute;
+  top: 72px;
+  left: 50%;
+  width: 420px;
+  transform: translateX(-50%);
+  height: 580px;
+  opacity: 0.5;
+}
+
+.mobile .g2.mainPage .rays-left {
+  left: -110px;
+}
+.mobile .g2.mainPage .rays-right {
+  right: -110px;
+}
+
 .g2.mainPage .ray {
   position: absolute;
   width: 215px;
   height: 583px;
-  opacity: 0.5;
 }
 
-.g2.mainPage .people {
+.g2.gamePage .ray {
+  position: absolute;
+  width: 133px;
+  height: 360px;
+}
+
+.g2 .people {
   position: absolute;
   background-size: cover;
   background-position: center;
@@ -417,4 +448,93 @@
   width: 913px;
   height: 91px;
   pointer-events: none;
+}
+.g2.gamePage .people {
+  left: 20px;
+}
+
+.mobile .g2.gamePage .people {
+  left: 20px;
+  bottom: -20px;
+}
+
+.g2 .bottom-fade {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  bottom: -30px;
+  /* background: #e74a5c; */
+  background: linear-gradient(180deg, rgba(29, 8, 63, 0) 0%, #1d083f 73.56%);
+}
+
+.g2 .panel-right,
+.g2 .panel-left {
+  position: absolute;
+  background-color: #ff49b8;
+  left: 40px;
+  top: 138px;
+  width: 137px;
+  height: 240px;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.g2 .panel-right {
+  left: auto;
+  right: 40px;
+}
+
+.g2 .panel-top {
+  position: absolute;
+  background-color: #ff49b8;
+  left: 267px;
+  top: -76px;
+  width: 426px;
+  height: 76px;
+  pointer-events: none;
+  border-radius: 40px;
+  overflow: hidden;
+}
+
+.g2 .blob-body {
+  position: absolute;
+  --amount: 80;
+  animation: blob-scale 10s linear infinite;
+}
+
+.g2 .blob {
+  position: absolute;
+  animation: blob-skew 20s linear infinite;
+  width: 100%;
+  height: 100%;
+}
+
+.g2 .pie {
+  position: absolute;
+  animation: spin 20s linear infinite;
+  width: 100%;
+  height: 100%;
+}
+
+.g2 .pie-body {
+  position: absolute;
+  --amount: 50;
+  animation: blob-scale 10s linear infinite;
+}
+
+.g2 .purple {
+  fill: #752e99;
+}
+.g2 .cyan {
+  fill: #10cfc9;
+}
+.g2 .red {
+  fill: #e74a5c;
+}
+.g2 .pink {
+  fill: #ff49b8;
+}
+.g2 .yellow {
+  fill: #ffd100;
 }

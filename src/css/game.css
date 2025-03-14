@@ -20,6 +20,10 @@
   touch-action: none;
 }
 
+.g2 .gameScene {
+  background-color: #1d083f;
+}
+
 .countdown {
   position: absolute;
   pointer-events: none;
@@ -103,5 +107,30 @@
 }
 
 .g1 .countdown .progress-bar__progress {
+  stroke: #5d279e;
+}
+
+.g2 .bonus {
+  background-image: url(../images/game2/bonus.svg);
+  color: #fff;
+}
+.g2 .bonus.negative {
+  color: #5d279e;
+}
+
+.g2 .score {
+  background-image: url(../images/game2/bonus-display.svg);
+  color: #ff49b8;
+}
+
+.g2 .countdown {
+  color: #fff;
+}
+
+.g2 .countdown .progress-bar__background {
+  stroke: #ffd100;
+}
+
+.g2 .countdown .progress-bar__progress {
   stroke: #5d279e;
 }

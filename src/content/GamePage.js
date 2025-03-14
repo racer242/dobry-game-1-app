@@ -26,6 +26,7 @@ class GamePage extends Component {
     this.counter = 0;
     if (this.countdownTimer != null) clearTimeout(this.countdownTimer);
     if (this.gameTimer != null) clearTimeout(this.gameTimer);
+    if (this.stopTimer != null) clearTimeout(this.stopTimer);
     this.countdown = 0;
   }
 

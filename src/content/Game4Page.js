@@ -333,7 +333,7 @@ class Game4Page extends GamePage {
                 "g3-gameBonus" + (bonus.value > 0 ? "" : " g3-negativeBonus")
               }
               style={{
-                backgroundImage: `url(${require("../images/game2/bonus.png")})`,
+                backgroundImage: `url(${require("../images/game2/bonus.svg")})`,
                 pointerEvents: "none",
               }}
             >

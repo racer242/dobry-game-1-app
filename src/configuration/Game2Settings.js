@@ -11,10 +11,10 @@ const Game2Settings = {
   },
   objSources: [
     {
-      x: 341,
-      y: 359,
-      width: 75,
-      height: 63,
+      x: 282,
+      y: 229,
+      width: 47,
+      height: 72,
       type: {
         src: require("../images/game2/objects/o1.png"),
         bonus: 1,
@@ -22,10 +22,10 @@ const Game2Settings = {
       },
     },
     {
-      x: 556,
-      y: 361,
-      width: 54,
-      height: 64,
+      x: 451,
+      y: 365,
+      width: 63,
+      height: 80,
       type: {
         src: require("../images/game2/objects/o2.png"),
         bonus: 1,
@@ -34,9 +34,9 @@ const Game2Settings = {
     },
     {
       x: 453,
-      y: 357,
-      width: 93,
-      height: 80,
+      y: 159,
+      width: 69,
+      height: 108,
       type: {
         src: require("../images/game2/objects/o3.png"),
         bonus: 1,
@@ -44,10 +44,10 @@ const Game2Settings = {
       },
     },
     {
-      x: 355,
-      y: 51,
-      width: 37,
-      height: 66,
+      x: 369,
+      y: 57,
+      width: 48,
+      height: 62,
       type: {
         src: require("../images/game2/objects/o4.png"),
         bonus: 1,
@@ -55,34 +55,108 @@ const Game2Settings = {
       },
     },
     {
-      x: 524,
-      y: 90,
-      width: 52,
-      height: 90,
+      x: 596,
+      y: 200,
+      width: 63,
+      height: 95,
       type: {
         src: require("../images/game2/objects/o5.png"),
         bonus: 1,
         speed: 0.5,
       },
     },
+    {
+      x: 384,
+      y: 294,
+      width: 56,
+      height: 56,
+      type: {
+        src: require("../images/game2/objects/o6.png"),
+        bonus: 1,
+        speed: 0.5,
+      },
+    },
+    {
+      x: 567,
+      y: 393,
+      width: 64,
+      height: 53,
+      type: {
+        src: require("../images/game2/objects/o7.png"),
+        bonus: 1,
+        speed: 0.5,
+      },
+    },
+    {
+      x: 288,
+      y: 368,
+      width: 76,
+      height: 76,
+      type: {
+        src: require("../images/game2/objects/o8.png"),
+        bonus: 1,
+        speed: 0.5,
+      },
+    },
+    {
+      x: 640,
+      y: 347,
+      width: 27,
+      height: 87,
+      type: {
+        src: require("../images/game2/objects/o9.png"),
+        bonus: 1,
+        speed: 0.5,
+      },
+    },
+    {
+      x: 544,
+      y: 90,
+      width: 37,
+      height: 84,
+      type: {
+        src: require("../images/game2/objects/o10.png"),
+        bonus: 1,
+        speed: 0.5,
+      },
+    },
   ],
-
-  lifeCount: 3,
-  deadCount: 4,
-  killCount: 3,
-  switchCount: 2,
+  decorSources: [
+    {
+      x: 380,
+      y: 368,
+      width: 69,
+      height: 58,
+      type: {
+        src: require("../images/game2/objects/m2.png"),
+      },
+    },
+    {
+      x: 531,
+      y: 370,
+      width: 48,
+      height: 56,
+      type: {
+        src: require("../images/game2/objects/m1.png"),
+      },
+    },
+  ],
+  lifeCount: 2,
+  deadCount: 1,
+  killCount: 1,
+  killingCount: 3,
+  switchCount: 1,
 
   lightSize: 100,
 
-  bonusLife: 3,
+  bonusLife: 5,
+  transitionDuration: 100, //ms
 
-  newCount: 2,
-  transitionDuration: 300, //ms
-  detectionSize: 50,
-
-  stepDuration: 200, //ms
-  gameDuration: 100, //s
+  stepDuration: 100, //ms
+  gameDuration: 500, //s
   stopDuration: 3000, //ms
+
+  mobileScale: 1.2,
 };
 
 export default Game2Settings;
