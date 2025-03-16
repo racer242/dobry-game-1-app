@@ -134,3 +134,28 @@
 .g2 .countdown .progress-bar__progress {
   stroke: #5d279e;
 }
+
+.g3 .bonus {
+  background-image: url(../images/game3/bonus.svg);
+  color: #fff;
+}
+.g3 .bonus.negative {
+  color: #5d279e;
+}
+
+.g3 .score {
+  background-image: url(../images/game3/bonus-display.svg);
+  color: #ff49b8;
+}
+
+.g3 .countdown {
+  color: #fff;
+}
+
+.g3 .countdown .progress-bar__background {
+  stroke: #ffd100;
+}
+
+.g3 .countdown .progress-bar__progress {
+  stroke: #5d279e;
+}

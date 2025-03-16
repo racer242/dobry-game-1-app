@@ -12,7 +12,7 @@ const Game3Settings = {
     height: 100,
   },
 
-  objSources: [
+  objSources1: [
     {
       type: {
         src: require("../images/game3/objects/o1.png"),
@@ -61,7 +61,84 @@ const Game3Settings = {
         bonus: 1,
       },
     },
+    {
+      type: {
+        src: require("../images/game3/objects/o9.png"),
+        bonus: 1,
+      },
+    },
+    {
+      type: {
+        src: require("../images/game3/objects/o10.png"),
+        bonus: 1,
+      },
+    },
   ],
+
+  objSources2: [
+    {
+      type: {
+        src: require("../images/game3/objects/o11.png"),
+        bonus: 1,
+      },
+    },
+    {
+      type: {
+        src: require("../images/game3/objects/o12.png"),
+        bonus: 1,
+      },
+    },
+    {
+      type: {
+        src: require("../images/game3/objects/o13.png"),
+        bonus: 1,
+      },
+    },
+    {
+      type: {
+        src: require("../images/game3/objects/o14.png"),
+        bonus: 1,
+      },
+    },
+    {
+      type: {
+        src: require("../images/game3/objects/o15.png"),
+        bonus: 1,
+      },
+    },
+    {
+      type: {
+        src: require("../images/game3/objects/o16.png"),
+        bonus: 1,
+      },
+    },
+    {
+      type: {
+        src: require("../images/game3/objects/o17.png"),
+        bonus: 1,
+      },
+    },
+    {
+      type: {
+        src: require("../images/game3/objects/o18.png"),
+        bonus: 1,
+      },
+    },
+    {
+      type: {
+        src: require("../images/game3/objects/o19.png"),
+        bonus: 1,
+      },
+    },
+    {
+      type: {
+        src: require("../images/game3/objects/o20.png"),
+        bonus: 1,
+      },
+    },
+  ],
+
+  objects2Ratio: 0.3,
 
   cellColors: ["#5D279E", "#A71FE1", "#FF49B8", "#E11F26"],
 

@@ -1,11 +1,3 @@
-.g2-countdown {
-  color: rgba(255, 0, 0, 0.8) !important;
-}
-
-.g2-score {
-  color: rgba(255, 0, 0, 0.8) !important;
-}
-
 .g2-gameObjectBox {
   position: absolute;
   display: block;

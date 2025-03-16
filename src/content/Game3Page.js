@@ -1,6 +1,7 @@
 import React from "react";
 import "../css/game3.css";
 import GamePage from "./GamePage";
+import CircularProgress from "../components/CircularProgress";
 
 class Game3Page extends GamePage {
   constructor(props) {
@@ -33,11 +34,27 @@ class Game3Page extends GamePage {
 
     randomCell.sort((a, b) => 0.5 - Math.random());
 
+    let amount =
+      (this.state.game3.matrixSize[0] * this.state.game3.matrixSize[1]) / 2;
+    let amount2 = Math.round(amount * this.state.game3.objects2Ratio);
+    let amount1 = amount - amount2;
+
+    let sources = [...this.state.game3.objSources1]
+      .sort((a, b) => 0.5 - Math.random())
+      .slice(0, amount1)
+      .concat(
+        [...this.state.game3.objSources2]
+          .sort((a, b) => 0.5 - Math.random())
+          .slice(0, amount2)
+      );
+
+    console.log(sources);
+
     let objects = [];
-    for (let i = 0; i < this.state.game3.objSources.length; i++) {
+    for (let i = 0; i < amount; i++) {
       let cell = randomCell.pop();
       let obj = {
-        ...this.state.game3.objSources[i],
+        ...sources[i],
         id: "obj" + this.counter++,
         status: "obj-off",
         isOpen: false,
@@ -50,7 +67,7 @@ class Game3Page extends GamePage {
 
       cell = randomCell.pop();
       obj = {
-        ...this.state.game3.objSources[i],
+        ...sources[i],
         id: "obj" + this.counter++,
         status: "obj-off",
         isOpen: false,
@@ -338,8 +355,10 @@ class Game3Page extends GamePage {
       );
     }
 
+    let time = this.state.game3.gameDuration - this.state.countdown;
+
     return (
-      <div className="gamePage">
+      <div className="g3 gamePage">
         <div className="gameScene">
           <div
             className="g3-gameScene"
@@ -367,12 +386,43 @@ class Game3Page extends GamePage {
                   : this.state.desktopBounds.height,
                 left: "50%",
                 top: "50%",
-                transform:
-                  "translate(-50%, -50%) " +
-                  (this.props.bounds.mobileSize ? "rotate(270deg)" : ""),
+                transform: "translate(-50%, -50%)",
               }}
             ></div>
-
+            {!this.props.bounds.mobileSize && (
+              <>
+                <div className="fix"></div>
+                <div className="disc-left music-box"></div>
+                <div className="disc-right music-box"></div>
+                <div className="music-button-box">
+                  <div className="music-button button-switching"></div>
+                  <div className="music-button button-switching delay500ms"></div>
+                  <div className="music-button button-switching delay1s"></div>
+                </div>
+                <div className="jack-box">
+                  <div className="jack button-switching"></div>
+                  <div className="jack button-switching delay500ms"></div>
+                  <div className="jack button-switching delay1s"></div>
+                </div>
+                <div className="ajuster-right ajusting"></div>
+                <div className="ajuster-left ajusting delay3s"></div>
+              </>
+            )}
+            {this.props.bounds.mobileSize && (
+              <>
+                <div className="disc-mobile music-box"></div>
+                <div className="handle-box">
+                  <div className="handle">
+                    <div className="handle handling"></div>
+                    <div className="handle-item"></div>
+                  </div>
+                  <div className="handle">
+                    <div className="handle handling delay500ms"></div>
+                    <div className="handle-item"></div>
+                  </div>
+                </div>
+              </>
+            )}
             <div
               className="g3-gameCellsBlock"
               style={{
@@ -387,10 +437,26 @@ class Game3Page extends GamePage {
             </div>
           </div>
         </div>
-        <div className="countdown g3-countdown">
-          {this.state.game3.gameDuration - this.state.countdown}
+        <div className={"countdown display " + (time < 10 ? " warning" : "")}>
+          <CircularProgress value={1 - time / this.state.game2.gameDuration}>
+            {time}
+          </CircularProgress>
         </div>
-        <div className="score g3-score">{this.state.score}</div>
+        <div
+          className={
+            "score display" + (this.state.scoreAdded > 0 ? " impulse" : "")
+          }
+        >
+          {this.state.score}
+        </div>
+        <div
+          className="pageBg pulsing"
+          style={{
+            visibility: this.state.finished ? "visible" : "hidden",
+            opacity: this.state.finished ? 1 : 0,
+            transitionDuration: this.state.game2.stopDuration + "ms",
+          }}
+        ></div>
       </div>
     );
   }

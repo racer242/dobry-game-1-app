@@ -1,4 +1,4 @@
-window.gameId = "SPOTLIGHTS";
+window.gameId = "MATCH";
 
 // Функция инициализации приложения
 function onAppReadyHandler(app) {
