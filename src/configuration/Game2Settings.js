@@ -141,19 +141,19 @@ const Game2Settings = {
       },
     },
   ],
-  lifeCount: 2,
+  lifeCount: 7,
   deadCount: 1,
   killCount: 1,
-  killingCount: 3,
+  killingCount: 8,
   switchCount: 1,
 
   lightSize: 100,
 
-  bonusLife: 5,
+  bonusLife: 10,
   transitionDuration: 100, //ms
 
-  stepDuration: 100, //ms
-  gameDuration: 500, //s
+  stepDuration: 50, //ms
+  gameDuration: 60, //s
   stopDuration: 3000, //ms
 
   mobileScale: 1.2,

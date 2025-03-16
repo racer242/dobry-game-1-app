@@ -523,6 +523,40 @@
   animation: blob-scale 10s linear infinite;
 }
 
+.g2 .music-top,
+.g2 .music-right,
+.g2 .music-left {
+  position: absolute;
+  width: 122px;
+  height: 530px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.g2 .music-left {
+  transform-origin: 90% 50%;
+  top: 20px;
+  left: 145px;
+  background-image: url(../images/game2/music-left.png);
+}
+
+.g2 .music-right {
+  transform-origin: 10% 50%;
+  top: 20px;
+  left: 695px;
+  background-image: url(../images/game2/music-right.png);
+}
+
+.g2 .music-top {
+  transform-origin: 50% 10%;
+  left: 0px;
+  width: 100%;
+  height: 85px;
+  bottom: 10px;
+  background-image: url(../images/game2/music-mob.png);
+}
+
 .g2 .purple {
   fill: #752e99;
 }

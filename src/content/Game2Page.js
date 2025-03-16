@@ -332,6 +332,8 @@ class Game2Page extends GamePage {
               </div>
               {!this.props.bounds.mobileSize && (
                 <>
+                  <div className="music-left music-box"></div>
+                  <div className="music-right music-box"></div>
                   <div className="panel-left">
                     <div
                       className="blob"
@@ -402,46 +404,55 @@ class Game2Page extends GamePage {
                 </>
               )}
               {this.props.bounds.mobileSize && (
-                <div className="panel-top">
-                  <div className="blob" style={{ left: "-35%", top: "-80%" }}>
-                    <BLOB2
-                      className="blob-body red"
-                      width={"850px"}
-                      height={"810px"}
-                      preserveAspectRatio="none"
-                    />
+                <>
+                  <div className="music-top music-box"></div>
+                  <div className="panel-top">
+                    <div className="blob" style={{ left: "-35%", top: "-80%" }}>
+                      <BLOB2
+                        className="blob-body red"
+                        width={"850px"}
+                        height={"810px"}
+                        preserveAspectRatio="none"
+                      />
+                    </div>
+                    <div
+                      className="blob"
+                      style={{ left: "-200%", top: "-290%" }}
+                    >
+                      <BLOB3
+                        width={"500%"}
+                        height={"500%"}
+                        className="blob-body purple"
+                      />
+                    </div>
+                    <div
+                      className="blob"
+                      style={{ left: "-140%", top: "-60%" }}
+                    >
+                      <BLOB1
+                        className="blob-body purple"
+                        width={"400%"}
+                        height={"400%"}
+                      />
+                    </div>
+                    <div className="pie" style={{ left: "0%", top: "0%" }}>
+                      <PIE
+                        width={"30%"}
+                        height={"30%"}
+                        style={{ left: "60%", top: "0%" }}
+                        className="pie-body yellow"
+                      />
+                    </div>
+                    <div className="blob" style={{ left: "30%", top: "-30%" }}>
+                      <BLOB4
+                        className="blob-body cyan"
+                        width={"150px"}
+                        height={"210px"}
+                        preserveAspectRatio="none"
+                      />
+                    </div>
                   </div>
-                  <div className="blob" style={{ left: "-200%", top: "-290%" }}>
-                    <BLOB3
-                      width={"500%"}
-                      height={"500%"}
-                      className="blob-body purple"
-                    />
-                  </div>
-                  <div className="blob" style={{ left: "-140%", top: "-60%" }}>
-                    <BLOB1
-                      className="blob-body purple"
-                      width={"400%"}
-                      height={"400%"}
-                    />
-                  </div>
-                  <div className="pie" style={{ left: "0%", top: "0%" }}>
-                    <PIE
-                      width={"30%"}
-                      height={"30%"}
-                      style={{ left: "60%", top: "0%" }}
-                      className="pie-body yellow"
-                    />
-                  </div>
-                  <div className="blob" style={{ left: "30%", top: "-30%" }}>
-                    <BLOB4
-                      className="blob-body cyan"
-                      width={"150px"}
-                      height={"210px"}
-                      preserveAspectRatio="none"
-                    />
-                  </div>
-                </div>
+                </>
               )}
 
               <div className="people dancing"></div>
