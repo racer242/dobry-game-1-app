@@ -37,7 +37,8 @@ function onAppReadyHandler(app) {
       },
       3: { id: "MATCH", request: { url: "/api/Match.json", method: "GET" } },
       4: { id: "STAGE", request: { url: "/api/Stage.json", method: "GET" } },
-      index: { VIBE: 1, SPOTLIGHTS: 2, MATCH: 3, STAGE: 4 },
+      5: { id: "FIVE", request: { url: "/api/Stage.json", method: "GET" } },
+      index: { VIBE: 1, SPOTLIGHTS: 2, MATCH: 3, STAGE: 4, FIVE: 5 },
     },
   };
   data.gameIndex = data.games.index[window.gameId];

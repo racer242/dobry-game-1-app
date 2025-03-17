@@ -79,10 +79,9 @@ class PageStack extends Component {
             (this.state.gameIndex == 5 && (
               <Game5Page bounds={this.props.bounds} store={this.store} />
             )))}
-        {this.state.currentPage === "finish" &&
-          ((this.state.gameIndex == 1 && (
-            <Finish1Page bounds={this.props.bounds} store={this.store} />
-          )) || <FinishPage bounds={this.props.bounds} store={this.store} />)}
+        {this.state.currentPage === "finish" && (
+          <Finish1Page bounds={this.props.bounds} store={this.store} />
+        )}
 
         {this.state.currentPage === "scores" && (
           <ScoresPage bounds={this.props.bounds} store={this.store} />

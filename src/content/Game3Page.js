@@ -90,7 +90,7 @@ class Game3Page extends GamePage {
       objects,
       cells,
       cellsWidth:
-        this.state.game3.matrixSize[1] *
+        this.state.game3.matrixSize[0] *
           (this.state.game3.cellBounds.width +
             this.state.game3.cellBounds.gapX) -
         this.state.game3.cellBounds.gapX,
@@ -116,6 +116,7 @@ class Game3Page extends GamePage {
   doGame() {
     let objects = this.state.objects;
     let bonuses = this.state.bonuses;
+    let scoreAdded = this.state.scoreAdded;
 
     let count = objects.filter((v) => v.isFound);
     if (count.length === objects.length) {
@@ -138,7 +139,8 @@ class Game3Page extends GamePage {
       }
       if (bonus.status == "bonus-on") {
         bonus.status = "bonus-show";
-        bonus.life = this.state.game2.bonusLife;
+        scoreAdded = false;
+        bonus.life = this.state.game3.bonusLife;
         continue;
       }
     }
@@ -207,6 +209,7 @@ class Game3Page extends GamePage {
       aniMode,
       currentMode,
       modeLife,
+      scoreAdded,
     });
     return true;
   }
@@ -233,7 +236,8 @@ class Game3Page extends GamePage {
               bonusValue = obj.type.bonus;
               bonuses.push({
                 id: "bonus" + this.counter++,
-                cssX: event.target.offsetLeft,
+                cssX:
+                  event.target.offsetLeft + this.state.game3.cellBounds.width,
                 cssY: event.target.offsetTop,
                 value: bonusValue,
                 status: "bonus-on",
@@ -257,6 +261,7 @@ class Game3Page extends GamePage {
       objects,
       bonuses,
       score,
+      scoreAdded: bonusValue > 0,
     });
   }
 
@@ -274,8 +279,10 @@ class Game3Page extends GamePage {
           id={cell.id}
           key={cell.id}
           style={{
-            left: cell.x + "px",
-            top: cell.y + "px",
+            left: cell.x,
+            top: cell.y,
+            width: cell.width,
+            height: cell.height,
             transitionDuration: this.state.game3.transitionDuration + "ms",
           }}
           onPointerDown={this.cell_clickHandler}
@@ -328,28 +335,34 @@ class Game3Page extends GamePage {
     let bonuses = [];
     for (let i = 0; i < this.state.bonuses.length; i++) {
       let bonus = this.state.bonuses[i];
+      let particles = [];
+      if (bonus.value > 0) {
+        for (let i = 0; i < this.state.particlesCount; i++) {
+          particles.push(<div key={"p" + i} className="particle"></div>);
+        }
+      }
       bonuses.push(
-        <div
-          className="g3-gameBonusBox bonusUp"
-          id={bonus.id}
-          key={bonus.id}
-          style={{
-            left: bonus.cssX,
-            top: bonus.cssY,
-            width: this.state.game3.bonusBounds.width,
-            height: this.state.game3.bonusBounds.height,
-          }}
-        >
+        <div key={bonus.id}>
           <div
-            className={
-              "g3-gameBonus" + (bonus.value > 0 ? "" : " g3-negativeBonus")
-            }
+            className="particle-container"
             style={{
-              backgroundImage: `url(${require("../images/game2/bonus.svg")})`,
-              pointerEvents: "none",
+              left: bonus.cssX,
+              top: bonus.cssY,
             }}
           >
-            {bonus.value > 0 ? "+" + bonus.value : bonus.value}
+            {particles}
+          </div>
+          <div
+            className="bonus-box bonusUp display"
+            id={bonus.id}
+            style={{
+              left: bonus.cssX,
+              top: bonus.cssY,
+            }}
+          >
+            <div className={"bonus g3" + (bonus.value > 0 ? "" : " negative")}>
+              {bonus.value > 0 ? "+" + bonus.value : bonus.value}
+            </div>
           </div>
         </div>
       );
@@ -379,10 +392,10 @@ class Game3Page extends GamePage {
               className="g3-gameSceneBg"
               style={{
                 width: this.props.bounds.mobileSize
-                  ? this.state.mobileBounds.height
+                  ? this.state.mobileBounds.width
                   : this.state.desktopBounds.width,
                 height: this.props.bounds.mobileSize
-                  ? this.state.mobileBounds.width
+                  ? this.state.mobileBounds.height
                   : this.state.desktopBounds.height,
                 left: "50%",
                 top: "50%",
@@ -406,14 +419,56 @@ class Game3Page extends GamePage {
                 </div>
                 <div className="ajuster-right ajusting"></div>
                 <div className="ajuster-left ajusting delay3s"></div>
+                <div className="handle-box">
+                  <div className="handle">
+                    <div className="handle handling"></div>
+                    <div className="handle-item"></div>
+                  </div>
+                  <div className="handle">
+                    <div className="handle handling delay500ms"></div>
+                    <div className="handle-item"></div>
+                  </div>
+                  <div className="handle">
+                    <div className="handle handling delay500ms"></div>
+                    <div className="handle-item"></div>
+                  </div>
+                  <div className="handle">
+                    <div className="handle handling"></div>
+                    <div className="handle-item"></div>
+                  </div>
+                  <div className="handle">
+                    <div className="handle handling delay500ms"></div>
+                    <div className="handle-item"></div>
+                  </div>
+                  <div className="handle">
+                    <div className="handle handling delay500ms"></div>
+                    <div className="handle-item"></div>
+                  </div>
+                </div>
               </>
             )}
             {this.props.bounds.mobileSize && (
               <>
                 <div className="disc-mobile music-box"></div>
+                <div className="jack-box">
+                  <div className="jack button-switching"></div>
+                  <div className="jack button-switching delay500ms"></div>
+                  <div className="jack button-switching delay1s"></div>
+                </div>
+                <div className="music-button-box">
+                  <div className="music-button button-switching"></div>
+                  <div className="music-button button-switching delay1s"></div>
+                </div>
+                <div className="ajuster-rotate">
+                  <div className="ajuster-mobile ajusting"></div>
+                </div>
                 <div className="handle-box">
                   <div className="handle">
                     <div className="handle handling"></div>
+                    <div className="handle-item"></div>
+                  </div>
+                  <div className="handle">
+                    <div className="handle handling delay500ms"></div>
                     <div className="handle-item"></div>
                   </div>
                   <div className="handle">
@@ -428,8 +483,6 @@ class Game3Page extends GamePage {
               style={{
                 width: this.state.cellsWidth,
                 height: this.state.cellsHeight,
-                left: this.props.bounds.mobileSize ? "45%" : "50%",
-                top: this.props.bounds.mobileSize ? "50%" : "45%",
               }}
             >
               {cells}
@@ -438,7 +491,7 @@ class Game3Page extends GamePage {
           </div>
         </div>
         <div className={"countdown display " + (time < 10 ? " warning" : "")}>
-          <CircularProgress value={1 - time / this.state.game2.gameDuration}>
+          <CircularProgress value={1 - time / this.state.game3.gameDuration}>
             {time}
           </CircularProgress>
         </div>
@@ -450,11 +503,11 @@ class Game3Page extends GamePage {
           {this.state.score}
         </div>
         <div
-          className="pageBg pulsing"
+          className="pageOverlay"
           style={{
             visibility: this.state.finished ? "visible" : "hidden",
             opacity: this.state.finished ? 1 : 0,
-            transitionDuration: this.state.game2.stopDuration + "ms",
+            transitionDuration: this.state.game3.stopDuration + "ms",
           }}
         ></div>
       </div>

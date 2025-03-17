@@ -154,7 +154,7 @@ const Game2Settings = {
 
   stepDuration: 50, //ms
   gameDuration: 60, //s
-  stopDuration: 3000, //ms
+  stopDuration: 2000, //ms
 
   mobileScale: 1.2,
 };

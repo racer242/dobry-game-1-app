@@ -250,7 +250,7 @@ class Game1Page extends GamePage {
           {this.state.score}
         </div>
         <div
-          className="pageBg pulsing"
+          className="pageOverlay"
           style={{
             visibility: this.state.finished ? "visible" : "hidden",
             opacity: this.state.finished ? 1 : 0,

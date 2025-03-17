@@ -56,6 +56,7 @@ const resources = {
     require("../images/game3/bg.png"),
     require("../images/game3/ajuster.png"),
     require("../images/game3/bg-mobile.png"),
+    require("../images/game3/bg-game-mobile.png"),
     require("../images/game3/disc-left.png"),
     require("../images/game3/disc-mob.png"),
     require("../images/game3/disc-right.png"),

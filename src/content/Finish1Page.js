@@ -62,16 +62,18 @@ class Finish1Page extends Component {
         <div className="head appear-opacity">
           <h1>Время закончилось!</h1>
         </div>
-        <div className="score-plate appear-top">
-          <h2>
-            Супер!
-            <br />
-            Ты успел набрать:
-          </h2>
-          <div className="score-pie appear-zoom delay500ms">
-            <div className="score-value">{this.state.gameScore} </div>
-            <div className="score-title">
-              {getScoreTitleInGenitive(this.state.gameScore)}
+        <div className="score-box">
+          <div className="score-plate appear-top">
+            <h2>
+              Супер!
+              <br />
+              Ты успел набрать:
+            </h2>
+            <div className="score-pie appear-zoom delay500ms">
+              <div className="score-value">{this.state.gameScore} </div>
+              <div className="score-title">
+                {getScoreTitleInGenitive(this.state.gameScore)}
+              </div>
             </div>
           </div>
         </div>

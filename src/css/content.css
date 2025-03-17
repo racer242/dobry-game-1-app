@@ -22,6 +22,7 @@
   justify-content: space-evenly;
 }
 
+.pageOverlay,
 .pageBg {
   position: absolute;
   background-position: center;
@@ -35,12 +36,21 @@
 .head {
   position: relative;
   width: 100%;
-  height: 160px;
+
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
   gap: 10px;
+}
+
+.mainPage .head {
+  height: 160px;
+}
+
+.mainPage .head h1 {
+  position: absolute;
+  bottom: -10px;
 }
 
 .logo {
@@ -50,11 +60,6 @@
   background-size: contain;
   background-position: center bottom;
   background-repeat: no-repeat;
-}
-
-.head h1 {
-  position: absolute;
-  bottom: -20px;
 }
 
 .plate {
@@ -91,11 +96,23 @@
   min-width: 20px;
 }
 
+.score-box {
+  position: relative;
+  display: flex;
+  width: 400px;
+  height: 240px;
+  flex-direction: column;
+
+  align-content: start;
+  align-items: center;
+  gap: 10px;
+  box-sizing: border-box;
+}
+
 .score-plate {
   position: relative;
   display: flex;
   width: 400px;
-  min-height: 180px;
   flex-direction: column;
 
   align-content: start;
@@ -103,8 +120,6 @@
   gap: 10px;
   padding-top: 16px;
   padding-bottom: 100px;
-  margin-bottom: 50px;
-
   background: #ff49b8;
   border-radius: 20px;
   box-sizing: border-box;
@@ -335,6 +350,7 @@
 }
 
 .g1 .pageBg {
+  background-color: #8822cb;
   background-image: url(../images/game1/bg.jpg);
   background-size: cover;
 }
@@ -344,10 +360,12 @@
 }
 
 .g3 .pageBg {
+  background-color: #2f3138;
   background-image: url(../images/game3/bg.png);
   background-size: cover;
 }
 
+.pageOverlay,
 .common .pageBg {
   background: linear-gradient(180deg, #9d1fe1 0%, #5d279e 100%);
 }
@@ -615,17 +633,12 @@
   background-image: url(../images/game3/disc-mob.png);
 }
 
-.mobile .g3 .handle-box {
+.g3 .handle-box {
   position: absolute;
-  left: 20px;
-  top: 20px;
-  width: 180px;
-  height: 66px;
   display: flex;
   flex-direction: row;
   align-items: start;
   justify-content: start;
-  gap: 20px;
   box-sizing: border-box;
 }
 .g3 .handle {
@@ -656,6 +669,30 @@
   background-image: url(../images/game3/handle-item.svg);
 }
 
+.mobile .g3 .handle-box {
+  left: 20px;
+  top: 20px;
+  gap: 20px;
+  width: 180px;
+  height: 66px;
+}
+
+.g3.gamePage .handle-box {
+  left: 245px;
+  top: 465px;
+  width: 480px;
+  height: 624px;
+  gap: 25px;
+}
+
+.mobile .g3.gamePage .handle-box {
+  left: 133px;
+  top: 28px;
+  width: 210px;
+  height: 624px;
+  gap: 15px;
+}
+
 .g3 .music-button-box {
   position: absolute;
   left: 807px;
@@ -674,6 +711,14 @@
   width: 26px;
   height: 10px;
   background-color: #984ef2;
+}
+
+.mobile .g3 .music-button-box {
+  transform: scale(1.2);
+  position: absolute;
+  left: 402px;
+  top: 697px;
+  gap: 22px;
 }
 
 .g3 .jack-box {
@@ -698,6 +743,13 @@
   border-bottom-left-radius: 7px;
 }
 
+.mobile .jack-box {
+  transform: scale(1.155);
+  left: 62px;
+  top: 686px;
+}
+
+.g3 .ajuster-mobile,
 .g3 .ajuster-right,
 .g3 .ajuster-left {
   position: absolute;
@@ -715,6 +767,18 @@
 .g3 .ajuster-right {
   left: 709px;
 }
+
+.ajuster-rotate {
+  position: absolute;
+  left: 560px;
+  top: 595px;
+  transform: rotate(90deg) scale(1.15);
+}
+.ajuster-mobile {
+  top: 0px;
+  left: 0px;
+}
+
 .g3 .fix {
   position: absolute;
   top: 14px;

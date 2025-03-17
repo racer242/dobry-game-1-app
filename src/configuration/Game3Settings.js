@@ -2,8 +2,8 @@ import { isMobile, isLocal } from "../core/helpers";
 
 const Game3Settings = {
   cellBounds: {
-    width: 88,
-    height: 100,
+    width: 84,
+    height: 94,
     gapX: 10,
     gapY: 10,
   },
@@ -160,8 +160,8 @@ const Game3Settings = {
   detectionSize: 50,
 
   stepDuration: 500, //ms
-  gameDuration: 100, //s
-  stopDuration: 3000, //ms
+  gameDuration: 60, //s
+  stopDuration: 2000, //ms
   animationDuration: 4000, //ms
 };
 

@@ -67,6 +67,7 @@ class Game2Page extends GamePage {
     let objects = this.state.objects;
     let bonuses = this.state.bonuses;
     let obj = this.state.currentObject;
+    let scoreAdded = this.state.scoreAdded;
 
     bonuses = bonuses.filter((v) => v.status != "bonus-destroy");
     for (const bonus of bonuses) {
@@ -78,6 +79,7 @@ class Game2Page extends GamePage {
       }
       if (bonus.status == "bonus-on") {
         bonus.status = "bonus-show";
+        scoreAdded = false;
         bonus.life = this.state.game2.bonusLife;
       }
     }
@@ -136,6 +138,7 @@ class Game2Page extends GamePage {
       objects,
       bonuses,
       currentObject: obj,
+      scoreAdded,
     });
     return true;
   }
@@ -190,6 +193,7 @@ class Game2Page extends GamePage {
           objects,
           bonuses,
           score,
+          scoreAdded: bonusValue > 0,
         });
       }
     }
@@ -498,7 +502,7 @@ class Game2Page extends GamePage {
           {this.state.score}
         </div>
         <div
-          className="pageBg pulsing"
+          className="pageOverlay"
           style={{
             visibility: this.state.finished ? "visible" : "hidden",
             opacity: this.state.finished ? 1 : 0,

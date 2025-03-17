@@ -157,7 +157,7 @@ const Game1Settings = {
   bonusLife: 3,
 
   stepDuration: 1000, //ms
-  gameDuration: 10, //s
+  gameDuration: 60, //s
   stopDuration: 2000, //ms
 };
 
