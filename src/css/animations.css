@@ -565,3 +565,16 @@
     transform: translateY(0px);
   }
 }
+
+.parallax1 {
+  animation: parallax 1000ms ease-in-out infinite;
+  --position: 100px;
+}
+@keyframes parallax {
+  0% {
+    background-position-x: 0%;
+  }
+  100% {
+    background-position-x: var(--position, 100);
+  }
+}

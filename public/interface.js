@@ -1,4 +1,4 @@
-window.gameId = "MATCH";
+window.gameId = "STAGE";
 
 // Функция инициализации приложения
 function onAppReadyHandler(app) {

@@ -28,15 +28,19 @@
 }
 
 .g4-parallax3 {
+  height: 97px;
   background-image: url(../images/game4/plan1.png);
 }
 
 .g4-parallax2 {
+  height: 231px;
+  bottom: 0px;
   background-image: url(../images/game4/plan2.png);
 }
 
 .g4-parallax1 {
   background-image: url(../images/game4/plan3.png);
+  height: 100%;
 }
 
 .g4-columns {

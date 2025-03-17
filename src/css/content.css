@@ -365,6 +365,10 @@
   background-size: cover;
 }
 
+.g4 .pageBg {
+  background-color: #7dceed;
+}
+
 .pageOverlay,
 .common .pageBg {
   background: linear-gradient(180deg, #9d1fe1 0%, #5d279e 100%);
@@ -380,6 +384,10 @@
 
 .g3 .logo {
   background-image: url(../images/game3/logo.png);
+}
+
+.g4 .logo {
+  background-image: url(../images/game4/logo.png);
 }
 
 .mobile .g1 .pageBg {
@@ -786,4 +794,50 @@
   width: 150px;
   height: 70px;
   background: #34363f;
+}
+
+.g4.mainPage .parallax1,
+.g4.mainPage .parallax2,
+.g4.mainPage .parallax3 {
+  position: absolute;
+  display: block;
+  width: 100%;
+  background-repeat: repeat-x;
+  background-size: cover;
+  background-position-x: 0;
+  background-position-y: center;
+  transition-property: background-position-x;
+  transition-timing-function: steps(100);
+}
+
+.g4.mainPage .parallax1 {
+  animation: parallax 5000ms linear infinite reverse;
+  --position: 961px;
+  top: 270px;
+  height: 77px;
+  background-image: url(../images/game4/flags.png);
+}
+
+.mobile .g4.mainPage .parallax1 {
+  top: 700px;
+}
+
+.g4.mainPage .parallax2 {
+  animation: parallax 15s linear infinite reverse;
+  --position: 1111px;
+  height: 146px;
+  bottom: 0px;
+  background-image: url(../images/game4/titleplan1.png);
+}
+
+.g4.mainPage .parallax3 {
+  animation: parallax 100s linear infinite reverse;
+  --position: 1857px;
+  height: 100%;
+  background-image: url(../images/game4/titleplan2.png);
+}
+
+.mobile .g4.mainPage .parallax3 {
+  background-color: #52bae0;
+  background-position-y: 100px;
 }
