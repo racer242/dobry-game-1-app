@@ -196,3 +196,15 @@
 .g4 .countdown .progress-bar__progress {
   stroke: #5d279e;
 }
+
+.g5 .countdown {
+  color: #fff;
+}
+
+.g5 .countdown .progress-bar__background {
+  stroke: #10cfc9;
+}
+
+.g5 .countdown .progress-bar__progress {
+  stroke: #d00007;
+}
