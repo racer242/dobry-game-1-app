@@ -125,19 +125,19 @@ const Game2Settings = {
     {
       x: 380,
       y: 368,
-      width: 69,
-      height: 58,
+      width: 81,
+      height: 71,
       type: {
-        src: require("../images/game2/objects/m2.png"),
+        src: require("../images/game2/drummer.png"),
       },
     },
     {
       x: 531,
       y: 370,
       width: 48,
-      height: 56,
+      height: 60,
       type: {
-        src: require("../images/game2/objects/m1.png"),
+        src: require("../images/game2/guitarist.png"),
       },
     },
   ],

@@ -1,6 +1,7 @@
 import React from "react";
 import "../css/game4.css";
 import GamePage from "./GamePage";
+import CircularProgress from "../components/CircularProgress";
 
 class Game4Page extends GamePage {
   constructor(props) {
@@ -44,6 +45,7 @@ class Game4Page extends GamePage {
 
   doGame() {
     let bonuses = this.state.bonuses;
+    let scoreAdded = this.state.scoreAdded;
 
     bonuses = bonuses.filter((v) => v.status != "bonus-destroy");
     for (const bonus of bonuses) {
@@ -56,7 +58,8 @@ class Game4Page extends GamePage {
       }
       if (bonus.status == "bonus-on") {
         bonus.status = "bonus-show";
-        bonus.life = this.state.game2.bonusLife;
+        scoreAdded = false;
+        bonus.life = this.state.game4.bonusLife;
         continue;
       }
     }
@@ -89,7 +92,9 @@ class Game4Page extends GamePage {
     }
     if (heroY > this.state.desktopBounds.height) {
       heroY =
-        this.state.desktopBounds.height - this.state.game4.heroBounds.height;
+        this.state.desktopBounds.height -
+        this.state.game4.heroBounds.height +
+        this.state.game4.heroBounds.offsetTop;
       heroPower = 0;
     }
 
@@ -102,7 +107,12 @@ class Game4Page extends GamePage {
         Math.max(v.prize.l, hX) <
           Math.min(v.prize.r, hX + this.state.game4.heroBounds.width) &&
         Math.max(v.prize.t, hY) <
-          Math.min(v.prize.b, hY + this.state.game4.heroBounds.height)
+          Math.min(
+            v.prize.b,
+            hY +
+              this.state.game4.heroBounds.height -
+              this.state.game4.heroBounds.offsetTop
+          )
     );
 
     let score = this.state.score;
@@ -110,7 +120,7 @@ class Game4Page extends GamePage {
       let prize = prizeColumns[0].prize;
       prize.isOn = false;
       prize.status = "prize-off";
-
+      scoreAdded = true;
       bonuses.push({
         id: "bonus" + this.counter++,
         cssX: prize.l + position,
@@ -127,17 +137,25 @@ class Game4Page extends GamePage {
           Math.max(v.top.l, hX) <
             Math.min(v.top.r, hX + this.state.game4.heroBounds.width) &&
           Math.max(v.top.t, hY) <
-            Math.min(v.top.b, hY + this.state.game4.heroBounds.height)) ||
+            Math.min(
+              v.top.b,
+              hY +
+                this.state.game4.heroBounds.height -
+                this.state.game4.heroBounds.offsetTop
+            )) ||
         (Math.max(v.bottom.l, hX) <
           Math.min(v.bottom.r, hX + this.state.game4.heroBounds.width) &&
           Math.max(v.bottom.t, hY) <
-            Math.min(v.bottom.b, hY + this.state.game4.heroBounds.height))
+            Math.min(
+              v.bottom.b,
+              hY +
+                this.state.game4.heroBounds.height -
+                this.state.game4.heroBounds.offsetTop
+            ))
     );
 
     let collision = null;
     if (hitColumns.length > 0) {
-      let hitColumn = hitColumns[0];
-      console.log(hitColumn.id);
       this.stopGame();
       this.finishGame();
       collision = [];
@@ -167,6 +185,7 @@ class Game4Page extends GamePage {
       heroPower,
       score,
       collision,
+      scoreAdded,
     });
     return !collision;
   }
@@ -212,6 +231,9 @@ class Game4Page extends GamePage {
       column.prize = {
         isOn: true,
         status: "prize-on",
+        ...this.state.game4.prizeSources[
+          Math.floor(Math.random() * this.state.game4.prizeSources.length)
+        ],
         ...this.state.game4.prizeBounds,
         x: (column.width - this.state.game4.prizeBounds.width) / 2,
         y:
@@ -299,6 +321,7 @@ class Game4Page extends GamePage {
                     top: column.prize.y,
                     width: column.prize.width,
                     height: column.prize.height,
+                    backgroundImage: "url(" + column.prize.src + ")",
                   }}
                 ></div>
               </>
@@ -309,37 +332,15 @@ class Game4Page extends GamePage {
 
     let bonuses = [];
     for (let i = 0; i < this.state.bonuses.length; i++) {
-      let particles = [];
-      for (let i = 0; i < 50; i++) {
-        particles.push(<div key={"p" + i} className="particle"></div>);
-      }
-
       let bonus = this.state.bonuses[i];
+      let particles = [];
+      if (bonus.value > 0) {
+        for (let i = 0; i < this.state.particlesCount; i++) {
+          particles.push(<div key={"p" + i} className="particle"></div>);
+        }
+      }
       bonuses.push(
-        <>
-          <div
-            className="g3-gameBonusBox bonusUp"
-            id={bonus.id}
-            key={bonus.id}
-            style={{
-              left: bonus.cssX,
-              top: bonus.cssY,
-              width: this.state.game4.bonusBounds.width,
-              height: this.state.game4.bonusBounds.height,
-            }}
-          >
-            <div
-              className={
-                "g3-gameBonus" + (bonus.value > 0 ? "" : " g3-negativeBonus")
-              }
-              style={{
-                backgroundImage: `url(${require("../images/game2/bonus.svg")})`,
-                pointerEvents: "none",
-              }}
-            >
-              {bonus.value > 0 ? "+" + bonus.value : bonus.value}
-            </div>
-          </div>
+        <div key={bonus.id}>
           <div
             className="particle-container"
             style={{
@@ -349,15 +350,29 @@ class Game4Page extends GamePage {
           >
             {particles}
           </div>
-        </>
+          <div
+            className="bonus-box bonusUp display"
+            id={bonus.id}
+            style={{
+              left: bonus.cssX,
+              top: bonus.cssY,
+            }}
+          >
+            <div className={"bonus g4" + (bonus.value > 0 ? "" : " negative")}>
+              {bonus.value > 0 ? "+" + bonus.value : bonus.value}
+            </div>
+          </div>
+        </div>
       );
     }
 
     let mobileScale =
       this.state.mobileBounds.height / this.state.desktopBounds.height;
 
+    let time = this.state.game4.gameDuration - this.state.countdown;
+
     return (
-      <div className="gamePage">
+      <div className="g4 gamePage">
         <div
           className="gameScene"
           onPointerDown={this.game_downHandler}
@@ -497,10 +512,26 @@ class Game4Page extends GamePage {
             {bonuses}
           </div>
         </div>
-        <div className="countdown g4-countdown">
-          {this.state.game2.gameDuration - this.state.countdown}
+        <div className={"countdown display " + (time < 10 ? " warning" : "")}>
+          <CircularProgress value={1 - time / this.state.game4.gameDuration}>
+            {time}
+          </CircularProgress>
         </div>
-        <div className="score g4-score">{this.state.score}</div>
+        <div
+          className={
+            "score display" + (this.state.scoreAdded > 0 ? " impulse" : "")
+          }
+        >
+          {this.state.score}
+        </div>
+        <div
+          className="pageOverlay"
+          style={{
+            visibility: this.state.finished ? "visible" : "hidden",
+            opacity: this.state.finished ? 1 : 0,
+            transitionDuration: this.state.game4.stopDuration + "ms",
+          }}
+        ></div>
       </div>
     );
   }

@@ -251,10 +251,11 @@ class Game2Page extends GamePage {
           }}
         >
           <div
-            className={"g2-gameObject swing"}
+            className={"g2-gameObject sprites"}
             style={{
               backgroundImage: `url(${decor.type.src})`,
               pointerEvents: "none",
+              backgroundSize: decor.width * 8 + "px " + decor.height + "px",
             }}
           ></div>
         </div>

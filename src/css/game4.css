@@ -130,7 +130,6 @@
   display: block;
   background-repeat: no-repeat;
   background-size: contain;
-  background-image: url(../images/game4/can.png);
   animation: floating 1000ms ease-in-out infinite;
   transition: all 500ms linear;
 }

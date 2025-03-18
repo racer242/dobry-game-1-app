@@ -20,8 +20,20 @@
   touch-action: none;
 }
 
+.g1 .gameScene {
+  background-color: #8822cb;
+}
+
 .g2 .gameScene {
   background-color: #1d083f;
+}
+
+.g3 .gameScene {
+  background-color: #2f3138;
+}
+
+.g4 .gameScene {
+  background-color: #7dceed;
 }
 
 .countdown {
@@ -157,5 +169,30 @@
 }
 
 .g3 .countdown .progress-bar__progress {
+  stroke: #5d279e;
+}
+
+.g4 .bonus {
+  background-image: url(../images/game4/bonus.svg);
+  color: #fff;
+}
+.g4 .bonus.negative {
+  color: #5d279e;
+}
+
+.g4 .score {
+  background-image: url(../images/game4/bonus-display.svg);
+  color: #ff49b8;
+}
+
+.g4 .countdown {
+  color: #fff;
+}
+
+.g4 .countdown .progress-bar__background {
+  stroke: #91deff;
+}
+
+.g4 .countdown .progress-bar__progress {
   stroke: #5d279e;
 }

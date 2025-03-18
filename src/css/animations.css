@@ -578,3 +578,16 @@
     background-position-x: var(--position, 100);
   }
 }
+
+.sprites {
+  animation: sprites 600ms steps(7) infinite;
+  animation-direction: alternate-reverse;
+}
+@keyframes sprites {
+  0% {
+    background-position: 0px;
+  }
+  100% {
+    background-position: 100%;
+  }
+}
