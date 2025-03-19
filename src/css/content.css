@@ -53,6 +53,16 @@
   bottom: -10px;
 }
 
+.mobile .g5.mainPage .head {
+  height: 190px;
+  justify-content: start;
+}
+
+.mobile .g5.mainPage .head h1 {
+  position: absolute;
+  line-height: 38px;
+}
+
 .logo {
   position: relative;
   width: 155px;
@@ -74,6 +84,10 @@
   width: calc(100% - 280px);
   min-width: 480px;
   box-sizing: border-box;
+}
+
+.g5 .plate {
+  background: #ff1c24;
 }
 
 .help {
@@ -349,6 +363,13 @@
   color: #ff49b8;
 }
 
+.green-plate {
+  display: block;
+  background: #7dc858;
+  border-radius: 6px;
+  padding: 2px 8px !important;
+}
+
 .g1 .pageBg {
   background-color: #8822cb;
   background-image: url(../images/game1/bg.jpg);
@@ -369,9 +390,17 @@
   background-color: #7dceed;
 }
 
+.g5 .pageBg {
+  background-color: #a20006;
+}
+
 .pageOverlay,
 .common .pageBg {
   background: linear-gradient(180deg, #9d1fe1 0%, #5d279e 100%);
+}
+
+.g5 .pageOverlay {
+  background: #a20006;
 }
 
 .g1 .logo {
@@ -388,6 +417,10 @@
 
 .g4 .logo {
   background-image: url(../images/game4/logo.png);
+}
+
+.g5 .logo {
+  background-image: url(../images/game5/logo.png);
 }
 
 .mobile .g1 .pageBg {
@@ -840,4 +873,139 @@
 .mobile .g4.mainPage .parallax3 {
   background-color: #52bae0;
   background-position-y: 100px;
+}
+
+.hint-right,
+.hint-left {
+  position: absolute;
+  bottom: 0px;
+  width: 155px;
+  height: 135px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 16px;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.hint-right p {
+  text-align: right;
+}
+.hint-left p {
+  text-align: left;
+}
+
+.hint-right {
+  align-items: end;
+  right: 24px;
+}
+.hint-left {
+  align-items: start;
+  left: 24px;
+}
+
+.mobile .hint-right,
+.mobile .hint-left {
+  width: 155px;
+  height: 155px;
+}
+
+.hint-logo {
+  width: 36px;
+  height: 36px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(../images/game5/five.svg);
+}
+
+.hint-item {
+  width: 66px;
+  height: 26px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(../images/game5/hint.svg);
+}
+
+.g5.mainPage .bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: 1500px 640px;
+  background-position: center;
+  background-repeat: repeat;
+  background-image: url(../images/game5/bg.png);
+  image-rendering: optimizeSpeed;
+  animation: parallax 60s linear infinite;
+  --position: 1500px;
+  opacity: 0.2;
+}
+
+.g5 .fade-left {
+  position: absolute;
+  left: 0;
+  top: -1%;
+  width: 40%;
+  height: 102%;
+  background: linear-gradient(
+    90deg,
+    rgba(162, 0, 6, 1) 0%,
+    rgba(162, 0, 6, 1) 20%,
+    rgba(162, 0, 6, 0) 100%
+  );
+}
+
+.g5 .fade-right {
+  position: absolute;
+  right: 0%;
+  top: -1%;
+  width: 40%;
+  height: 102%;
+  background: linear-gradient(
+    90deg,
+    rgba(162, 0, 6, 0) 0%,
+    rgba(162, 0, 6, 1) 80%,
+    rgba(162, 0, 6, 1) 100%
+  );
+}
+
+.g5 .success-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}
+
+.success-container .five,
+.success-container .success,
+.success-container .success-decor {
+  position: absolute;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.success-container .success {
+  width: 320px;
+  height: 320px;
+  transform: translate(-50%, -50%);
+  background-image: url(../images/game5/success.svg);
+}
+
+.success-container .five {
+  width: 88px;
+  height: 88px;
+  left: -50px;
+  top: -44px;
+  background-image: url(../images/game5/five.svg);
+}
+
+.success-container .success-decor {
+  width: 320px;
+  height: 320px;
+  left: -160px;
+  top: -160px;
+  opacity: 0;
+  background-image: url(../images/game5/success-decor.svg);
 }

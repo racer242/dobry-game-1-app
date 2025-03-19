@@ -337,8 +337,8 @@ class Game3Page extends GamePage {
       let bonus = this.state.bonuses[i];
       let particles = [];
       if (bonus.value > 0) {
-        for (let i = 0; i < this.state.particlesCount; i++) {
-          particles.push(<div key={"p" + i} className="particle"></div>);
+        for (let j = 0; j < this.state.particlesCount; j++) {
+          particles.push(<div key={"p" + j} className="particle"></div>);
         }
       }
       bonuses.push(

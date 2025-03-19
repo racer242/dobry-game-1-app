@@ -124,7 +124,15 @@ const resources = {
     require("../images/game4/top7.png"),
     require("../images/game4/top8.png"),
   ],
-  5: [require("../images/game5/scene.png")],
+  5: [
+    require("../images/game5/scene1.png"),
+    require("../images/game5/scene2.png"),
+    require("../images/game5/scene3.png"),
+    require("../images/game5/scene4.png"),
+    require("../images/game5/scene5.png"),
+    require("../images/game5/scene6.png"),
+    require("../images/game5/scene7.png"),
+  ],
 };
 
 export default resources;

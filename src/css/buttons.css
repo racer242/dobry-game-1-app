@@ -24,16 +24,20 @@
 .primary-button:hover,
 .primary-button:active {
   background: #ff49b8;
-  color: #fff;
+  color: #fff !important;
 }
 .primary-button:active {
   background: #ff49b8;
-  color: #5d279e;
+  color: #5d279e !important;
 }
 .primary-button:disabled {
-  color: #ddd;
+  color: #ddd !important;
   background: #eee;
   cursor: default;
+}
+
+.g5 .primary-button {
+  color: #f22830;
 }
 
 .secondary-button {

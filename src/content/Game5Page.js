@@ -26,6 +26,8 @@ class Game5Page extends GamePage {
       startRotation: 0,
       zRadius,
       scene,
+      loading: true,
+      success: "none",
     };
 
     this.obj_clickHandler = this.obj_clickHandler.bind(this);
@@ -36,6 +38,25 @@ class Game5Page extends GamePage {
 
   doStart() {
     super.doStart();
+    this.setState({
+      ...this.state,
+      loading: false,
+    });
+  }
+
+  finishGame(success) {
+    if (this.stopTimer != null) clearTimeout(this.stopTimer);
+    this.stopTimer = setTimeout(() => {
+      this.registerFinish();
+      this.setState({
+        ...this.state,
+        success: success ? "win" : "fail",
+      });
+      if (this.stopTimer != null) clearTimeout(this.stopTimer);
+      this.stopTimer = setTimeout(() => {
+        console.log("!!!!!!", success);
+      }, this.state.stopDuration / 2);
+    }, this.state.stopDuration / 10);
   }
 
   doGame() {
@@ -83,7 +104,7 @@ class Game5Page extends GamePage {
 
     if (found.length > 0) {
       this.stopGame();
-      this.finishGame();
+      this.finishGame(true);
     }
   }
 
@@ -169,6 +190,13 @@ class Game5Page extends GamePage {
 
     let time = this.state.game5.gameDuration - this.state.countdown;
 
+    let particles = [];
+    if (this.state.success === "win") {
+      for (let j = 0; j < this.state.particlesCount * 10; j++) {
+        particles.push(<div key={"p" + j} className="particle infinite"></div>);
+      }
+    }
+
     return (
       <div className="g5 gamePage">
         <div
@@ -195,10 +223,24 @@ class Game5Page extends GamePage {
             <div
               className="g5-frame"
               style={{
-                transform:
-                  "rotateX(0deg) rotateY(0deg) rotateZ(0deg) translate3d(" +
-                  this.state.desktopBounds.width / 2 +
-                  "px,50px, 0px)",
+                transform: this.props.bounds.mobileSize
+                  ? "rotateX(0deg) rotateY(0deg) rotateZ(0deg) translate3d(" +
+                    this.state.mobileBounds.width / 2 +
+                    "px," +
+                    (this.state.mobileBounds.height -
+                      this.state.game5.sceneHeight *
+                        this.state.game5.mobileScale) *
+                      0.4 +
+                    "px, 0px) scale(" +
+                    this.state.game5.mobileScale +
+                    ")"
+                  : "rotateX(0deg) rotateY(0deg) rotateZ(0deg) translate3d(" +
+                    this.state.desktopBounds.width / 2 +
+                    "px," +
+                    (this.state.desktopBounds.height -
+                      this.state.game5.sceneHeight) /
+                      2 +
+                    "px, 0px)",
               }}
             >
               <div
@@ -209,9 +251,7 @@ class Game5Page extends GamePage {
                   left: 0,
                   top: 0,
                   transform:
-                    "scale(1) rotateY(" +
-                    this.state.rotation +
-                    "deg) translateX(-33px)",
+                    "rotateY(" + this.state.rotation + "deg) translateX(-33px)",
                   transition: this.state.idle
                     ? "transform " + this.state.game5.stepDuration + "ms linear"
                     : "transform " +
@@ -226,11 +266,63 @@ class Game5Page extends GamePage {
             <div className="g5-fade-right"></div>
           </div>
         </div>
-        <div className={"countdown display " + (time < 10 ? " warning" : "")}>
+        <div
+          className={"countdown display " + (time < 10 ? " warning" : "")}
+          style={{
+            animation: this.state.finished ? "none" : "",
+            opacity: this.state.finished ? 0 : 1,
+            transitionDuration: this.state.game4.stopDuration + "ms",
+          }}
+        >
           <CircularProgress value={1 - time / this.state.game5.gameDuration}>
             {time}
           </CircularProgress>
         </div>
+        <div
+          className="hint-right"
+          style={{
+            opacity: this.state.finished ? 0 : 1,
+            transitionDuration: this.state.game4.stopDuration + "ms",
+          }}
+        >
+          <div className="hint-item"></div>
+          <p>Вращай карту левой кнопкой мышки</p>
+        </div>
+        <div
+          className="hint-left"
+          style={{
+            opacity: this.state.finished ? 0 : 1,
+            transitionDuration: this.state.game4.stopDuration + "ms",
+          }}
+        >
+          <div className="hint-logo"></div>
+          <p>Найди объект с&nbsp;логотипом Пятерочки</p>
+        </div>
+        <div
+          className="pageOverlay"
+          style={{
+            visibility:
+              this.state.finished || this.state.loading ? "visible" : "hidden",
+            opacity:
+              this.state.finished || this.state.loading
+                ? this.state.finished
+                  ? 0.8
+                  : 1
+                : 0,
+            transitionDuration: this.state.game4.stopDuration + "ms",
+          }}
+        ></div>
+        {this.state.success === "win" && (
+          <>
+            <div className="success-container">{particles}</div>
+            <div className="success-container show-zoom">
+              <div className="success"></div>
+              <div className="success-decor spark"></div>
+              <div className="success-decor spark delay3s"></div>
+              <div className="five show-zoom delay300ms"></div>
+            </div>
+          </>
+        )}
       </div>
     );
   }
