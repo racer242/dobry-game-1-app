@@ -1,5 +1,7 @@
 .scoresPage,
 .finishPage,
+.failPage,
+.prizePage,
 .mainPage {
   position: relative;
   left: 0;
@@ -63,6 +65,20 @@
   line-height: 38px;
 }
 
+.g5.gamePage .head {
+  position: absolute;
+  top: 80px;
+}
+
+.mobile .g5.gamePage .head {
+  position: absolute;
+  top: 200px;
+}
+
+.g5.prizePage .head {
+  height: 60px;
+}
+
 .logo {
   position: relative;
   width: 155px;
@@ -88,6 +104,19 @@
 
 .g5 .plate {
   background: #ff1c24;
+}
+
+.g5.failPage .plate {
+  padding-top: 100px;
+  padding: 20px 60px;
+  padding-top: 70px;
+  width: 580px;
+  background: #ff49b8;
+}
+
+.mobile .g5.failPage .plate {
+  min-width: 360px;
+  width: 360px;
 }
 
 .help {
@@ -421,6 +450,14 @@
 
 .g5 .logo {
   background-image: url(../images/game5/logo.png);
+}
+
+.g5.failPage .logo {
+  position: absolute;
+  top: -56px;
+  width: 124px;
+  height: 124px;
+  background-image: url(../images/game5/fail.svg);
 }
 
 .mobile .g1 .pageBg {
@@ -929,6 +966,8 @@
   background-image: url(../images/game5/hint.svg);
 }
 
+.g5.prizePage .bg,
+.g5.failPage .bg,
 .g5.mainPage .bg {
   position: absolute;
   width: 100%;
@@ -1008,4 +1047,58 @@
   top: -160px;
   opacity: 0;
   background-image: url(../images/game5/success-decor.svg);
+}
+
+.g5.prizePage {
+  top: 0px;
+  justify-content: start;
+}
+
+.prize-page-content {
+  position: relative;
+
+  padding: 40px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  box-sizing: border-box;
+  color: #fff;
+  gap: 10px;
+}
+
+.g5.prizePage .prize-container {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  background: #ff49b8;
+  border-radius: 110px;
+}
+
+.g5.prizePage .prize {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: opacity 300ms ease-out;
+}
+
+.prize-name {
+  position: relative;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.g5.mainPage .button-group,
+.g5.prizePage .button-group {
+  height: 80px;
 }

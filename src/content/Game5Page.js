@@ -2,6 +2,7 @@ import React from "react";
 import "../css/game5.css";
 import GamePage from "./GamePage";
 import CircularProgress from "../components/CircularProgress";
+import { setStoreData } from "../actions/appActions";
 
 class Game5Page extends GamePage {
   constructor(props) {
@@ -18,7 +19,9 @@ class Game5Page extends GamePage {
       ...this.state,
       gameDuration: this.state.game5.gameDuration,
       stopDuration: this.state.game5.stopDuration,
+      startDuration: this.state.game5.startDuration,
       stepDuration: this.state.game5.stepDuration,
+      winDuration: this.state.game5.winDuration,
       idle: true,
       rotation: 0,
       speed: this.state.game5.idleSpeed,
@@ -44,19 +47,54 @@ class Game5Page extends GamePage {
     });
   }
 
+  registerStart() {}
+
+  registerFinish(success) {
+    let guid = this.state.gameCredentials?.guid;
+    this.store.dispatch(
+      setStoreData({
+        requestFinish: {
+          request: this.state.gameData.request,
+          data: {
+            mode: "finish",
+            guid,
+          },
+        },
+      })
+    );
+  }
+
   finishGame(success) {
     if (this.stopTimer != null) clearTimeout(this.stopTimer);
     this.stopTimer = setTimeout(() => {
-      this.registerFinish();
       this.setState({
         ...this.state,
         success: success ? "win" : "fail",
       });
-      if (this.stopTimer != null) clearTimeout(this.stopTimer);
       this.stopTimer = setTimeout(() => {
-        console.log("!!!!!!", success);
-      }, this.state.stopDuration / 2);
-    }, this.state.stopDuration / 10);
+        this.registerFinish(success);
+
+        if (this.stopTimer != null) clearTimeout(this.stopTimer);
+        this.stopTimer = setTimeout(() => {
+          if (!success) {
+            this.store.dispatch(
+              setStoreData({
+                currentPage: "fail",
+              })
+            );
+          } else {
+            if (this.stopTimer != null) clearTimeout(this.stopTimer);
+            this.stopTimer = setTimeout(() => {
+              this.store.dispatch(
+                setStoreData({
+                  currentPage: "prize",
+                })
+              );
+            }, this.state.winDuration);
+          }
+        }, this.state.stopDuration);
+      }, this.state.stopDuration);
+    }, this.state.stopDuration);
   }
 
   doGame() {
@@ -271,7 +309,7 @@ class Game5Page extends GamePage {
           style={{
             animation: this.state.finished ? "none" : "",
             opacity: this.state.finished ? 0 : 1,
-            transitionDuration: this.state.game4.stopDuration + "ms",
+            transitionDuration: this.state.stopDuration + "ms",
           }}
         >
           <CircularProgress value={1 - time / this.state.game5.gameDuration}>
@@ -282,7 +320,7 @@ class Game5Page extends GamePage {
           className="hint-right"
           style={{
             opacity: this.state.finished ? 0 : 1,
-            transitionDuration: this.state.game4.stopDuration + "ms",
+            transitionDuration: this.state.stopDuration + "ms",
           }}
         >
           <div className="hint-item"></div>
@@ -292,7 +330,7 @@ class Game5Page extends GamePage {
           className="hint-left"
           style={{
             opacity: this.state.finished ? 0 : 1,
-            transitionDuration: this.state.game4.stopDuration + "ms",
+            transitionDuration: this.state.stopDuration + "ms",
           }}
         >
           <div className="hint-logo"></div>
@@ -301,20 +339,33 @@ class Game5Page extends GamePage {
         <div
           className="pageOverlay"
           style={{
-            visibility:
-              this.state.finished || this.state.loading ? "visible" : "hidden",
-            opacity:
-              this.state.finished || this.state.loading
-                ? this.state.finished
+            visibility: this.state.finished ? "visible" : "hidden",
+            opacity: this.state.finished
+              ? this.state.finished
+                ? this.state.success === "win"
                   ? 0.8
-                  : 1
-                : 0,
-            transitionDuration: this.state.game4.stopDuration + "ms",
+                  : this.state.success === "fail"
+                  ? 1
+                  : 0
+                : 1
+              : 0,
+            transitionDuration: this.state.stopDuration + "ms",
+          }}
+        ></div>
+        <div
+          className="pageOverlay"
+          style={{
+            visibility: this.state.loading ? "visible" : "hidden",
+            opacity: this.state.loading ? 1 : 0,
+            transitionDuration: this.state.startDuration + "ms",
           }}
         ></div>
         {this.state.success === "win" && (
           <>
             <div className="success-container">{particles}</div>
+            <div className="head show-zoom">
+              <h1>Ура, получилось!</h1>
+            </div>
             <div className="success-container show-zoom">
               <div className="success"></div>
               <div className="success-decor spark"></div>

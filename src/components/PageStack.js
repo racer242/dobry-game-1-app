@@ -13,6 +13,8 @@ import Main2Page from "../content/Main2Page";
 import Main3Page from "../content/Main3Page";
 import Main4Page from "../content/Main4Page";
 import Main5Page from "../content/Main5Page";
+import Fail5Page from "../content/Fail5Page";
+import Prize5Page from "../content/Prize5Page";
 
 class PageStack extends Component {
   constructor(props) {
@@ -89,6 +91,13 @@ class PageStack extends Component {
             )))}
         {this.state.currentPage === "finish" && (
           <Finish1Page bounds={this.props.bounds} store={this.store} />
+        )}
+
+        {this.state.currentPage === "fail" && (
+          <Fail5Page bounds={this.props.bounds} store={this.store} />
+        )}
+        {this.state.currentPage === "prize" && (
+          <Prize5Page bounds={this.props.bounds} store={this.store} />
         )}
 
         {this.state.currentPage === "scores" && (

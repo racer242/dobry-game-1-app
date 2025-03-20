@@ -43,9 +43,14 @@ const Game5Settings = {
   inertia: 3,
 
   stepDuration: 200, //ms
-  gameDuration: 60, //s
-  stopDuration: 6000, //ms
-  dragDuration: 0,
+  gameDuration: 6, //s
+  stopDuration: 1000, //ms
+  startDuration: 3000, //ms
+  winDuration: 2000, //ms
+  dragDuration: 0, //ms
+  selectDuration: 500, //ms
+
+  selectPrizeCount: 5,
 };
 
 export default Game5Settings;

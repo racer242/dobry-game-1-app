@@ -11,6 +11,7 @@
 
   color: #5d279e;
   background: #ffffff;
+  border: #fff 3px solid;
   border-radius: 12px;
 
   flex: none;
@@ -24,14 +25,17 @@
 .primary-button:hover,
 .primary-button:active {
   background: #ff49b8;
+  border: #ff49b8 3px solid;
   color: #fff !important;
 }
 .primary-button:active {
   background: #ff49b8;
+  border: #ff49b8 3px solid;
   color: #5d279e !important;
 }
 .primary-button:disabled {
   color: #ddd !important;
+  border: #eee 3px solid;
   background: #eee;
   cursor: default;
 }
@@ -61,61 +65,7 @@
   border: #eee 3px solid;
 }
 
-.link-button {
-  position: relative;
-  display: block;
-  padding: 10px;
-  cursor: pointer;
-  color: #fff;
-  font-size: 20px;
-  text-decoration: none;
-
-  font-family: "Raleway";
-  font-style: normal;
-  font-weight: 500;
-  leading-trim: both;
-  text-edge: cap;
-  text-align: center;
-  line-height: 100%;
-
-  color: #f5f1e7;
-}
-
-.link-button:hover,
-.link-button:active {
-  color: #fff;
-  text-decoration: underline;
-}
-.link-button:active {
-  text-decoration: underline;
-  color: #999;
-}
-
-.social-button {
-  padding: 10px;
-  cursor: pointer;
-}
-
-.social-button:hover,
-.social-button:active {
-  opacity: 0.7;
-}
-
-.image-button {
-  cursor: pointer;
-}
-
-.image-button:hover,
-.image-button:active {
-  opacity: 0.7;
-}
-
-.close-button {
-  padding: 10px;
-  cursor: pointer;
-}
-
-.close-button:hover,
-.close-button:active {
-  opacity: 0.7;
+.primary-button.small,
+.secondary-button.small {
+  padding: 18px 25px !important;
 }

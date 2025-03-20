@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { setStoreData } from "../actions/appActions";
+import { getAttemptsTitleInGenitive } from "../utils/stringTools";
 
 class Main5Page extends Component {
   constructor(props) {
@@ -14,6 +15,44 @@ class Main5Page extends Component {
     this.startButton_clickHandler = this.startButton_clickHandler.bind(this);
   }
 
+  componentDidMount() {
+    this.unsubscribe = this.store.subscribe(() => {
+      this.onStoreChange();
+    });
+    this.mounted = true;
+    this.registerStart();
+  }
+
+  componentWillUnmount() {
+    if (this.unsubscribe) {
+      this.unsubscribe();
+    }
+    this.mounted = false;
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {}
+
+  onStoreChange() {
+    if (this.mounted) {
+      let state = this.store.getState();
+      this.setState({
+        ...this.state,
+        ...state,
+      });
+    }
+  }
+
+  registerStart() {
+    this.store.dispatch(
+      setStoreData({
+        requestStart: {
+          request: this.state.gameData.request,
+          data: { mode: "start", tentCode: this.state.gameData.id },
+        },
+      })
+    );
+  }
+
   startButton_clickHandler(event) {
     this.store.dispatch(
       setStoreData({
@@ -25,6 +64,8 @@ class Main5Page extends Component {
   render() {
     let children = [];
     children.push(this.props.children);
+
+    let attemptsLeft = this.state.gameCredentials?.attemptsLeft ?? 0;
 
     return (
       <div className="g5 mainPage">
@@ -42,13 +83,21 @@ class Main5Page extends Component {
             Найди за 30 секунд брендированный объект. Крути изображение, ищи и
             нажимай.
           </p>
-          <p className="green-plate">У тебя 2 попытки</p>
+          {this.state.gameCredentials && (
+            <p className="green-plate">
+              У тебя {attemptsLeft} {getAttemptsTitleInGenitive(attemptsLeft)}
+            </p>
+          )}
         </div>
-        <div
-          className="primary-button button appear-bottom delay1s"
-          onClick={this.startButton_clickHandler}
-        >
-          Искать
+        <div className="button-group">
+          {this.state.gameCredentials && (
+            <div
+              className="primary-button button appear-bottom delay1s"
+              onClick={this.startButton_clickHandler}
+            >
+              Искать
+            </div>
+          )}
         </div>
       </div>
     );

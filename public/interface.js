@@ -1,5 +1,9 @@
 window.gameId = "FIVE";
 
+window.closeGamePopup = function () {
+  console.log("closeGamePopup");
+};
+
 // Функция инициализации приложения
 function onAppReadyHandler(app) {
   // Функция обработки ресайза страницы.
@@ -33,13 +37,14 @@ function onAppReadyHandler(app) {
       1: { id: "VIBE", request: { url: "/api/TentGame.json", method: "GET" } },
       2: {
         id: "SPOTLIGHTS",
-        request: { url: "/api/SpotLights.json", method: "GET" },
+        request: { url: "/api/TentGame.json", method: "GET" },
       },
-      3: { id: "MATCH", request: { url: "/api/Match.json", method: "GET" } },
-      4: { id: "STAGE", request: { url: "/api/Stage.json", method: "GET" } },
-      5: { id: "FIVE", request: { url: "/api/Stage.json", method: "GET" } },
+      3: { id: "MATCH", request: { url: "/api/TentGame.json", method: "GET" } },
+      4: { id: "STAGE", request: { url: "/api/TentGame.json", method: "GET" } },
+      5: { id: "FIVE", request: { url: "/api/FiveGame.json", method: "GET" } },
       index: { VIBE: 1, SPOTLIGHTS: 2, MATCH: 3, STAGE: 4, FIVE: 5 },
     },
+    closeHandler: window.closeGamePopup,
   };
   data.gameIndex = data.games.index[window.gameId];
   data.gameData = data.games[data.gameIndex];
