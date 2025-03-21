@@ -4,6 +4,10 @@ window.closeGamePopup = function () {
   console.log("closeGamePopup");
 };
 
+window.registerBill = function () {
+  console.log("registerBill");
+};
+
 // Функция инициализации приложения
 function onAppReadyHandler(app) {
   // Функция обработки ресайза страницы.
@@ -45,6 +49,7 @@ function onAppReadyHandler(app) {
       index: { VIBE: 1, SPOTLIGHTS: 2, MATCH: 3, STAGE: 4, FIVE: 5 },
     },
     closeHandler: window.closeGamePopup,
+    registerHandler: window.registerBill,
   };
   data.gameIndex = data.games.index[window.gameId];
   data.gameData = data.games[data.gameIndex];

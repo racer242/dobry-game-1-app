@@ -13,6 +13,8 @@ class Main5Page extends Component {
     } else this.state = {};
 
     this.startButton_clickHandler = this.startButton_clickHandler.bind(this);
+    this.registerButton_clickHandler =
+      this.registerButton_clickHandler.bind(this);
   }
 
   componentDidMount() {
@@ -61,6 +63,10 @@ class Main5Page extends Component {
     );
   }
 
+  registerButton_clickHandler(event) {
+    this.state.registerHandler();
+  }
+
   render() {
     let children = [];
     children.push(this.props.children);
@@ -83,19 +89,33 @@ class Main5Page extends Component {
             Найди за 30 секунд брендированный объект. Крути изображение, ищи и
             нажимай.
           </p>
-          {this.state.gameCredentials && (
+          {this.state.gameCredentials && attemptsLeft > 0 && (
             <p className="green-plate">
               У тебя {attemptsLeft} {getAttemptsTitleInGenitive(attemptsLeft)}
             </p>
           )}
+          {this.state.gameCredentials && attemptsLeft <= 0 && (
+            <p className="yellow-plate">
+              Чтобы играть, зарегистрируй чек с акционной продукцией из
+              Пятёрочки
+            </p>
+          )}
         </div>
         <div className="button-group">
-          {this.state.gameCredentials && (
+          {this.state.gameCredentials && attemptsLeft > 0 && (
             <div
               className="primary-button button appear-bottom delay1s"
               onClick={this.startButton_clickHandler}
             >
               Искать
+            </div>
+          )}
+          {this.state.gameCredentials && attemptsLeft <= 0 && (
+            <div
+              className="primary-button  inverted button appear-bottom delay1s"
+              onClick={this.registerButton_clickHandler}
+            >
+              Зарегистрировать чек
             </div>
           )}
         </div>

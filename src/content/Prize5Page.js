@@ -127,6 +127,14 @@ class Prize5Page extends Component {
     let prizeName = this.state.gameCredentials?.prize?.name;
     let prizeSources = this.state.gameCredentials?.prize?.thumbs;
     let prizeSourceLength = prizeSources?.length ?? 0;
+
+    let particles = [];
+    if (this.state.stage === "show") {
+      for (let j = 0; j < this.state.particlesCount * 10; j++) {
+        particles.push(<div key={"p" + j} className="particle infinite"></div>);
+      }
+    }
+
     let prizes = [];
     for (let i = 0; i < prizeSourceLength; i++) {
       let prizeSrc = prizeSources[i];
@@ -163,10 +171,15 @@ class Prize5Page extends Component {
           )}
 
           {(this.state.stage === "select" || this.state.stage === "show") && (
-            <div className="prize-container appear-opacity">{prizes}</div>
+            <div className="prize-container appear-opacity">
+              {this.state.stage === "show" && (
+                <div className="prize-particles">{particles}</div>
+              )}
+              {prizes}
+            </div>
           )}
           {this.state.stage === "show" && (
-            <div>
+            <>
               <div
                 className="prize-name show-zoom"
                 style={{ opacity: this.state.stage === "show" ? 1 : 0 }}
@@ -178,7 +191,7 @@ class Prize5Page extends Component {
                 style={{ opacity: this.state.stage === "show" ? 1 : 0 }}
               >
                 <div
-                  className="secondary-button small button appear-bottom delay1s"
+                  className="secondary-button small button appear-bottom delay500ms"
                   onClick={this.closeButton_clickHandler}
                 >
                   Закрыть
@@ -192,7 +205,7 @@ class Prize5Page extends Component {
                   </div>
                 )}
               </div>
-            </div>
+            </>
           )}
         </div>
       </div>

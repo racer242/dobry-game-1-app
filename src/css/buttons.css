@@ -69,3 +69,21 @@
 .secondary-button.small {
   padding: 18px 25px !important;
 }
+
+.primary-button.inverted {
+  background: #ff49b8;
+  border: #ff49b8 3px solid;
+  color: #fff !important;
+}
+
+.primary-button:hover,
+.primary-button:active {
+  color: #ff49b8 !important;
+  background: #ffffff;
+  border: #fff 3px solid;
+}
+.primary-button:active {
+  background: #ffffff;
+  border: #fff 3px solid;
+  color: #5d279e !important;
+}

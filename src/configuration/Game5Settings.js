@@ -44,11 +44,11 @@ const Game5Settings = {
 
   stepDuration: 200, //ms
   gameDuration: 6, //s
-  stopDuration: 1000, //ms
+  stopDuration: 500, //ms
   startDuration: 3000, //ms
   winDuration: 2000, //ms
   dragDuration: 0, //ms
-  selectDuration: 500, //ms
+  selectDuration: 200, //ms
 
   selectPrizeCount: 5,
 };
