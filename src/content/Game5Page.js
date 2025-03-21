@@ -41,10 +41,13 @@ class Game5Page extends GamePage {
 
   doStart() {
     super.doStart();
-    this.setState({
-      ...this.state,
-      loading: false,
-    });
+
+    this.stopTimer = setTimeout(() => {
+      this.setState({
+        ...this.state,
+        loading: false,
+      });
+    }, this.state.startDuration / 10);
   }
 
   registerStart() {}

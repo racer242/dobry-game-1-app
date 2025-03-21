@@ -33,6 +33,7 @@
   width: 100%;
   height: 100%;
   pointer-events: none;
+  /* transition: opacity 1s ease-out, visibility 1s ease-out; */
 }
 
 .head {
@@ -1029,7 +1030,8 @@
 
 .success-container .five,
 .success-container .success,
-.success-container .success-decor {
+.success-container .success-decor,
+.success-container .prize-decor {
   position: absolute;
   background-size: contain;
   background-position: center;
@@ -1058,6 +1060,15 @@
   top: -160px;
   opacity: 0;
   background-image: url(../images/game5/success-decor.svg);
+}
+
+.success-container .prize-decor {
+  width: 360px;
+  height: 360px;
+  left: -180px;
+  top: -180px;
+  opacity: 0;
+  background-image: url(../images/game5/prize-decor.svg);
 }
 
 .g5.prizePage {

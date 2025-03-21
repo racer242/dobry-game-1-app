@@ -141,7 +141,7 @@ class Prize5Page extends Component {
       prizes.push(
         <div
           key={"prize" + i}
-          className="prize"
+          className={"prize" + (this.state.stage === "show" ? " floating" : "")}
           style={{
             backgroundImage: "url(" + prizeSrc + ")",
             opacity: i === this.state.prizeIndex ? 1 : 0,
@@ -173,7 +173,13 @@ class Prize5Page extends Component {
           {(this.state.stage === "select" || this.state.stage === "show") && (
             <div className="prize-container appear-opacity">
               {this.state.stage === "show" && (
-                <div className="prize-particles">{particles}</div>
+                <>
+                  <div className="prize-particles">{particles}</div>
+                  <div className="success-container spin duration5s">
+                    <div className="prize-decor fireworks"></div>
+                    <div className="prize-decor fireworks delay800ms"></div>
+                  </div>
+                </>
               )}
               {prizes}
             </div>

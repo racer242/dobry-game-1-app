@@ -255,7 +255,7 @@
 
 .appear-opacity {
   animation: appear-opacity 1000ms ease-out;
-  animation-fill-mode: both;
+  animation-fill-mode: backwards;
 }
 @keyframes appear-opacity {
   0% {
@@ -268,7 +268,7 @@
 
 .disappear-opacity {
   animation: disappear-opacity 1000ms ease-in;
-  animation-fill-mode: both;
+  animation-fill-mode: forwards;
 }
 @keyframes disappear-opacity {
   0% {
@@ -301,7 +301,9 @@
 
 .appear-top {
   animation: appear-top 1000ms cubic-bezier(0.075, 0.82, 0.165, 1);
-  animation-fill-mode: both;
+  animation-fill-mode: forwards;
+  opacity: 0;
+  will-change: contents;
 }
 @keyframes appear-top {
   0% {
@@ -336,12 +338,18 @@
 .duraton200ms {
   animation-duration: 200ms !important;
 }
+.duration5s {
+  animation-duration: 15s !important;
+}
 
 .delay300ms {
   animation-delay: 300ms !important;
 }
 .delay500ms {
   animation-delay: 500ms !important;
+}
+.delay800ms {
+  animation-delay: 800ms !important;
 }
 .delay1s {
   animation-delay: 1s !important;
@@ -645,6 +653,31 @@
     opacity: 1;
   }
   80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.fireworks {
+  animation: fireworks-scale 1500ms ease-out infinite,
+    fireworks-opacity 1500ms linear infinite;
+}
+@keyframes fireworks-scale {
+  0% {
+    transform: scale(0.1) rotate(0);
+  }
+  100% {
+    transform: scale(1) rotate(-60deg);
+  }
+}
+
+@keyframes fireworks-opacity {
+  0% {
+    opacity: 1;
+  }
+  60% {
     opacity: 1;
   }
   100% {
