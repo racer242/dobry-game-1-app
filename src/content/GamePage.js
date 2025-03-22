@@ -61,7 +61,7 @@ class GamePage extends Component {
     this.store.dispatch(
       setStoreData({
         requestStart: {
-          request: this.state.gameData.request,
+          request: this.state.gameData.request1,
           data: { mode: "start", tentCode: this.state.gameData.id },
         },
       })
@@ -76,7 +76,7 @@ class GamePage extends Component {
     this.store.dispatch(
       setStoreData({
         requestFinish: {
-          request: this.state.gameData.request,
+          request: this.state.gameData.request2,
           data: {
             mode: "finish",
             hash,

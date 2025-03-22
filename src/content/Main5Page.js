@@ -48,8 +48,8 @@ class Main5Page extends Component {
     this.store.dispatch(
       setStoreData({
         requestStart: {
-          request: this.state.gameData.request,
-          data: { mode: "start", tentCode: this.state.gameData.id },
+          request: this.state.gameData.request1,
+          data: { play: false },
         },
       })
     );
@@ -70,7 +70,6 @@ class Main5Page extends Component {
   render() {
     let children = [];
     children.push(this.props.children);
-
     let attemptsLeft = this.state.gameCredentials?.attemptsLeft ?? 0;
 
     return (

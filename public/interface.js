@@ -38,14 +38,31 @@ function onAppReadyHandler(app) {
   // Настройки приложения
   var data = {
     games: {
-      1: { id: "VIBE", request: { url: "/api/TentGame.json", method: "GET" } },
+      1: {
+        id: "VIBE",
+        request1: { url: "/api/TentGame1.json", method: "GET" },
+        request2: { url: "/api/TentGame2.json", method: "GET" },
+      },
       2: {
         id: "SPOTLIGHTS",
-        request: { url: "/api/TentGame.json", method: "GET" },
+        request1: { url: "/api/TentGame1.json", method: "GET" },
+        request2: { url: "/api/TentGame2.json", method: "GET" },
       },
-      3: { id: "MATCH", request: { url: "/api/TentGame.json", method: "GET" } },
-      4: { id: "STAGE", request: { url: "/api/TentGame.json", method: "GET" } },
-      5: { id: "FIVE", request: { url: "/api/FiveGame.json", method: "GET" } },
+      3: {
+        id: "MATCH",
+        request1: { url: "/api/TentGame1.json", method: "GET" },
+        request2: { url: "/api/TentGame2.json", method: "GET" },
+      },
+      4: {
+        id: "STAGE",
+        request1: { url: "/api/TentGame1.json", method: "GET" },
+        request2: { url: "/api/TentGame2.json", method: "GET" },
+      },
+      5: {
+        id: "FIVE",
+        request1: { url: "/api/FiveGame1.json", method: "GET" },
+        request2: { url: "/api/FiveGame2.json", method: "GET" },
+      },
       index: { VIBE: 1, SPOTLIGHTS: 2, MATCH: 3, STAGE: 4, FIVE: 5 },
     },
     closeHandler: window.closeGamePopup,

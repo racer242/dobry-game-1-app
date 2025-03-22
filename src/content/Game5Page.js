@@ -3,6 +3,7 @@ import "../css/game5.css";
 import GamePage from "./GamePage";
 import CircularProgress from "../components/CircularProgress";
 import { setStoreData } from "../actions/appActions";
+import md5 from "md5";
 
 class Game5Page extends GamePage {
   constructor(props) {
@@ -54,13 +55,19 @@ class Game5Page extends GamePage {
 
   registerFinish(success) {
     let guid = this.state.gameCredentials?.guid;
+    let userCode = this.state.gameCredentials?.userCode;
+    let won = success ? 1 : 0;
+    let hash = md5(userCode + guid + guid + guid + won);
+
     this.store.dispatch(
       setStoreData({
         requestFinish: {
-          request: this.state.gameData.request,
+          request: this.state.gameData.request2,
           data: {
-            mode: "finish",
+            play: true,
+            hash,
             guid,
+            won,
           },
         },
       })

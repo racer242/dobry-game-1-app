@@ -71,9 +71,9 @@ class Prize5Page extends Component {
   }
 
   changePrize() {
-    let prizeSources = this.state.gameCredentials?.prize?.thumbs;
+    let prizeName = this.state.gameScores?.prize?.name ?? "noprize";
+    let prizeSources = this.state.gameScores?.prizeList;
     let prizeSourceLength = prizeSources?.length ?? 0;
-    let selectedIndex = this.state.gameCredentials?.prize?.index ?? 0;
     let stage = this.state.stage;
 
     let prizeIndex = this.state.prizeIndex + 1;
@@ -84,9 +84,10 @@ class Prize5Page extends Component {
         selectPrizeStep++;
       }
     }
+    let currentName = prizeSources[prizeIndex]?.title;
     if (
       selectPrizeStep >= this.state.game5.selectPrizeCount &&
-      prizeIndex === selectedIndex
+      (currentName === prizeName || prizeName === "noprize")
     ) {
       stage = "show";
     }
@@ -122,10 +123,10 @@ class Prize5Page extends Component {
     let children = [];
     children.push(this.props.children);
 
-    let attemptsLeft = this.state.gameCredentials?.attemptsLeft ?? 0;
+    let attemptsLeft = this.state.gameScores?.attemptsLeft ?? 0;
 
-    let prizeName = this.state.gameCredentials?.prize?.name;
-    let prizeSources = this.state.gameCredentials?.prize?.thumbs;
+    let prizeName = this.state.gameScores?.prize?.name ?? "noprize";
+    let prizeSources = this.state.gameScores?.prizeList;
     let prizeSourceLength = prizeSources?.length ?? 0;
 
     let particles = [];
@@ -137,7 +138,7 @@ class Prize5Page extends Component {
 
     let prizes = [];
     for (let i = 0; i < prizeSourceLength; i++) {
-      let prizeSrc = prizeSources[i];
+      let prizeSrc = prizeSources[i]?.thumb;
       prizes.push(
         <div
           key={"prize" + i}
@@ -166,22 +167,43 @@ class Prize5Page extends Component {
           )}
           {this.state.stage === "show" && (
             <div className="head show-zoom">
-              <h1>И твой приз</h1>
+              <h1>{prizeName === "noprize" ? "Без приза" : "И твой приз"}</h1>
             </div>
           )}
 
           {(this.state.stage === "select" || this.state.stage === "show") && (
             <div className="prize-container appear-opacity">
-              {this.state.stage === "show" && (
+              {prizeName === "noprize" && (
                 <>
-                  <div className="prize-particles">{particles}</div>
-                  <div className="success-container spin duration5s">
-                    <div className="prize-decor fireworks"></div>
-                    <div className="prize-decor fireworks delay800ms"></div>
-                  </div>
+                  {this.state.stage === "show" && (
+                    <>
+                      <div className="success-container spin duration5s">
+                        <div className="success-decor spark"></div>
+                        <div className="success-decor spark delay3s"></div>
+                      </div>
+                      <div className="appear-opacity">
+                        <div className="noprize floating"></div>
+                      </div>
+                    </>
+                  )}
+                  {this.state.stage !== "show" && <>{prizes}</>}
                 </>
               )}
-              {prizes}
+
+              {prizeName !== "noprize" && (
+                <>
+                  {this.state.stage === "show" && (
+                    <>
+                      <div className="prize-particles">{particles}</div>
+                      <div className="success-container spin duration5s">
+                        <div className="prize-decor fireworks"></div>
+                        <div className="prize-decor fireworks delay800ms"></div>
+                      </div>
+                    </>
+                  )}
+                  {prizes}
+                </>
+              )}
             </div>
           )}
           {this.state.stage === "show" && (
@@ -190,7 +212,11 @@ class Prize5Page extends Component {
                 className="prize-name show-zoom"
                 style={{ opacity: this.state.stage === "show" ? 1 : 0 }}
               >
-                <h2>{prizeName}</h2>
+                <h2>
+                  {prizeName === "noprize"
+                    ? "Регистрируй чеки и играй ещё"
+                    : prizeName}
+                </h2>
               </div>
               <div
                 className="button-group"
