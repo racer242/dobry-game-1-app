@@ -267,7 +267,7 @@ const Game4Settings = {
 
   bonusLife: 3,
   stepDuration: 80, //ms
-  gameDuration: 100, //s
+  gameDuration: 60, //s
   startDuration: 500, //ms
   stopDuration: 3000, //ms
   animationDuration: 4000, //ms
