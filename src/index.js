@@ -1,23 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 
-let element=document.getElementById('root');
+let element = document.getElementById("game");
 
 console.log(element.getAttribute("oninit"));
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("game"));
 root.render(
   <React.StrictMode>
-    <App 
+    <App
       id="brandApp"
       onInit={window[element.getAttribute("oninit")]}
       onImage={window[element.getAttribute("onimage")]}
       onImages={window[element.getAttribute("onimages")]}
-
-/>
+    />
   </React.StrictMode>
 );
 
