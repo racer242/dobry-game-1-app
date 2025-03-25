@@ -44,7 +44,7 @@ class ScoresPage extends Component {
     this.store.dispatch(setStoreData({ currentPage: "game" }));
   }
   closeButton_clickHandler(event) {
-    this.store.dispatch(setStoreData({ currentPage: "main" }));
+    this.state.closeHandler();
   }
 
   render() {

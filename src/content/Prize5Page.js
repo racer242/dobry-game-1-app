@@ -142,7 +142,9 @@ class Prize5Page extends Component {
       prizes.push(
         <div
           key={"prize" + i}
-          className={"prize" + (this.state.stage === "show" ? " floating" : "")}
+          className={
+            "myprize" + (this.state.stage === "show" ? " floating" : "")
+          }
           style={{
             backgroundImage: "url(" + prizeSrc + ")",
             opacity: i === this.state.prizeIndex ? 1 : 0,

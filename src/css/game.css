@@ -95,6 +95,11 @@
   align-items: center;
   gap: 20px;
   transform: translate(-50%, -25%);
+  font-family: "Onest";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 32px;
 }
 
 .g1 .bonus {
