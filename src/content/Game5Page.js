@@ -20,7 +20,7 @@ class Game5Page extends GamePage {
       ...this.state,
       gameDuration: this.state.game5.gameDuration,
       stopDuration: this.state.game5.stopDuration,
-      startDuration: this.state.game5.startDuration,
+      startDuration: this.state.game5.startGameDuration,
       stepDuration: this.state.game5.stepDuration,
       winDuration: this.state.game5.winDuration,
       idle: true,
@@ -30,7 +30,6 @@ class Game5Page extends GamePage {
       startRotation: 0,
       zRadius,
       scene,
-      loading: true,
       success: "none",
     };
 
@@ -38,17 +37,6 @@ class Game5Page extends GamePage {
     this.scene_downHandler = this.scene_downHandler.bind(this);
     this.scene_moveHandler = this.scene_moveHandler.bind(this);
     this.scene_upHandler = this.scene_upHandler.bind(this);
-  }
-
-  doStart() {
-    super.doStart();
-
-    this.stopTimer = setTimeout(() => {
-      this.setState({
-        ...this.state,
-        loading: false,
-      });
-    }, this.state.startDuration / 10);
   }
 
   registerStart() {}
@@ -362,14 +350,7 @@ class Game5Page extends GamePage {
             transitionDuration: this.state.stopDuration + "ms",
           }}
         ></div>
-        <div
-          className="pageOverlay"
-          style={{
-            visibility: this.state.loading ? "visible" : "hidden",
-            opacity: this.state.loading ? 1 : 0,
-            transitionDuration: this.state.startDuration + "ms",
-          }}
-        ></div>
+        <div className="pageOverlay disappear-opacity"></div>
         {this.state.success === "win" && (
           <>
             <div className="success-container">{particles}</div>

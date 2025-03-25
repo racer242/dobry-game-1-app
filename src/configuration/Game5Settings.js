@@ -46,6 +46,7 @@ const Game5Settings = {
   gameDuration: 60, //s
   stopDuration: 500, //ms
   startDuration: 2000, //ms
+  startGameDuration: 500, //ms
   winDuration: 2000, //ms
   dragDuration: 0, //ms
   selectDuration: 200, //ms
