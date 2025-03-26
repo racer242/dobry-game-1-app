@@ -259,8 +259,8 @@ const Game4Settings = {
 
   heroStartPosition: -100,
   heroXPosition: 100,
-  pushPower: 10,
-  heroWeight: 3,
+  pushPower: 5, //10,
+  heroWeight: 2, //3,
 
   prizeProb: 0.5,
   prizeValue: 1,

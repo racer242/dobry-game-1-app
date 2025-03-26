@@ -85,7 +85,7 @@ class Main5Page extends Component {
         </div>
         <div className="plate appear-top delay500ms">
           <p>
-            Найди за 30 секунд брендированный объект. Крути изображение, ищи и
+            Найди объект с логотипом «Пятёрочка». Крути изображение, ищи и
             нажимай.
           </p>
           {this.state.gameCredentials && attemptsLeft > 0 && (

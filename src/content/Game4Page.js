@@ -99,7 +99,7 @@ class Game4Page extends GamePage {
     }
 
     let hX = -this.state.position + this.state.heroX;
-    let hY = heroY;
+    let hY = heroY + this.state.game4.heroBounds.offsetTop;
     let prizeColumns = columns.filter(
       (v) =>
         v.prize &&
@@ -267,10 +267,11 @@ class Game4Page extends GamePage {
   }
 
   render() {
-    let objs = [];
     let columns = [];
 
-    for (let i = 0; i < this.state.columns.length; i++) {
+    let start = Math.max(this.state.columns.length - 5);
+
+    for (let i = start; i < this.state.columns.length; i++) {
       let column = this.state.columns[i];
       if (column.x + this.state.position > -column.width)
         columns.push(

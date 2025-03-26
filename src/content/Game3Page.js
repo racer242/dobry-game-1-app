@@ -48,8 +48,6 @@ class Game3Page extends GamePage {
           .slice(0, amount2)
       );
 
-    console.log(sources);
-
     let objects = [];
     for (let i = 0; i < amount; i++) {
       let cell = randomCell.pop();
@@ -107,10 +105,6 @@ class Game3Page extends GamePage {
     };
 
     this.cell_clickHandler = this.cell_clickHandler.bind(this);
-  }
-
-  doStart() {
-    super.doStart();
   }
 
   doGame() {
@@ -201,6 +195,8 @@ class Game3Page extends GamePage {
     }
     modeLife++;
 
+    let score = this.state.game3.gameDuration - this.state.countdown;
+
     this.setState({
       ...this.state,
       objects,
@@ -210,6 +206,7 @@ class Game3Page extends GamePage {
       currentMode,
       modeLife,
       scoreAdded,
+      score,
     });
     return true;
   }
@@ -237,8 +234,11 @@ class Game3Page extends GamePage {
               bonuses.push({
                 id: "bonus" + this.counter++,
                 cssX:
-                  event.target.offsetLeft + this.state.game3.cellBounds.width,
-                cssY: event.target.offsetTop,
+                  event.target.offsetLeft +
+                  this.state.game3.cellBounds.width / 2,
+                cssY:
+                  event.target.offsetTop +
+                  this.state.game3.cellBounds.height / 2,
                 value: bonusValue,
                 status: "bonus-on",
               });
@@ -254,7 +254,7 @@ class Game3Page extends GamePage {
         }
       }
     }
-    let score = Math.max(this.state.score + bonusValue, 0);
+    let score = this.state.game3.gameDuration - this.state.countdown;
 
     this.setState({
       ...this.state,
@@ -352,18 +352,6 @@ class Game3Page extends GamePage {
           >
             {particles}
           </div>
-          <div
-            className="bonus-box bonusUp display"
-            id={bonus.id}
-            style={{
-              left: bonus.cssX,
-              top: bonus.cssY,
-            }}
-          >
-            <div className={"bonus g3" + (bonus.value > 0 ? "" : " negative")}>
-              {bonus.value > 0 ? "+" + bonus.value : bonus.value}
-            </div>
-          </div>
         </div>
       );
     }
@@ -404,7 +392,6 @@ class Game3Page extends GamePage {
             ></div>
             {!this.props.bounds.mobileSize && (
               <>
-                <div className="fix"></div>
                 <div className="disc-left music-box"></div>
                 <div className="disc-right music-box"></div>
                 <div className="music-button-box">
@@ -494,13 +481,6 @@ class Game3Page extends GamePage {
           <CircularProgress value={1 - time / this.state.game3.gameDuration}>
             {time}
           </CircularProgress>
-        </div>
-        <div
-          className={
-            "score display" + (this.state.scoreAdded > 0 ? " impulse" : "")
-          }
-        >
-          {this.state.score}
         </div>
         <div
           className="pageOverlay"

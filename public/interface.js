@@ -9,7 +9,7 @@
 
 // Просто переменная - используется внутри этого файла для удобства,
 // передается ниже в конфигурацию, сама на приложение не влияет
-window.gameId = "VIBE";
+window.gameId = "STAGE";
 
 // Также функция для использования внутри этого файла, заглушка
 // Имитирует закрытие попапа с игрой
@@ -62,28 +62,28 @@ function onAppReadyHandler(app) {
       // request2 - запрос после старта
       1: {
         id: "VIBE",
-        request1: { url: "/api/TentGame1.json", method: "GET" },
-        request2: { url: "/api/TentGame2.json", method: "GET" },
+        request1: { url: "/api/TentGame", method: "POST" },
+        request2: { url: "/api/TentGame", method: "POST" },
       },
       2: {
         id: "SPOTLIGHTS",
-        request1: { url: "/api/TentGame1.json", method: "GET" },
-        request2: { url: "/api/TentGame2.json", method: "GET" },
+        request1: { url: "/api/TentGame", method: "POST" },
+        request2: { url: "/api/TentGame", method: "POST" },
       },
       3: {
         id: "MATCH",
-        request1: { url: "/api/TentGame1.json", method: "GET" },
-        request2: { url: "/api/TentGame2.json", method: "GET" },
+        request1: { url: "/api/TentGame", method: "POST" },
+        request2: { url: "/api/TentGame", method: "POST" },
       },
       4: {
         id: "STAGE",
-        request1: { url: "/api/TentGame1.json", method: "GET" },
-        request2: { url: "/api/TentGame2.json", method: "GET" },
+        request1: { url: "/api/TentGame", method: "POST" },
+        request2: { url: "/api/TentGame", method: "POST" },
       },
       5: {
         id: "FIVE",
-        request1: { url: "/api/FiveGame1.json", method: "GET" },
-        request2: { url: "/api/FiveGame2.json", method: "GET" },
+        request1: { url: "/api/PlayVip", method: "POST" },
+        request2: { url: "/api/PlayVip", method: "POST" },
       },
       // Это индекс игр для быстрой идентификации внутри приложения
       index: { VIBE: 1, SPOTLIGHTS: 2, MATCH: 3, STAGE: 4, FIVE: 5 },
