@@ -854,6 +854,7 @@
   border: 3px solid #e41d24;
   border-radius: 9px;
   border-bottom-left-radius: 7px;
+  box-sizing: content-box;
 }
 
 .mobile .jack-box {
