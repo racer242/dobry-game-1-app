@@ -332,7 +332,7 @@ class Game5Page extends GamePage {
           }}
         >
           <div className="hint-logo"></div>
-          <p>Найди объект с&nbsp;логотипом Пятерочки</p>
+          <p>Найди объект с&nbsp;логотипом «Пятёрочка»</p>
         </div>
         <div
           className="pageOverlay"

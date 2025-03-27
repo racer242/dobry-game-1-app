@@ -9,7 +9,7 @@
 
 // Просто переменная - используется внутри этого файла для удобства,
 // передается ниже в конфигурацию, сама на приложение не влияет
-window.gameId = "STAGE";
+window.gameId = "FIVE";
 
 // Также функция для использования внутри этого файла, заглушка
 // Имитирует закрытие попапа с игрой
@@ -83,6 +83,7 @@ function onAppReadyHandler(app) {
       5: {
         id: "FIVE",
         request1: { url: "/api/PlayVip", method: "POST" },
+        // request1: { url: "/api/FiveGame1.json", method: "GET" },
         request2: { url: "/api/PlayVip", method: "POST" },
       },
       // Это индекс игр для быстрой идентификации внутри приложения
