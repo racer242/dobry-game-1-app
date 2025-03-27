@@ -284,13 +284,14 @@ class Game3Page extends GamePage {
             width: cell.width,
             height: cell.height,
             transitionDuration: this.state.game3.transitionDuration + "ms",
+            pointerEvents: obj.isFound ? "none" : "",
           }}
           onPointerDown={this.cell_clickHandler}
         >
           <div
             className="g3-cellPlate"
             style={{
-              backgroundColor: cell.color,
+              backgroundColor: obj.isFound ? "#D0D5E0" : cell.color,
               transitionDuration: this.state.game3.transitionDuration + "ms",
               animationDelay:
                 this.state.aniMode == "rows"
@@ -301,7 +302,7 @@ class Game3Page extends GamePage {
                   : (this.state.game3.animationDuration / 4) *
                       (cell.column + cell.row) +
                     "ms",
-              animationName: "color-switch",
+              animationName: obj.isFound ? "" : "color-switch",
               animationDuration: this.state.game3.animationDuration + "ms",
               animationIterationCount: "infinite",
             }}
