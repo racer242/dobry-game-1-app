@@ -87,10 +87,12 @@ class ScoresPage extends Component {
           <div className="scores-info with-plate appear-top">
             <div className="scores-info-plate">
               <h3>У тебя</h3>
-              <h2 className="yellow">
-                {marks} {getScoreTitleInGenitive(marks)} и
-              </h2>
-              <h2 className="pink">{place}-е место</h2>
+              <div className="scores-values">
+                <h2 className="yellow">
+                  {marks} {getScoreTitleInGenitive(marks)} и
+                </h2>
+                <h2 className="pink">{place}-е место</h2>
+              </div>
               <h3>в рейтинге текущей недели</h3>
             </div>
             <p className="scores-info-comment small">
@@ -112,13 +114,13 @@ class ScoresPage extends Component {
         </div>
         <div className="button-group appear-bottom">
           <div
-            className="secondary-button"
+            className="secondary-button button"
             onClick={this.closeButton_clickHandler}
           >
             Играть позже
           </div>
           <div
-            className="primary-button"
+            className="primary-button button"
             onClick={this.startButton_clickHandler}
           >
             Играть заново

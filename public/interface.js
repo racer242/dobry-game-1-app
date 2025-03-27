@@ -9,7 +9,7 @@
 
 // Просто переменная - используется внутри этого файла для удобства,
 // передается ниже в конфигурацию, сама на приложение не влияет
-window.gameId = "STAGE";
+window.gameId = "VIBE";
 
 // Также функция для использования внутри этого файла, заглушка
 // Имитирует закрытие попапа с игрой
@@ -63,7 +63,9 @@ function onAppReadyHandler(app) {
       1: {
         id: "VIBE",
         request1: { url: "/api/TentGame", method: "POST" },
+        // request1: { url: "/api/TentGame1.json", method: "GET" },
         request2: { url: "/api/TentGame", method: "POST" },
+        // request2: { url: "/api/TentGame2.json", method: "GET" },
       },
       2: {
         id: "SPOTLIGHTS",
@@ -93,6 +95,7 @@ function onAppReadyHandler(app) {
     closeHandler: window.closeGamePopup,
     // Обработчик перехода к регистрации чека
     registerHandler: window.registerBill,
+    switchToMobileWidth: 720,
   };
 
   // Передается номер текущей игры (внутри приложения игры идентифицируются по номерам)

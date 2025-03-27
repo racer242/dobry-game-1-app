@@ -76,6 +76,14 @@
   text-align: center;
 }
 
+.mobile .score {
+  transform: scale(1.1);
+}
+
+.mobile .countdown {
+  transform: scale(1.1);
+}
+
 .bonus-box {
   position: absolute;
   display: block;

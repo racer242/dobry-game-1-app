@@ -20,6 +20,12 @@
   margin: 0;
 }
 
+.game .scores-info-plate h2 {
+  font-size: 30px;
+  line-height: 28px;
+  font-weight: 500;
+}
+
 .game h3 {
   font-family: "Onest";
   font-style: normal;
@@ -31,6 +37,14 @@
   margin: 0;
 }
 
+.game .scores-info-plate h3 {
+  font-size: 20px;
+  padding: 16px;
+}
+
+.game .mobile .scores-info-plate h3 {
+  padding: 6px;
+}
 .game p {
   font-family: "Onest";
   font-style: normal;
@@ -43,8 +57,8 @@
 }
 
 .game p.small {
-  font-size: 14px;
-  line-height: 18px;
+  font-size: 18px;
+  line-height: 24px;
 }
 
 .game .button {
@@ -78,21 +92,26 @@
 }
 
 .game .mobile p.small {
-  font-size: 16px;
-  line-height: 20px;
+  font-size: 20px;
+  line-height: 24px;
 }
 
 .game .mobile .button {
   font-size: 20px;
   line-height: 28px;
+  padding: 24px 36px;
+}
+
+.game .scoresPage .button {
+  padding: 20px 36px;
 }
 
 .game .display {
   font-family: "Onest";
   font-style: normal;
   font-weight: 600;
-  font-size: 32px;
-  line-height: 32px;
+  font-size: 28px;
+  line-height: 34px;
 }
 
 .game .score-value {
