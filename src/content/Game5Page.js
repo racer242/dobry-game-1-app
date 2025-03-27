@@ -322,7 +322,18 @@ class Game5Page extends GamePage {
           }}
         >
           <div className="hint-item"></div>
-          <p>Вращай карту левой кнопкой мышки</p>
+          {!this.props.bounds.mobileSize && (
+            <p>Вращай карту левой кнопкой мышки</p>
+          )}
+          {this.props.bounds.mobileSize && (
+            <p>
+              Вращай
+              <br />
+              карту для
+              <br />
+              поиска
+            </p>
+          )}
         </div>
         <div
           className="hint-left"

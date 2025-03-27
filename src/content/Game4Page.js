@@ -33,6 +33,9 @@ class Game4Page extends GamePage {
 
     this.game_downHandler = this.game_downHandler.bind(this);
     this.game_upHandler = this.game_upHandler.bind(this);
+
+    this.power = false;
+    this.heroPower = this.state.game4.pushPower;
   }
 
   doStart() {
@@ -76,26 +79,25 @@ class Game4Page extends GamePage {
       this.addColumn(columns);
     }
 
-    let heroY = this.state.heroY;
-    let heroPower = this.state.heroPower;
-
-    if (this.state.power) {
-      heroPower += this.state.game4.pushPower;
+    if (this.power) {
+      this.heroPower += this.state.game4.pushPower;
     }
-    heroPower -= this.state.game4.heroWeight;
+    this.heroPower -= this.state.game4.heroWeight;
 
-    heroY -= heroPower;
+    let heroY = this.state.heroY;
+
+    heroY -= this.heroPower;
 
     if (heroY < 0) {
       heroY = 0;
-      heroPower = 0;
+      this.heroPower = 0;
     }
     if (heroY > this.state.desktopBounds.height) {
       heroY =
         this.state.desktopBounds.height -
         this.state.game4.heroBounds.height +
         this.state.game4.heroBounds.offsetTop;
-      heroPower = 0;
+      this.heroPower = 0;
     }
 
     let hX = -this.state.position + this.state.heroX;
@@ -182,7 +184,7 @@ class Game4Page extends GamePage {
       position,
       columns,
       heroY,
-      heroPower,
+      heroPower: this.heroPower,
       score,
       collision,
       scoreAdded,
@@ -190,17 +192,22 @@ class Game4Page extends GamePage {
     return !collision;
   }
 
-  game_downHandler() {
-    this.setState({
-      ...this.state,
-      power: true,
-    });
+  game_downHandler(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    e.bubbles = false;
+    this.power = true;
+    // console.log(this.state.isMobile);
+    this.heroPower += this.state.game4.pushPower;
   }
-  game_upHandler() {
-    this.setState({
-      ...this.state,
-      power: false,
-    });
+  game_upHandler(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    e.bubbles = false;
+    if (this.upTimer != null) clearTimeout(this.upTimer);
+    this.upTimer = setTimeout(() => {
+      this.power = false;
+    }, this.state.stepDuration);
   }
 
   addColumn(columns) {
@@ -378,6 +385,7 @@ class Game4Page extends GamePage {
           className="gameScene"
           onPointerDown={this.game_downHandler}
           onPointerUp={this.game_upHandler}
+          onPointerLeave={this.game_upHandler}
         >
           <div
             className="g4-gameScene"
@@ -450,7 +458,7 @@ class Game4Page extends GamePage {
                     ? {
                         opacity: 0,
                       }
-                    : this.state.power
+                    : this.power
                     ? { transform: "rotate(-20deg) translateY(10px)" }
                     : {}
                 }
@@ -468,7 +476,7 @@ class Game4Page extends GamePage {
                         left: this.state.collision[2].x,
                         top: this.state.collision[2].y,
                       }
-                    : this.state.power
+                    : this.power
                     ? { transform: "rotate(-20deg)" }
                     : {}
                 }
@@ -483,9 +491,9 @@ class Game4Page extends GamePage {
                         left: this.state.collision[1].x,
                         top: this.state.collision[1].y,
                       }
-                    : this.state.heroPower < 0
+                    : this.heroPower < 0
                     ? {
-                        transform: "translateY(" + this.state.heroPower + "px)",
+                        transform: "translateY(" + this.heroPower + "px)",
                       }
                     : {}
                 }
@@ -501,10 +509,9 @@ class Game4Page extends GamePage {
                         left: this.state.collision[0].x,
                         top: this.state.collision[0].y,
                       }
-                    : this.state.heroPower < 0
+                    : this.heroPower < 0
                     ? {
-                        transform:
-                          "translateY(" + this.state.heroPower / 2 + "px)",
+                        transform: "translateY(" + this.heroPower / 2 + "px)",
                       }
                     : {}
                 }
