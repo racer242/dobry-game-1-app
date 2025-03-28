@@ -263,7 +263,7 @@ const Game4Settings = {
   heroWeight: 1, //3,
 
   prizeProb: 0.5,
-  prizeValue: 1,
+  prizeValue: 3,
 
   bonusLife: 3,
   stepDuration: 80, //ms
