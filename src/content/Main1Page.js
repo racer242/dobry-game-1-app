@@ -17,6 +17,8 @@ class Main1Page extends Component {
     } else this.state = {};
 
     this.startButton_clickHandler = this.startButton_clickHandler.bind(this);
+    this.signUpWarning_clickHandler =
+      this.signUpWarning_clickHandler.bind(this);
   }
 
   startButton_clickHandler(event) {
@@ -25,6 +27,12 @@ class Main1Page extends Component {
         currentPage: "game",
       })
     );
+  }
+
+  signUpWarning_clickHandler(event) {
+    if (this.state.signUpHandler) {
+      this.state.signUpHandler();
+    }
   }
 
   render() {
@@ -40,8 +48,8 @@ class Main1Page extends Component {
         </div>
         <div className="plate appear-top delay500ms">
           <h3>
-            Лови вайб на Добрый Fest! Тапай на то, что даёт плюс вайб на
-            фестивале, и набирай очки.
+            Лови вайб на Добрый Fest! Тапай на то, что даёт плюс вайб
+            на&nbsp;фестивале, и набирай очки.
           </h3>
           <p className="orange">
             Нажимай на всё, что создаёт музыкальный вайб и получай +1 за каждый
@@ -89,6 +97,16 @@ class Main1Page extends Component {
         >
           Играть
         </div>
+
+        {this.state.userAuthorized && (
+          <div
+            className="signUpWarning appear-zoom"
+            onClick={this.signUpWarning_clickHandler}
+          >
+            <span className="signUpLink">Зарегистрируйся</span> в Акции, чтобы
+            сохранить результат игры
+          </div>
+        )}
       </div>
     );
   }

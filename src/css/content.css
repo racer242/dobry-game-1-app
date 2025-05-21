@@ -14,7 +14,7 @@
   align-items: center;
   box-sizing: border-box;
   color: #fff;
-  padding: 0px 10px;
+  padding: 0px 13px;
   gap: 10px;
 }
 
@@ -149,7 +149,7 @@
 .score-box {
   position: relative;
   display: flex;
-  width: 400px;
+  width: 388px;
   height: 240px;
   flex-direction: column;
 
@@ -162,14 +162,14 @@
 .score-plate {
   position: relative;
   display: flex;
-  width: 400px;
+  width: 388px;
   flex-direction: column;
 
   align-content: start;
   align-items: center;
   gap: 10px;
   padding-top: 16px;
-  padding-bottom: 100px;
+  padding-bottom: 90px;
   background: #ff49b8;
   border-radius: 20px;
   box-sizing: border-box;
@@ -1192,4 +1192,86 @@
 .mobile .g5.prizePage .button-group {
   height: 150px;
   align-items: end;
+}
+
+.mainPage .signUpWarning {
+  position: absolute;
+  right: 60px;
+  top: 110px;
+  width: 160px;
+  height: 160px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 0px 15px;
+  background: #ff49b8;
+  border-radius: 50%;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: transform 200ms ease-in-out;
+}
+
+.signUpWarning .signUpLink {
+  position: relative;
+  text-decoration: underline;
+}
+
+.signUpWarning:hover .signUpLink {
+  text-decoration: none;
+}
+
+.signUpWarning:hover {
+  transform: scale(1.05);
+}
+
+.mobile .mainPage .signUpWarning {
+  position: relative;
+  right: auto;
+  top: auto;
+  width: auto;
+  height: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px 20px;
+  background: #ff49b8;
+  border-radius: 6px;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: transform 200ms ease-in-out;
+}
+
+.signUpInfo {
+  position: relative;
+  width: 450px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+
+  font-family: "Onest";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+.mobile .signUpInfo {
+  width: 400px;
+  font-size: 26px;
 }

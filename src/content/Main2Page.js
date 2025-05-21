@@ -16,6 +16,8 @@ class Main2Page extends Component {
     } else this.state = {};
 
     this.startButton_clickHandler = this.startButton_clickHandler.bind(this);
+    this.signUpWarning_clickHandler =
+      this.signUpWarning_clickHandler.bind(this);
   }
 
   startButton_clickHandler(event) {
@@ -24,6 +26,12 @@ class Main2Page extends Component {
         currentPage: "game",
       })
     );
+  }
+
+  signUpWarning_clickHandler(event) {
+    if (this.state.signUpHandler) {
+      this.state.signUpHandler();
+    }
   }
 
   render() {
@@ -59,9 +67,9 @@ class Main2Page extends Component {
         </div>
         <div className="plate appear-top delay500ms">
           <h3>
-            Сделай настоящее шоу со звездой на сцене! Главное - не упускать ее
-            из виду прожекторов, ведь она так любит внезапно появляться в разных
-            местах сцены.
+            Сделай настоящее шоу со звездой на сцене! Главное - не упускать
+            ее&nbsp;из&nbsp;виду прожекторов, ведь она так любит внезапно
+            появляться в разных местах сцены.
           </h3>
           <p className="orange">
             Звезда появляется на сцене, а ты подсвечивай её прожектором, для
@@ -76,6 +84,16 @@ class Main2Page extends Component {
         >
           Играть
         </div>
+
+        {this.state.userAuthorized && (
+          <div
+            className="signUpWarning appear-zoom"
+            onClick={this.signUpWarning_clickHandler}
+          >
+            <span className="signUpLink">Зарегистрируйся</span> в Акции, чтобы
+            сохранить результат игры
+          </div>
+        )}
       </div>
     );
   }

@@ -15,6 +15,8 @@ class Finish1Page extends Component {
 
     this.closeButton_clickHandler = this.closeButton_clickHandler.bind(this);
     this.scoresButton_clickHandler = this.scoresButton_clickHandler.bind(this);
+    this.signUpWarning_clickHandler =
+      this.signUpWarning_clickHandler.bind(this);
   }
 
   componentDidMount() {
@@ -53,6 +55,11 @@ class Finish1Page extends Component {
     this.store.dispatch(setStoreData({ currentPage: "main" }));
   }
 
+  signUpWarning_clickHandler(event) {
+    if (this.state.signUpHandler) {
+      this.state.signUpHandler();
+    }
+  }
   render() {
     let children = [];
     children.push(this.props.children);
@@ -77,12 +84,29 @@ class Finish1Page extends Component {
             </div>
           </div>
         </div>
-        <div
-          className="secondary-button button appear-bottom"
-          onClick={this.scoresButton_clickHandler}
-        >
-          Смотреть рейтинг
-        </div>
+
+        {!this.state.userAuthorized && (
+          <div
+            className="secondary-button button appear-bottom"
+            onClick={this.scoresButton_clickHandler}
+          >
+            Смотреть рейтинг
+          </div>
+        )}
+        {this.state.userAuthorized && (
+          <>
+            <div className="signUpInfo appear-opacity">
+              Регистрируйся в Акции, попадай в ТОП-500 игроков и участвуй в
+              розыгрыше призов:
+            </div>
+            <div
+              className="secondary-button button appear-bottom"
+              onClick={this.signUpWarning_clickHandler}
+            >
+              Регистрация
+            </div>
+          </>
+        )}
       </div>
     );
   }

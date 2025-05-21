@@ -12,6 +12,8 @@ class Main4Page extends Component {
     } else this.state = {};
 
     this.startButton_clickHandler = this.startButton_clickHandler.bind(this);
+    this.signUpWarning_clickHandler =
+      this.signUpWarning_clickHandler.bind(this);
   }
 
   startButton_clickHandler(event) {
@@ -20,6 +22,12 @@ class Main4Page extends Component {
         currentPage: "game",
       })
     );
+  }
+
+  signUpWarning_clickHandler(event) {
+    if (this.state.signUpHandler) {
+      this.state.signUpHandler();
+    }
   }
 
   render() {
@@ -52,6 +60,16 @@ class Main4Page extends Component {
         >
           Играть
         </div>
+
+        {this.state.userAuthorized && (
+          <div
+            className="signUpWarning appear-zoom"
+            onClick={this.signUpWarning_clickHandler}
+          >
+            <span className="signUpLink">Зарегистрируйся</span> в Акции, чтобы
+            сохранить результат игры
+          </div>
+        )}
       </div>
     );
   }
