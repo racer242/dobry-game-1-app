@@ -98,7 +98,7 @@ class Main1Page extends Component {
           Играть
         </div>
 
-        {this.state.userAuthorized && (
+        {this.state.userNotAuthorized && (
           <div
             className="signUpWarning appear-zoom"
             onClick={this.signUpWarning_clickHandler}

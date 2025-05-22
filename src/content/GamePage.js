@@ -58,6 +58,7 @@ class GamePage extends Component {
   }
 
   registerStart() {
+    if (this.state.userNotAuthorized) return;
     this.store.dispatch(
       setStoreData({
         requestStart: {
@@ -69,6 +70,7 @@ class GamePage extends Component {
   }
 
   registerFinish() {
+    if (this.state.userNotAuthorized) return;
     let guid = this.state.gameCredentials?.guid;
     let userCode = this.state.gameCredentials?.userCode;
     let marks = this.state.score;

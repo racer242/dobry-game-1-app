@@ -85,7 +85,7 @@ class Finish1Page extends Component {
           </div>
         </div>
 
-        {!this.state.userAuthorized && (
+        {!this.state.userNotAuthorized && (
           <div
             className="secondary-button button appear-bottom"
             onClick={this.scoresButton_clickHandler}
@@ -93,7 +93,7 @@ class Finish1Page extends Component {
             Смотреть рейтинг
           </div>
         )}
-        {this.state.userAuthorized && (
+        {this.state.userNotAuthorized && (
           <>
             <div className="signUpInfo appear-opacity">
               Регистрируйся в Акции, попадай в ТОП-500 игроков и участвуй в

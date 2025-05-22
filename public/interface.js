@@ -13,7 +13,7 @@ window.gameId = "STAGE";
 
 // Просто переменная - используется внутри этого файла для удобства,
 // передается ниже в конфигурацию, сама на приложение не влияет
-window.userAuthorized = true; //true; //false;
+window.userAuthorized = false; //true; false;
 
 // Также функция для использования внутри этого файла, заглушка
 // Имитирует закрытие попапа с игрой
@@ -108,7 +108,7 @@ function onAppReadyHandler(app) {
     registerHandler: window.registerBill,
     signUpHandler: window.signUp,
     switchToMobileWidth: 720,
-    userAuthorized: window.userAuthorized,
+    userNotAuthorized: !window.userAuthorized,
   };
 
   // Передается номер текущей игры (внутри приложения игры идентифицируются по номерам)
